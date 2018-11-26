@@ -6,6 +6,11 @@ while(attem<5){
 }
 console.log("循环结束");
 
+var v =0;
+do {
+    v++;
+    console.log('v:',v);
+} while (v<4);
 
 //复习For循环:
 var i;

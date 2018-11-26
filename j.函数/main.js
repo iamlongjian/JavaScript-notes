@@ -30,25 +30,8 @@
 
 
 //
-function housework(){
-    function jia(a,b){
-        console.log(a+b);
-    }
-    jia(6,2);
-
-    function jian(a,b){
-        console.log(a-b);
-    }
-    jian(6,2);
-
-    function cheng(a,b){
-        console.log(a*b);
-    }
-    cheng(6,2);
-
-    function chu(a,b){
-        console.log(a/b);
-    }
-    chu(6,2);
+function jia(a,b){
+    return a+b;
 }
-housework();
+var x = jia(1,3);
+console.log(x);
