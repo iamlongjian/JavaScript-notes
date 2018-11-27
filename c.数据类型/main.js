@@ -43,29 +43,55 @@
 // ob.a = 1;
 // console.log(ob.a)      //输出1,申明对象后还可以添加新键
 
-var arr = ['a','b','c'];
-arr.push('long');              //添加新元素push 从末尾添加
-console.log('push',arr);
+//数组////数组////数组////数组////数组////数组////数组////数组////数组////数组//
+
+// var arr = ['a','b','c'];
+// arr.push('long');              //添加新元素push 从末尾添加
+// console.log('push',arr);
 
 
-var arr = ['a','b','c'];
-arr.unshift('long');              //添加新元素unshift 从开头添加
-console.log('unshift:',arr);
+// var arr = ['a','b','c'];
+// arr.unshift('long');              //添加新元素unshift 从开头添加
+// console.log('unshift:',arr);
 
-var arr = ['a','b','c'];
-arr.pop();                       //pop 从末尾删除
-console.log('pop:',arr);
+// var arr = ['a','b','c'];
+// arr.pop();                       //pop 从末尾删除
+// console.log('pop:',arr);
 
-var arr = ['a','b','c'];
-arr.shift();                    //shift 从开头删除
-console.log('shift:',arr);
+// var arr = ['a','b','c'];
+// arr.shift();                    //shift 从开头删除
+// console.log('shift:',arr);
 
-var arr = ['a','b','c'];
-arr.reverse();                      //reverse 颠倒元素顺序
-console.log('reverse:',arr);
+// var arr = ['a','b','c'];
+// arr.reverse();                      //reverse 颠倒元素顺序
+// console.log('reverse:',arr);
 
-var arr = ['a','b','c'];
-arr.splice(1,2,'1','2','3','4');                      //splice(从哪开始剪,剪几个元素,'替换元素1','替换元素2','替换元素3'......)
-console.log('splice:',arr);
+// var arr = ['a','b','c'];
+// arr.splice(1,2,'1','2','3','4');                      //splice(从哪开始剪,剪几个元素,'替换元素1','替换元素2','替换元素3'......)
+// console.log('splice:',arr);
+
+// var myCars = ['a','b','c','d','e'];
+// var y=myCars.indexOf("d");              // "d" 值的索引值
+// var x;
+// for( x=0;x<myCars.length;x++  ){        //使用for循环输出数组
+//     console.log(myCars[x]);
+// }
+
+
+//null////null////null////null////null////null////null////null////null////null////null//
+var x = null;
+if (x){
+    console.log('1');
+}else{
+    console.log('2');      //返回2 则null的值为false
+}
+
+
+//undefined未定义//
+var a = undefined;
+console.log(a);      //返回undefined,也就是说你可以将一个变量定义为未定义          
+
+
+
 
 
