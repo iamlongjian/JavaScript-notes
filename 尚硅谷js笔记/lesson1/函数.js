@@ -45,4 +45,46 @@
 // person(info);
 //如果参数过多的话,建议把参数封装到一个对象中,通过对象传递。
 //----------------------------------------------------------------------------------------
+//闭包
+// function user(name,age,sex){
+//     return {
+//         getName:function(){
+//             console.log(name);
+//         },
+//         setName:function(newName){
+//             name = newName;
+//             console.log(name);
+//         },
+//         getSex:function(){
+//             console.log(sex);
+//         },
+//         setSex:function(newSex){
+//             sex = newSex;
+//             console.log(Sex);
+//         },
+//         getAge:function(){
+//             console.log(age);
+//         },
+//         setAge:function(newAge){
+//             age = newAge;
+//             console.log(age);
+//         },
+//     }
+// }
+// var long = user('longer',18,'男');
+// long.getName();
+// long.setName('hapi');
+// long.getSex();
+// long.getAge();
 
+// alert(123);
+
+// var x = confirm('你好，以下按钮二选一');
+// if(x == true){
+//     alert('你做了正确的选择');
+// }else{
+//     alert('你选错了嗷');
+// }
+
+// var x = prompt();
+// alert(x);

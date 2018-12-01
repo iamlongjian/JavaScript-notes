@@ -43,3 +43,15 @@ for(var i = 1; i<=9; i++){
     document.write('<br />');
 }
 
+//循环label的使用
+warp:                                
+for(var i = 0; i <=5; i++){
+    for(var j=1;j<=10;j++){
+        console.log('j=',j);
+        if(j == 2){
+            break warp;
+        }
+    }
+    console.log('i=',i);
+}
+
