@@ -1,13 +1,21 @@
 var name = '全局name';
 function fun(){
-    console.log(this.name);                 //this
+    var x = this.name;
+    alert(x);
 }
 var obj = {
-    name:'longer',
-    sayName:fun
+    name:'obj-name',
+    getName:function fun2(){
+        alert(this.name);
+    }
 }
 var obj2 = {
-    name:'cici',
-    sayName:fun
+    name:'obj2-name',
+    getName:function fun3(){
+        alert(this.name);
+    }
 }
-obj2.sayName();
+
+fun();
+obj.getName();
+obj2.getName();
