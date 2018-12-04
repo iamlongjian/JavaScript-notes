@@ -23,3 +23,24 @@ var arr2 = arr.splice(0,2,'牛魔王','铁扇公主');            //返回一个
 console.log('删除元素,并且添加新元素后的原数组:'+arr);      //牛魔王,铁扇公主,沙和尚,唐僧,白骨精
 console.log('截取后的新数组:'+arr2);        //孙悟空,猪八戒
 ```
+#### 数组的去重
+```
+var arr = [1,2,2,3,4,5,5,6,4,3,1];
+//输出去重前的数组
+console.log('去重前:'+arr);
+//遍历数组
+for(var i = 0;i<arr.length;i++){
+    //遍历被比较数组
+    for(var j=i+1;j<arr.length;j++){
+        //比较两值是否相等
+        if(arr[i]==arr[j]){
+            //如果相等,则删除下标为j的一个元素
+            arr.splice(j,1);
+            //由于元素删除后会自动补位，所以要进行二次判断，使用j--
+            j--;
+        }
+    }
+}
+console.log('去重后:'+arr);  
+```
+![FQiIhQ.png](https://s1.ax1x.com/2018/12/04/FQiIhQ.png)
