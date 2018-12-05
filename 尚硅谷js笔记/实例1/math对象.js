@@ -25,13 +25,5 @@
 // var result=Math.sqrt(4);
 // console.log(result);
 
-function Person(name,age){
-    this.name=name;
-    this.age=age;
-}
-Person.prototype.setName=function(newName){
-   console.log(this.name=newName);
-}
-var per = new Person('龙健',18);
-per.setName('哈皮');
-console.log(per);
+//生成10个15-19的随机整数
+

@@ -28,14 +28,17 @@
 // console.log(chuo/1000/60/60/365/24);
 
 //利用时间戳来测试性能
-var start = Date.now();
-for(var i=0;i<1000;i+=5){
-    console.log(i);
-}
-var end = Date.now();
-console.log(end-start);
+// var start = Date.now();
+// for(var i=0;i<1000;i+=5){
+//     console.log(i);
+// }
+// var end = Date.now();
+// console.log(end-start);
 
 //getHours(),getMinutes(),getSeconds(),getMilliseconds()
 //返回Date对象的小时，分钟，秒，毫秒
 // var dd = new Date('12/6/2012 10:00:28:1');
 // console.log(dd.getMilliseconds());
+
+
+

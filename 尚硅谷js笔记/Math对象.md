@@ -9,7 +9,7 @@
 ##### Math.floor() 将一个数向下取整
 - `Math.floor(1.1)` 返回1
 - `Math.floor(-1.1)` 返回-2
-##### Math.floor() 将一个数四舍五入
+##### Math.round() 将一个数四舍五入
 - `Math.round(1.1)` 返回1
 - `Math.round(1.5)` 返回2
 - `Math.round(-1.5)` 返回-1
