@@ -1,2 +1,2 @@
-var btn = document.getElementById("btn");
-btn.innerHTML="Iam a Button";
+var btn = document.getElementById('btn');
+btn.innerHTML='1230';

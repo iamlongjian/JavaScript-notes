@@ -20,8 +20,8 @@ console.log(str[1]); //e
 var str = 'Hello World';
 console.log(str.chatCodeAt(1));  //101  //e的unicode编码为101 
 ```
-##### String.formCharCode('unicode编码'):根据unicode编码去获取字符
-- 语法`String.formCharCode('unicode编码');` **注意**该方法是String调的
+##### String.fromCharCode('unicode编码'):根据unicode编码去获取字符
+- 语法`String.fromCharCode('unicode编码');` **注意**该方法是String调的
 ```
 console.log(String.formCharCode(72)); //H  //unicode中72表示H
 ```
