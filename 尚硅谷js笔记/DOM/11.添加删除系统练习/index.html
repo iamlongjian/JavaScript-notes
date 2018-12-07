@@ -5,9 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+    </style>
+    <script>
+        window.onload=function(){
+            // var Alla = document.getElementsByTagName("a");
+            // for(var i=0;i<Alla.length;i++){
+            //     Alla[i].onclick=function(){
+            //         var tr = this.parentElement.parentElement;
+            //         //获取要删除的员工Name
+            //         var name = tr.getElementsByTagName("td")[0].innerHTML;
+            //         //删除之前来一个提示框
+            //         var tt = confirm("您确定删除"+name+"吗？");
+            //         if(tt){
+            //             tr.parentElement.removeChild(tr);
+            //             return false;
+            //         }
+            //     }
+            // }
+        }
+    </script>
 </head>
+
 <body>
-    
+    <table id="employeeTable" border> 
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Salary</th>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td>Herry</td>
+            <td>Herry@tom.com</td>
+            <td>5000</td>
+            <td><a href="javascript:;">Delete</a></td>
+        </tr>
+        <tr>
+            <td>Tom</td>
+            <td>Tom@tom.com</td>
+            <td>8000</td>
+            <td><a href="#">Delete</a></td>
+        </tr>
+        <tr>
+            <td>cici</td>
+            <td>cicim@tom.com</td>
+            <td>10000</td>
+            <td><a href="#">Delete</a></td>
+        </tr>
+    </table>
+    <div id="formDiv">
+        <p>添加新员工</p>
+        <table border> 
+            <tr>
+                <td class="word">name:</td>
+                <td class="inp">
+                    <input type="text" name="empName" id="empName" />
+                </td>
+            </tr>
+            <tr>
+                <td class="word">email:</td>
+                <td class="inp">
+                    <input type="text" name="email" id="email" />
+                </td>
+            </tr>
+            <tr>
+                <td class="word">salary:</td>
+                <td class="inp">
+                    <input type="text" name="salary" id="salary" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <button id="addEmpButton">
+                        Submit
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
 </body>
 <script src="11.js"></script>
 </html>
