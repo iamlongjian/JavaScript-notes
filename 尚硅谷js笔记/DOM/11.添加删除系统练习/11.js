@@ -29,11 +29,12 @@ sub.onclick=function(){
                     +"<td>"+email+"</td>"
                     +"<td>"+salary+"</td>"
                     +"<td><a href='javascript:;''>Delete</a></td>";
-        var  a = tr.getElementsByTagName("a")[0];
-        a.onclick=DeleteA;
+                    //获取刚设置的a元素,并且绑定单击响应函数
+                    var a=tr.getElementsByTagName('a')[0];
+                    a.onclick=DeleteA;
 
-        var employeeTable = document.getElementById("employeeTable");
-        var tbody = document.getElementsByTagName('tbody')[0];
+        var table = document.getElementById("employeeTable");
+        var tbody = table.children[0];
         tbody.appendChild(tr);
       
 }

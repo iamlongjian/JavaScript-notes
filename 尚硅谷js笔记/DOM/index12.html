@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            text-align: center;
+            margin: 0 auto;
+            padding: 0;
+        }
+        #box1{
+            margin-top: 20px;
+            width: 200px;
+            height: 200px;
+            background-color: yellow;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            //点击按钮修改box1的宽度
+            //获取box1
+            var box1 = document.getElementById("box1");
+            //获取按钮并且添加单击响应函数
+            var btn01 = document.getElementById("btn01");
+            btn01.onclick=function(){
+                box1.style.width='120px';
+                box1.style.height='300px';
+                //修改背景颜色:需要采用驼峰命名法
+                box1.style.backgroundColor="blue";
+            }
+
+            //点击按钮2,读取样式(内联)
+            var btn02 = document.getElementById("btn02");
+            var box1 = document.getElementById("box1");
+            btn02.onclick=function(){
+                alert(box1.style.backgroundColor);
+            }
+            
+
+            //点击按钮3读取元素当前样式
+
+            function getStyle(obj,name){
+                if(window.getComputedStyle){
+                    return getComputedStyle(obj,null)[name]
+                }else{    
+                    return box1.currentStyle[name];
+                }
+            }
+
+            var btn03 = document.getElementById("btn03");
+            var box1 = document.getElementById("box1");
+            btn03.onclick=function(){
+               alert(getStyle(box1,"width"));
+            }
+
+            
+
+        }
+    </script>
+</head>
+
+<body>
+    <div id="box1"></div>
+    <br>
+    <button id="btn01">修改样式</button>
+    <br>
+    <br>
+    <button id="btn02">读取内联样式</button>
+    <button id="btn03">读取当前样式</button>
+</body>
+<script src="12.操作样式.js"></script>
+</html>
