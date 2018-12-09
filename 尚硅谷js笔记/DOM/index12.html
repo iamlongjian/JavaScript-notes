@@ -17,6 +17,12 @@
             height: 200px;
             background-color: yellow;
         }
+        #box2{
+            margin-top: 20px;
+            width: 400px;
+            height: 200px;
+            background-color: yellow;
+        }
     </style>
     <script>
         window.onload=function(){
@@ -41,19 +47,21 @@
             
 
             //点击按钮3读取元素当前样式
-
+            //使用自定义函数获取
+            
             function getStyle(obj,name){
-                if(window.getComputedStyle){
-                    return getComputedStyle(obj,null)[name]
-                }else{    
-                    return box1.currentStyle[name];
+                if(window.getComputedStyle){    //为了避免报错,window.
+                    return getComputedStyle(obj,null)[name]; //写.name 相当于把他写死了,需要使用[],来获取属性
+                }else{
+                    return obj.currentStyle[name];
                 }
             }
+            
 
             var btn03 = document.getElementById("btn03");
-            var box1 = document.getElementById("box1");
+            var box2 = document.getElementById("box2");
             btn03.onclick=function(){
-               alert(getStyle(box1,"width"));
+               alert(getStyle(box2,"width"));
             }
 
             
@@ -64,6 +72,7 @@
 
 <body>
     <div id="box1"></div>
+    <div id="box2"></div>
     <br>
     <button id="btn01">修改样式</button>
     <br>

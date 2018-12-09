@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件对象</title>
+    <style>
+        #areaDiv{
+            width:500px;
+            height: 80px;
+            border: 1px solid #000;
+            margin: 20px 0;
+        }
+        #showMsg{
+            width: 500px;
+            height: 30px;
+            border: 1px solid #000;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            //当鼠标再areaDIV中移动时,在showMsg中显示鼠标的坐标
+            //获取两个DIV
+            var areaDiv = document.getElementById("areaDiv");
+            var showMsg = document.getElementById("showMsg");
+
+            //onmousemove，该事件会在鼠标移动时被触发
+            areaDiv.onmousemove=function(event){
+
+                //解决兼容问题
+                if(!event){           
+                    event=window.event;      //ie8以下时将这个返回的事件对象存在window中,但是火狐却没有,所以需要判断
+                }
+
+                //在showMag显示鼠标的坐标
+                //`clientX`获取当前鼠标在事件内的X坐标
+                //`clientY`获取当前鼠标在时间内的Y坐标
+                showMsg.innerHTML = 'X=:'+event.clientX+
+                                    ',Y=:'+event.clientY;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="areaDiv"></div>
+    <div id="showMsg"></div>
+</body>
+</html>

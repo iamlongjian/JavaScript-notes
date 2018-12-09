@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <meta http-equiv="refresh" content="5;url=http://www.baidu.com">  网页重定向 -->
+    <title>123</title>
+    <style>
+        
+    </style>
+    <script>
+        window.onload=function(){
+            function Dle(){
+                var tr = this.parentElement.parentElement;
+                var name = tr.children[0].innerHTML;
+                var tt = confirm('确定删除'+name+'的信息吗？');
+                if(tt){
+                    tr.parentElement.removeChild(tr);
+                }
+            }
+            //点击删除员工信息
+            var employeeTable = document.getElementById("employeeTable");
+            var allA = employeeTable.getElementsByTagName("a");
+            for(var i = 0;i<allA.length;i++){
+                allA[i].onclick=Dle;
+            }
+            //增加员工信息
+            
+            
+            var submit = document.getElementById("addEmpButton");
+            submit.onclick=function (){
+                //获取input框内的值
+                var name = document.getElementById("empName").value;
+                var email = document.getElementById("email").value;
+                var salary = document.getElementById("salary").value;
+                
+                //获取到员工表格
+                var employeeTable = document.getElementById("employeeTable");
+                //获取所有的tr标签
+                var allTr = employeeTable.getElementsByTagName("tr");
+                //遍历所有的tr标签
+                for(var i=0;i<allTr.length;i++){
+                    //判断每一个tr的第一个td的值(name)是否和新name相同
+                    //如果新Name和以前有重复,则返回姓名已存在(可以用做ID验证)
+                    if(allTr[i].children[0].innerHTML == name ){
+                        alert('姓名已存在');
+                        return;   //结束此函数
+                    }
+                } 
+                //创建一个tr
+                var tr = document.createElement("tr");
+                //在tr中创建td
+                tr.innerHTML="<td>"+name+"</td>"+
+                            "<td>"+email+"</td>"+
+                            "<td>"+salary+"</td>"+
+                            "<td><a href='javascript:;'>Delete</a></td>"
+                //给新创建的a标签绑定单击响应函数
+                var a = tr.getElementsByTagName("a")[0];
+                a.onclick=Dle;
+                //将tr放入table中
+                employeeTable.appendChild(tr);
+            }
+        }
+    </script>
+</head>
+<body>
+    <table id="employeeTable" border> 
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Salary</th>
+                <th>&nbsp;</th>
+            </tr>
+            <tr>
+                <td>Herry</td>
+                <td>Herry@tom.com</td>
+                <td>5000</td>
+                <td><a href="javascript:;">Delete</a></td>
+            </tr>
+            <tr>
+                <td>Tom</td>
+                <td>Tom@tom.com</td>
+                <td>8000</td>
+                <td><a href="#">Delete</a></td>
+            </tr>
+            <tr>
+                <td>cici</td>
+                <td>cicim@tom.com</td>
+                <td>10000</td>
+                <td><a href="#">Delete</a></td>
+            </tr>
+    </table>
+    <div id="formDiv">
+        <p>添加新员工</p>
+        <table border> 
+            <tr>
+                <td class="word">name:</td>
+                <td class="inp">
+                    <input type="text" name="empName" id="empName" />
+                </td>
+            </tr>
+            <tr>
+                <td class="word">email:</td>
+                <td class="inp">
+                    <input type="text" name="email" id="email" />
+                </td>
+            </tr>
+            <tr>
+                <td class="word">salary:</td>
+                <td class="inp">
+                    <input type="text" name="salary" id="salary" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <button id="addEmpButton">
+                        Submit
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

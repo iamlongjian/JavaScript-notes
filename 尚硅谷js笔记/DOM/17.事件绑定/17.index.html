@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件绑定</title>
+    <style>
+        
+    </style>
+    <script>
+        window.onload=function(){
+            var btn01 = document.getElementById("btn01");
+            //这种绑定方式只能一次绑定一个响应函数给一个元素
+            //否则后一个会覆盖前一个
+            // btn01:onclick=function(){
+            //     //点击按钮以后弹出内容
+            //     alert('我弹出了');
+            // }
+            // btn01:onclick=function(){
+            //     //点击按钮以后弹出内容
+            //     alert('我弹出了2');
+            // }
+
+
+            //可以使用：addEventListener() 同时绑定多个
+            
+            btn01.addEventListener("click",function(){
+                alert('弹窗1');
+            },false);
+            btn01.addEventListener("click",function(){
+                alert('弹窗2');
+            },false);
+            btn01.addEventListener("click",function(){
+                alert('弹窗3');
+            },false);
+        }   
+    </script>
+</head>
+<body>
+    <button id="btn01">点我一下</button>
+</body>
+</html>

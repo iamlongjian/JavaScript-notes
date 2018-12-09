@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+     <!--window.onload=function(){} 复习 -->
+
+     <script>
+        window.onload=function (){
+            /*根据ID获取节点*/
+            // var bb = document.getElementById("checkedAllBox");
+            
+            /*根据标签名来获取一组元素节点对象*/
+            // var inp = document.getElementsByTagName("input");
+            // console.log(inp[0]);
+
+            //根据name属性来获取一组元素节点对象
+            //var items = document.getElementsByName("items");
+
+            //获取父元素的class名称
+            // var sub = document.getElementById("sendBtn");
+            // var pa = sub.parentNode;
+            // alert(pa.className);
+
+            //获取指定元素的子元素
+            // var lon = document.getElementById("lon");
+            // var allSon = lon.children;
+            // for(var i=0;i<allSon.length;i++){
+            //     console.log(allSon[i].innerHTML);
+            // }
+            
+            //获取指定节点的第一个子节点
+            // var lon = document.getElementById("lon");
+            // var fir = lon.firstChild;
+            // console.log(fir);
+
+            //获取制定节点的第一个子元素
+            // var lon = document.getElementById("lon");
+            // var fisele = lon.firstElementChild;
+            // console.log(fisele);
+
+            //获取指定节点的最后一个子节点
+            // var lon = document.getElementById('lon');
+            // var las = lon.lastChild;
+            // console.log(las);
+
+            //获取制定节点的最后一个子元素
+            // var lon = document.getElementById("lon");
+            // var lasele = lon.lastElementChild;
+            // console.log(lasele);
+
+            //获取制定节点的父元素
+            // var lon = document.getElementById("lon");
+            // var pa = lon.parentElement;
+            // console.log(pa);
+            
+            //获取指定节点的前一个兄弟元素
+            // var lon = document.getElementById("lon");
+            // var pre = lon.previousElementSibling;
+            // console.log(pre);
+
+            //获取指定节点的后一个兄弟元素
+            // var lon = document.getElementById('lon');
+            // var next = lon.nextElementSibling;
+            // console.log(next);
+            
+    }
+     </script>
+</head>
+<body>
+    <form method="POST" action="">
+        你爱好的运动是？<input type="checkbox" id="checkedAllBox" value="全选/全不选" />全选/全不选  
+        <br>
+        <div >
+            <input type="checkbox" name="items" value="足球" />足球       
+            <input type="checkbox" name="items" value="篮球" />篮球       
+            <input type="checkbox" name="items" value="羽毛球" />羽毛球       
+            <input type="checkbox" name="items" value="乒乓球"  />乒乓球    
+            <br>
+            <input type="button" id="checkedAllBtn" value="全选"/>  
+            <input type="button" id="checkedNoBtn" value="全不选"/>  
+            <input type="button" id="checkedRevBtn" value="反选"/>  
+            <input type="button" id="sendBtn" value="提交" />
+        </div>
+    </form>
+    
+</body>
+<script src="8.全选练习.js"></script>
+<script>
+    
+</script>
+
+</html>
+
+

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>练习</title>
+    <style>
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: rebeccapurple;
+            /*
+                想要改变位置,必须开启定位
+            */
+            position: absolute;
+        }
+        
+    </style>
+    <script>
+        window.onload=function(){
+            // var html = document.documentElement;
+            // html.onmouseout=function(event){
+            //     event = event || window.event;
+            //     var X = event.clientX;
+            //     var Y = event.clientY;
+            //     console.log(X+"+"+Y);
+            // }
+            
+            //-------------------------------
+            //使DIV跟随鼠标移动
+            // var box1 = document.getElementById("box1");
+            // document.onmousemove=function(event){
+            //     event = event || window.event;
+            //     var left = event.clientX;
+            //     var top = event.clientY;
+            //     //处理兼容问题：
+            //     var st = document.documentElement.scrollTop || document.body.scrollTop;
+            //     var sl = document.documentElement.scrollLeft || document.body.scrollLeft;
+
+            //     box1.style.left = left+sl+"px";
+            //     box1.style.top = top+st+"px";
+            // }
+            //使DIV跟随鼠标移动
+            var box1 = document.getElementById("box1");
+            document.onmousemove=function(event){
+                event = event || window.event;
+                var left = event.clientX;
+                var top = event.clientY;
+                /*
+                clientX，clientY 是相对于可见窗口来确定坐标的
+                而我们为box1设置的偏移量是相对于整个页面来确定距离的(两者的参考方不同)
+
+                pageX，pageY 是相对于整个页面来确定坐标的（ie8以下不支持）
+                */
+
+               /*
+               获取滚动条
+               1. 谷歌浏览器认为滚动条是body的  document.body.scrollTop
+               2. 火狐等其他浏览器认为滚动条是HTML的   document.documentElement.scrollTop
+               解决方法:
+               处理兼容性问题
+               垂直滚动条
+               var st = document.body.scrollTop || document.documentElement.scrollTop;
+                水平滚动条
+                var sl = document.body.scrollLeft || document.documentElement.scrollLeft;
+               */
+
+
+
+                //获取水平滚动条
+                var st = document.body.scrollTop || document.documentElement.scrollTop;
+                var sl = document.body.scrollLeft || document.documentElement.scrollLeft;
+
+                //设置DIV的偏移量
+
+                box1.style.left = left+sl+"px";
+                box1.style.top = top+st+"px";
+            }
+        }
+    </script>
+</head>
+<body style="height:1000px; width: 2000px;">
+    <div id="box1"></div>
+</body>
+</html>

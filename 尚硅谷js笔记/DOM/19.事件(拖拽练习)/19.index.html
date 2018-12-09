@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>拖拽</title>
+    <style>
+        *{
+            margin: 0;
+            height: 0;
+        }
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: aquamarine;
+            position: absolute;
+        }
+        #box2{
+            width: 100px;
+            height: 100px;
+            background-color: yellowgreen;
+            position: absolute;
+            left: 200px;
+            top: 200px;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            // var box1 = document.getElementById("box1");
+            // box1.onmousedown=function(event){
+               
+            //         var top = event.clientY;
+            //         var left = event.clientX;
+
+            //         var tt = top - box1.offsetTop;
+            //         var ll = left - box1.offsetLeft;
+
+            //     //当我移动时,获取鼠标定位
+            //     document.onmousemove=function(event){
+            //         event = event || window.event;
+
+            //         var top = event.clientY -tt;
+            //         var left = event.clientX -ll;
+
+            //         var st = document.documentElement.scrollTop || document.body.scrollTop;
+            //         var sl = document.documentElement.scrollLeft || document.body.scrollLeft;
+                    
+                    
+            //         box1.style.top = top +st+ "px";
+            //         box1.style.left = left +sl+ "px";
+            //     }
+            //     document.onmouseup=function(){
+            //         document.onmousemove = null;
+            //         document.onmouseup = null;
+            //     }
+
+            // }
+            var box1 = document.getElementById("box1");
+            box1.onmousedown=function(event){
+                    event = event || window.event;
+                    //div水平偏移量, 鼠标.clientX - 元素.offsetLeft
+                    var ol = event.clientX - box1.offsetLeft;
+                    //div垂直偏移量, 鼠标.clientY - 元素.offsetTop
+                    var ot = event.clientY - box1.offsetTop;
+
+                document.onmousemove=function(event){
+                    event = event || window.event;
+
+                    var top = event.clientY -ot;
+                    var left = event.clientX -ol;
+
+                    box1.style.top = top+"px";
+                    box1.style.left = left+"px";
+                }
+                document.onmouseup=function(){
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                }
+            }
+        }
+    </script>
+</head>
+<body style="height: 1000px;">
+    <div id="box1"></div>
+    <div id="box2"></div>
+</body>
+</html>
