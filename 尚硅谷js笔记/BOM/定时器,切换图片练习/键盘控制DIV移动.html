@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>键盘控制移动</title>
+    <style>
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: purple;
+            position: absolute;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var box1 = document.getElementById("box1");
+            var speed = 10;
+            //2.通过修改dir影响移动的方向
+            var dir = 0;
+            //1.开启定时器,控制DIV的移动
+            setInterval(function(){
+                switch(dir){
+                    case 37:
+                    box1.style.left  = box1.offsetLeft - speed+"px";
+                    break;
+                    case 38:
+                    box1.style.top  = box1.offsetTop - speed+"px";
+                    break;
+                    case 39:
+                    box1.style.left  = box1.offsetLeft + speed+"px";
+                    break;
+                    case 40:
+                    box1.style.top  = box1.offsetTop + speed+"px";
+                    break;
+                }
+            },30);
+
+            document.onkeydown=function(event){
+                event = event || window.event;
+                if(event.ctrlKey){
+                    speed = 50;
+                }else{
+                    //6. 松开ctrl速度初始化
+                    speed = 10;
+                }
+                //3.使dir等于按键的返回值
+                dir = event.keyCode;
+            }
+            //4.当手松开时,div不再移动
+            document.onkeyup=function(){
+                //5.当松开的时候,方向等于0
+                dir = 0;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="box1"></div>
+</body>
+</html>

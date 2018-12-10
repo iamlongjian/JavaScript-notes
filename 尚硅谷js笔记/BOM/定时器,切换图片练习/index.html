@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>定时器自动切换图片</title>
+    <style>
+        *{
+            text-align:center;
+        }
+        img{
+            width: 800px;
+            height: auto;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var img =document.getElementsByTagName("img")[0];
+            var imgArr = ["1.jpg","2.jpg","3.jpg","4.jpg"];
+            var index = 0;
+            var timer;  
+            var btn01 = document.getElementById("btn01");
+            
+            btn01.onclick=function(){
+                // 为了防止连续点击导致图片切换速度过快,需要在定时器开启之前,先关闭定时器
+                clearInterval(timer);
+                timer = setInterval(function(){
+                index++;
+                    if(index > imgArr.length-1){
+                        index = 0;
+                    }
+                    img.src=imgArr[index];
+                },1000);
+            }
+            var btn02 = document.getElementById("btn02");
+                btn02.onclick=function(){
+                    clearInterval(timer);
+                }
+        }
+    </script>
+</head>
+<body>
+    <div id="img_div" >
+        <img src="1.jpg" alt="123">
+    </div>
+    <button id="btn01">点我开始轮播</button>
+    <button id="btn02">停止轮播</button>
+</body>
+</html>

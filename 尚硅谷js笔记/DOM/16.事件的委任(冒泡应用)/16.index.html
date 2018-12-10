@@ -24,15 +24,27 @@
                 //我们希望只绑定一次事件,即可应用到多个元素上,即使元素是后增加的
                 //可以将这个方法绑定给元素共有的父元素，或祖先元素
                 var u1 = document.getElementById("u1");
-                ul:onclick=function(event){
-                    event = event || window.event;
+                u1.onclick = function(event){
                     var allA = u1.getElementsByTagName("a");
-                    for(var i=0;i<allA.length;i++){
+                    for(var i =0;i<allA.length;i++){
                         if(event.target == allA[i]){
-                            alert("你点击了超链接");
+                            alert('你点了链接');
                         }
                     }
                 }
+
+
+                // ul:onclick=function(event){
+                //     event = event || window.event;
+                //     var allA = u1.getElementsByTagName("a");
+                //     for(var i=0;i<allA.length;i++){
+                //         if(event.target == allA[i]){
+                //             alert("你点击了超链接");
+                //         }
+                //     }
+                // }
+
+
            
 
             //点击按钮增加超链接

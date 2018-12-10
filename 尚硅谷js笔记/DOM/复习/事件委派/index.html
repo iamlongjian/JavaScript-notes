@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload=function(){
+            //给ul绑定函数,其子元素也会绑定
+            var u1 = document.getElementById('u1');
+            u1.onclick=function(event){
+                event = event || window.event;
+                var allA = u1.getElementsByTagName("a");
+                for(var i=0;i<allA.length;i++){
+                    //指定鼠标点击a标签的时候,弹出提示框
+                    if(event.target == allA[i]){
+                        alert('你点击了链接');
+                    }
+                }
+            }
+            var sub = document.getElementById('sub');
+            sub.onclick=function(){
+                var li = document.createElement('li');
+                li.innerHTML='<a href="javascript:;">我是一个带有函数的新链接</a>';
+                u1.appendChild(li);
+            }
+        }
+    </script>
+</head>
+<body>
+    <button type="submit" id="sub">点我新增链接</button>
+    <ul id="u1">
+        <li><a href="javascript:;">我是一个链接</a></li>
+        <li><a href="javascript:;">我是一个链接</a></li>
+        <li><a href="javascript:;">我是一个链接</a></li>
+    </ul>
+</body>
+</html>

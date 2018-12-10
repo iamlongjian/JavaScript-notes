@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>定时器的调用1</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 0;
+            
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            //获取box1
+            var box1 = document.getElementById('box1');
+            //获取btn01
+            var btn01 = document.getElementById('btn01');
+            //给btn01绑定单击响应函数
+            var timer;
+            btn01.onclick=function(){
+                //防止误操作
+                clearInterval(timer);
+                //启动定时器
+                timer = setInterval(function(){
+                    //使用下面的方法,可以快速获取元素得指定样式
+                    //使用该方法在IE获取没有指定值的样式,会返回auto,解决方法,设置一个初始值即可
+                    //由于返回的是带单位的值,不好进行计算,所以使用parseInt取有效数字
+                    //获取原来box1的left值
+                    var old = parseInt(getStyle(box1,"left"));
+                    //在旧值得基础上增加
+                    var newValue = old + 18;
+                    //判断newValue是否大于800
+                    if(newValue > 1000){
+                        newValue = 1000;
+                    }
+                    //将新值设置给box1
+                    box1.style.left = newValue + "px";
+                    
+                    //当移动了1000px时,停止移动
+                    if(newValue == 1000){
+                        clearInterval(timer);
+                    }
+                },30)
+                
+            }
+            function getStyle(obj,name){
+                if(window.getComputedStyle){
+                    return getComputedStyle(obj,null)[name]
+                }else{    
+                    return 元素.currentStyle[name];
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="btn01">点击按钮方块向右移动</button>
+    <br><br>
+    <div id="box1"></div>
+    <div id="bo2" style="width:0;height:2000px;border-left:1px solid black;position:absolute;left:1000px;top:0;"></div>
+</body>
+</html>

@@ -13,54 +13,70 @@
         }
     </style>
     <script>
+        // window.onload=function(){
+        // var box1 =document.getElementById('box1');
+        // box1.onmousewheel=function(event){
+        //     event = event || window.event;
+        //     //event.wheelDelta,如果是正数则向上滚,反之是向下滚
+        //     //event.detail,跟wheelDalta相反,向上是负数,向下是正数
+        //     //判断滚轮的方向
+        //     if(event.detail < 0 || event.wheelDelta>0){
+        //         //向上滚,box1变短
+        //        box1.style.height = box1.clientHeight - 10 + "px";
+        //     }else{
+        //         //向下滚,box1变长
+        //         box1.style.height = box1.clientHeight + 10 + "px";
+        //     }
+            
+        //     //当滚轮滚动时,如果浏览器有滚动条,则页面会随之滚动.
+        //     //如果不希望发生则取消默认行为即可
+        //     //使用addEventListener()的默认行为
+        //     //需要使用event.preventDefault();，但是IE8及以下不支持该属性
+        //     event.preventDefault && event.preventDefault(); 
+        //     //其他浏览器
+        //     return false;
+        // }
+        //     //为火狐浏览器绑定滚轮事件
+        //    bind(box1,'DOMMouseScroll',box1.onmousewheel);
+
+            
+        //    function bind(obj,eventStr,fun){
+        //        if(obj.addEventListener){
+        //            obj.addEventListener(eventStr,fun,false)
+        //        }else{
+        //            obj.attachEvent('on'+eventStr,function(){
+        //                callback(obj);
+        //            })
+        //        }
+        //    }
+        // }
+
+
+        //鼠标向下滚动边长,向上滚动变短
         window.onload=function(){
-           //当滚轮向下滚动时,box1变长,反之变短
-           var box1 = document.getElementById("box1");
-           //为box1绑定鼠标滚动事件
-           //onmousewheel 是鼠标滚动事件(火狐不支持该事件)
-           box1.onmousewheel = function(event){
-               //判断滚轮滚动的方向
-                event = event || window.event;
-                //使用wheelDelta来判断:如果返回120则向上滚,如果返回-120则向下滚(判断正负即可)
-                //但是wheelDelta不支持火狐,火狐使用detail(返回值为正则是向下滚,反之向上滚)
-                if(event.wheelDelta >0 || event.detail < 0){
-                    //当滚轮向上滚动时,box变短  //clientHeight为现在的可见高度
-                    box1.style.height = box1.clientHeight - 10 +"px";
+            var box1 = document.getElementById('box1');
+            box1.onmousewheel=function(event){
+                if(event.wheelDelta > 0 || event.detail < 0){
+                    box1.style.height = box1.clientHeight -10+"px";
                 }else{
-                    //当滚轮向下滚动时,box变长  //clientHeight为现在的可见高度
-                    box1.style.height = box1.clientHeight + 10 +"px";
+                    box1.style.height = box1.clientHeight +10+"px";
                 }
-                //当滚轮滚动时,如果浏览器由滚动条,则浏览器的滚动条会随之滚动
-                //解决方法 取消默认行为
 
-                //addEventListener取消默认行为方法,使用event.preventDefault()
-                //但是IE8不支持event.preventDefault();如果直接调用会报错
-                //兼容方法
-                //如果有这个方法就event.preventDefault(),没有就直接执行 return false
                 event.preventDefault && event.preventDefault();
-                //取消默认行为(该方法不支持addEventListener)
-                return false;  
-           }
+                return false;
+            }
 
-           bind(box1,'DOMMouseScroll',box1.onmousewheel);
+            bind(box1,"DOMMouseScroll",box1.onmousewheel);
 
-            function bind(obj,eventStr,callback){
+            function bind(obj,eventStr,fun){
                 if(obj.addEventListener){
-                    //大部分浏览器支持的方式
-                    obj.addEventListener(eventStr,callback,false);
+                    obj.addEventListener(eventStr,fun,false);
                 }else{
-                /*
-                this是谁,由调用方式决定
-                callback.call(obj)
-                */
-                //IE8及以下
-                obj.attachEvent("on"+eventStr,function(){
-                    //在匿名函数中调用回调函数
-                    callback(obj);
-                })
+                    obj.attachEvent('on'+eventStr,function(){
+                        callback(obj);
+                    })
                 }
             }
-            
         }
     </script>
 </head>

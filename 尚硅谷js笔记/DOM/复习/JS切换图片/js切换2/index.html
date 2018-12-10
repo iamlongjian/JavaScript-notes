@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS切换图片</title>
+    <style>
+        *{
+            margin: 20 auto;
+            text-align: center;
+        }
+        img{
+            width: 500px;
+            height: auto;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var prev = document.getElementById('prev');
+            var next = document.getElementById('next');
+            var img_change = document.getElementById('img_change');
+            var img = img_change.children[0];
+
+            var srcArr=["1.jpg","2.jpg","3.jpg","4.jpg"];
+            var index = 0;
+
+            var info = document.getElementById('info');
+            info.innerHTML = '一共'+srcArr.length+'张图,现在是第'+(index+1)+'张。'
+            
+            prev.onclick=function(){
+                //点击上一页，回到上一张
+                index--;
+                if(index<0){
+                    index = srcArr.length -1 ;
+                }
+                img.src=srcArr[index];
+                info.innerHTML = '一共'+srcArr.length+'张图,现在是第'+(index+1)+'张。'
+                
+            }
+            next.onclick=function(){
+                //点击下一页，回到下一张
+                index++;
+                if(index>srcArr.length -1 ){
+                    index = 0;
+                }
+                img.src=srcArr[index];
+                info.innerHTML = '一共'+srcArr.length+'张图,现在是第'+(index+1)+'张。'
+            }
+        }
+    </script>
+</head>
+<body>
+    <p id="info"></p>
+    <div id="img_change">
+        <img src="1.jpg" alt="奥特曼">
+    </div>
+    <br>
+    <button type="button" id="prev">上一页</button>
+    <button type="button" id="next">下一页</button>
+</body>
+</html>

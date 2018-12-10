@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>location</title>
+    <script>
+        window.onload=function(){
+            var btn01 =document.getElementById('btn01');
+            btn01.onclick=function(){
+                //如果直接打印location,则可以获取到完整的路径
+                // alert(location);
+
+                //修改location,点击按钮跳转到百度
+                // location = "http://baidu.com"
+
+                //加载新文档
+                // location.assign();
+                
+                //重新加载当前页面,参数传一个true,表示清空缓存刷新
+                // location.reload(true);
+
+                //使用新的文档替换当前文档
+                location.replace('http://baidu.com');
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="btn01">点我</button>
+    <input type="text" name="" id="">
+</body>
+</html>

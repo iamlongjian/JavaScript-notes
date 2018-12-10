@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>键盘事件</title>
+    <style>
+        
+    </style>
+    <script>
+        window.onload=function(){
+            //给document绑定
+            // document.onkeyup=function(event){
+            //     event = event || window.event;
+
+            //     //可以通过keyCode来获取按键编码,可以用来判断按下的是哪个键
+            //     if(event.keyCode === 65 && event.ctrlKey){
+            //         alert('A出来了');
+            //     }
+            // }
+            //给input绑定
+            var inp = document.getElementById("inp1");
+            inp.onkeydown=function(event){
+                event = event || window.event;
+                //不允许输入数字
+                //0-9的unicode是 96-105
+                console.log(event.keyCode);
+                if(event.keyCode >= 96 && event.keyCode <=105 ){
+                    return false;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <input id="inp1" type="text">
+</body>
+</html>
