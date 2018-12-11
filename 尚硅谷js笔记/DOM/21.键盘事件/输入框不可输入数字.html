@@ -5,8 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>不允许输入数字</title>
+    <script>
+        window.onload=function(){
+            //获取到输入框
+            var inp = document.getElementById("inp");
+            // 给输入框绑定键盘按下事件
+            inp.onkeydown=function(event){
+                //兼容性写法
+                event = window.event || event;
+                // console.log(event.keyCode)
+                //如果输入的键位unicode编码大于95 并且 小于106 则取消默认行为(不显示)
+                if(event.keyCode >95 && event.keyCode <106){
+                    return false;
+                }else if(event.keyCode >47 && event.keyCode <58){
+                    return false;
+                }
+            }
+        }
+    </script>
 </head>
 <body>
-    
+    <input type="text" id="inp">
 </body>
 </html>

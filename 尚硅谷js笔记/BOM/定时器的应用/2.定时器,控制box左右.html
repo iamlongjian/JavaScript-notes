@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>定时器2</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box1{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: aquamarine;
+            left: 0;
+        }
+        #box2{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: rgb(255, 127, 127);
+            left: 0;
+            top: 250px;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var btn = document.getElementById('btn');
+            var btn2 = document.getElementById('btn2');
+            var btn3 = document.getElementById('btn3');
+            var btn4 = document.getElementById('btn4');
+            var box1= document.getElementById('box1');
+            var box2= document.getElementById('box2');
+            //var timer;
+            btn.onclick=function(){
+               move(box1,"left",800,20);
+            }
+            btn2.onclick=function(){
+               //  move(box1,0,-10)//直接传正负值不太好,需要做一个正负判断
+               move(box1,"left",0,10);
+            };
+            btn3.onclick=function(){
+               
+               move(box2,"left",800,10);
+            };
+            btn4.onclick=function(){
+               
+               move(box2,"width",800,10,function(){
+                    move(box2,"height",300,10,function(){
+                        move(box2,"top",0,10,function(){
+                   
+                        });
+                    });
+               });
+            };
+            
+            //尝试把它提取成函数 //如果外部页面需要也可以单独提取成js文件
+            /*参数1：obj 要执行动画的对象
+            参数2：attr 要执行动画的样式：top left width ...
+            参数3：target 移动的目标位置            
+            参数4：speed 移动的速度
+            参数5：callback 回调函数
+            */
+            function move(obj,attr,target,speed,callback){
+                //正负判断
+                //如果从0往800移动,那么speed需要为正值
+                //如果从800往0移动,那么speed需要为负值
+                //获取当前元素所在的位置
+                var current = parseInt(getStyle(obj,attr));
+                if(current>target){
+                    speed = -speed;
+                }
+                //clearInterval(timer);  //定时器的返回值不应该储存在全局变量timer中,否则每个调用该函数的动画都是返回的时同一个定时器的值
+                clearInterval(obj.timer); //需要根据移动的元素来变化 //在obj中保存一个timer属性
+                obj.timer = setInterval(function(){
+                    var old = parseInt(getStyle(obj,attr));
+                    var newValue = old + speed;
+                    //向左移动时,需要判断newValue是否小于target,小于target则等于target
+                    //向右移动时,需要判断newValue是否大于target,大于target则等于target
+                    if( speed <0 && newValue<target || speed >0 && newValue>target ){
+                        newValue = target;
+                    }
+                    //注意：不能直接写style.attr(attr是变量,这样子就直接写死了) 需要写成以下的方式
+                    obj.style[attr] = newValue + 'px';
+                    if(newValue == target){
+                        clearInterval(obj.timer);
+                        callback && callback();
+                    }
+                },30)
+            }
+
+            function getStyle(obj,name){
+                if(getComputedStyle){
+                    return getComputedStyle(obj,null)[name];
+                }else{
+                    return currentStyle(obj)[name];
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="btn">点击按钮向右</button>
+    <button id="btn2">点击按钮向左</button>
+    <button id="btn3">点击Box2向右移动</button>
+    <button id="btn4">测试按钮</button>
+    <br>
+    <div id="box1"></div>
+    <div id="box2"></div>
+</body>
+</html>
