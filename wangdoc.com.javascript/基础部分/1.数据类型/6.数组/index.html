@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload=function(){
+            /*12.17*/
+            /*
+                数组:
+                - 数组是按照次序排列的一组值,每个值得位置都有编号(索引)从0开始,整个数组用方括号表示.
+                    var arr = [1,'2',true];
+                - 数组也可以先定义,后赋值:
+                    var arr = [];
+                    arr[0] = 123;
+                    arr[1] = 'hello';
+                    arr; //[123,'hello']
+                - 如果数组得元素还是数组,就形成了多维数组
+                    var arr = [1,[1,2],[3,4]];
+                    arr[1][0]; //1
+                    arr[2][1]; //4
+                2. 数组的本质：
+                本质上数组是一种特殊的对象,使用typeof返回的值为Object
+                特殊性在与：它的键名总是固定的从0开始的整数。而对象的键名是个变量
+                - 赋值和取值
+                都是只能使用方括号来表示：arr[0] = 123; arr[1];
+                3. length属性
+                数组的length属性,返回数组成员的数量.
+                例子：
+                    var arr = [1,2,3,4,5];
+                    arr.length;  //5
+                - length的值为数组的最大键名+1
+                    arr[100] = 123;
+                    arr.length;  //101
+                    arr[66] = 123;
+                    arr.length;  //67
+                - length属性是可写的,如果大于最大键值+1,则多出来的会是undefined
+                                    如果小于最大键值+1,则会被舍去
+                    var arr = [1,2,3,4,5,6,7];
+                    arr.length = 5;
+                    arr;  //1,2,3,4,5
+                    arr.length = 10;
+                    arr; //1,2,3,4,5,6,7,,,,
+                - 清空一个数组,把该数组的length属性设置为0即可
+                例子：
+                    var arr = [1,2,3,4,5,6,7];
+                    arr.length =0;  //清空一个数组
+                    arr;  //
+                - 给数组添加非整数键名,则不会影响到length属性,length属性的值根据最大整数键名+1
+                4. in 运算符
+                查找一个数组里某个键名是否存在:
+                例一：
+                    '2' in arr[0,1];  //false //该数组最大索引为1
+                例二：
+                    var arr = [];
+                    arr[100] = 123;
+                    '1' in arr;  //false //空位也会返回false
+                - 这个arr只有一个成员,就是索引为100的成员,使用in运算符判断索引为1的成员返回false,因为undefined转换为
+                布尔值为false
+                !!undefined;  //fasle
+
+                5. 数组的遍历(for循环)
+                为什么不适用for in：因为for in遍历数组会遍历到非整数键,所以推荐使用for循环
+                例子：
+                    var arr = [1,23,4];
+                    for(var i=0;i<arr.length;i++){
+                        console.log(arr[i]);  //1,23,4
+                    }
+                6. 数组的空位(hole)
+                如果获取数组的空位会返回undefined,空位也是一个元素,length属性会连空位一起计算进去
+                例一：
+                    var arr = [1,,3];
+                    arr.length;   //3  //空位也是一个成员
+                    var arr = [1,2,3,];
+                    arr.length;   //3  //最后一个元素后面有','也不会产生空位
+                - 使用delete 可以删除一个数组成员,形成空位(空位也算一个成员,因此length属性不会受到影响)
+
+                7. 类数组对象：
+                如果一个对象的所有键值都是正整数或者零,并且有length属性,那么这个对象就成为类数组对象
+                - 转换成数组的方法：Array.prototype.slice.call('abc');
+            */
+            
+                    
+                    
+
+
+                    
+                    
+
+
+
+
+
+
+
+            /*
+                数组:
+                1. var arr = [];
+                2. in 可以查找数组中是否含有该索引  '0' in arr;
+                3. 一般使用for循环遍历数组
+                4. 使用delete命令删除一个数组成员，会形成空位，并且不会影响length属性(delete a[1];)
+                4.
+                    var arr = [1,2,3,4];
+                    delete arr[0]; 
+                    console.log(arr);   //2,3,4
+                    arr.length //4 //不影响length
+                
+            */
+            /*
+                任何数据类型的值都可以放入数组中
+            */
+                var arr = [
+                    'hello',
+                    123,
+                    true,
+                    function(){return true;}
+                ];
+                //上面数组的成员依次是字符串,数值,布尔值,和函数
+
+            /*多维数组
+                如果数组内还是数组,就形成了多维数组
+            */    
+            var arr = [[1,3],[4,6]];
+            arr[0][1];  //3
+            arr[1][0];   //4
+            /*
+            1. 数组的本质是一个对象,使用typeof返回的类型是Object
+            2. 数组的位置是根据索引来决定的,索引默认从0开始,第一个元素的索引为0以此类推。
+            3. 可以使用Object.keys(arr)来遍历数组的所有索引
+            4. 数组取值的时候只能使用方括号arr[number]
+            5. 使用数组的length属性可以返回数组的长度,也就是数组成员的数量
+              - 只要是数组就有length属性,该属性的值等于最大键名+1;
+            6. length的属性是可写的,如果修改了length的值小于键名那么数组的长度会减少到length,大于length的元素将会被删除
+              - 也就是说这时候该数组的最大键名就是修改后的length-1;
+            6.1 如果length的值大于当前元素的个数,那么数组会使用空位来填充
+            7. 清空数组的一个有效方法：就是将它的length属性设置为0
+            8. 为数组使用不合法键名
+            */
+            //5.
+            var arr = [1,2,3];
+            arr[3]="hello";
+            arr.length;   //4  //永远都是最大键名+1
+            arr[100]="hello";
+            arr.length;   //101
+            arr[666]="hello";
+            arr.length;   //667
+            arr.length = 0;   //清空一个数组
+            arr; //此时数组已被清空 //返回[]
+
+            //8.
+            var arr = [];
+            arr['p'] = 'a';
+            arr[12.1] = 'b';
+            // alert(arr['p']); //a //键名的双引号是必须的
+            // console.log(arr[12.1]);   //b
+            arr.length;  //0   //因为所添加值对应的键名不是合法键名,所以不会更改数组的长度,为什么可以读取到不合法
+            //键名呢，因为被读取的时候会自动转换为字符串形式,js规定所有的键名都必须为字符串形式
+
+            /*
+                in 运算符:查找某个键名是否存在,适用于对象也适用于数组
+            */
+            var arr = [1,2,3,4];
+            -1 in arr;   //false 数组没有键名为-1的元素
+            1  in arr;  //true  键名为1的元素是'2'
+            3  in arr; //true   键名为3的元素是'4'
+            4  in arr;  //false  没有键名为4的元素
+            /*
+                for in遍历数组中的所有元素,既可以遍历数组也可以遍历对象
+                - 遍历出所有的键名,包括非数字键名
+                - 所以  不推荐用forin遍历数组,推荐使用for循环
+            */
+
+            var arr = [1,2];
+            for(var i in arr){
+                i;   //0,1  
+                arr[i]; //1,2
+            }
+            arr.foo = 13;
+            for(var i in arr){
+                i; //0,1,foo   //这个现象表明不经可以遍历数字键名还可以遍历非数字键名
+            }
+            /*
+                forEach()方法:也可以用来遍历数组
+            */
+            var color = ['red','green','yellow'];
+            color.forEach(function(a){
+                a;  //'red' 'green' 'yellow'
+            });
+
+            /*
+                数组的空位
+                1. arr[1,,3];  此时数组arr的length为3,因为空位也占据了一个位置
+                2. arr[1,2,]; 此时数组arr的length为2,如果数组的最后一个元素后面有,并不会产生空位
+                3. 数组的空位是可以读取的,如果读取空位则返回undefined
+            */
+            //3.
+            var arr = [1,,3];
+            arr[1];  //undefined //返回下标为1的元素,该元素为空位所以返回undefined
+
+            /*
+                空位使用length遍历不会被跳过,如果使用forEach或者forin以及Object.keys()遍历空位都会被跳过
+                如果某个位置的值为undefined,则不会被跳过,因为这个值是真实存在的,这个值就是undefined
+            */
+            
+          
+           
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

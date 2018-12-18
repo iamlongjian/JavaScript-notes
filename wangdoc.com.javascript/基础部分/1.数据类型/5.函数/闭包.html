@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload=function(){
+            /*
+                闭包:
+                1. 了解作用域
+                2. 
+            */
+
+            /*实例*/
+            // function f1() {
+            //     var n = 999;
+            //     function f2() {
+            //     　　console.log(n); // 999
+            //     }
+            // }
+            /*
+            上面代码中，函数f2就在函数f1内部，这时f1内部的所有局部变量，对f2都是可见的。
+            但是反过来就不行，f2内部的局部变量，对f1就是不可见的。这就是 JavaScript 语言特有的"链式作用域"结构（chain scope），
+            子对象会一级一级地向上寻找所有父对象的变量。所以，父对象的所有变量，对子对象都是可见的，反之则不成立。
+            */
+
+            // function user(name){    
+            //     var age,sex;
+            //     return{
+            //         getName:function(){
+            //             return name;
+            //         },
+            //         setName:function(newName){
+            //             name = newName;
+            //         },
+            //         getSex:function(){
+            //             return sex;
+            //         },
+            //         getAge:function(){
+            //             return age;
+            //         },
+            //         setAge:function(newAge){
+            //             age = newAge;
+            //         }
+            //     }
+            // }
+
+            // var long = user('longer');
+            
+            // long.setName('cece');
+            // alert(long.getName());
+            
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

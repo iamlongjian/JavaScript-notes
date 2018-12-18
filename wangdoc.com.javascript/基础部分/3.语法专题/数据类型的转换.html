@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>语法专题</title>
+    <script>
+        window.onload=function(){
+            
+            /*  12.17
+                概述：Js是一种动态语言,变量没有类型限制,可以随时赋予任意值
+                比如减法:减法所期待的运算子都是数值类型的,如果不是则会先将运算子转换为数值型,在进行运算
+                例子：
+                    '3' - '2' = 1  //自动把等号两边的字符串形式的值转换为了数值
+
+
+                
+                //2.强制转换的三个函数：
+
+                2.1 Number()
+                - 使用Number()函数,可以将任意类型的值转换为Number类型
+                - 下面分为两种情况，
+                1. 原始数据类型转换的规则如下
+                例子：
+                    Number(123);  //123     //数值转换后还是原来的数值
+                    Number('123');  //123   //如果可以将字符串解析,则会返回对应的数值
+                    Number('123asd');  //NaN    //如果不可以解析为数值则返回NaN
+                    Number(''); //0     //空字符串转换为数值变成0
+                    Number(true);   //1     //true转换为数值变成1
+                    Number(false);  //0     //false转换为数值变成0
+                    Number(undefined); //NaN    //undefined转换为数值变成NaN
+                    Number(null); //0 //null转换为数值变成0
+                - Number()转换比parseInt()要严格的多,parseInt()是一个个转换,Number()则是整体转换.
+                2. 对象转换为Number类型的规则如下：
+                简单的规则是:如果Number方法的参数是对象则返回NaN,如果是除非是包含单个数值的数组。
+                例子：
+                    Number({name:'l'});  //NaN
+                    Number([1,2,3]); //NaN
+                    Number([5]);    //5
+                - 其背后的转换规则是先将对象使用valueOf()方法,如果返回的是基本数据类型,则直接转换为数值。
+                - 如果使用valueOf()后返回的是一个对象,则继续使用toString()方法
+                - 如果toString()方法返回的是一个字符串形式的对象,则返回NaN,因为无法解析
+                例子:
+                    var obj = {};
+                    if(typeof obj.valueOf() === 'object'){
+                        Number(obj.toString());
+                    }else{
+                        Number(obj.valueOf());
+                    }
+
+                2.2 String()方法：
+                - String()函数可以将任意类型的值转换为字符串形式,转换规则如下：
+                1. 原始值类型:
+                   - 数值:则转换为相应的字符串
+                   - 字符串:转换后还是原来的值
+                   - true,false:则转换为'true','false'
+                   - undefined:转换为'undefined' 
+                   - null:转换为'null'
+                2. 对象:
+                    String()的参数如果是对象,则返回一个类型字符串'[Object Object]'
+                    如果是一个数组,则返回该数组的字符串形式:
+                    例子:
+                        String({}); //[Object Object]
+                        String([1,2,3]);  //'1,2,3'
+                    - String()背后的转换规则大致和Number的相同,只是valueOf()和toString()方法的位置互换
+
+                2.3 Boolean()方法：
+                - Bollean()可以将任意类型的值转换为布尔值：规则如下
+                - 以下5种情况均转换为false,其他的情况都是转换为true;
+                    Boolean(0);  //false //0转换为布尔值
+                    Boolean(undefined); //false  //
+                    Boolean(null);  //false
+                    Boolean('');  //false
+                    Boolean(NaN);  //false
+                - 包括任何对象的布尔值都是true
+            */
+
+
+
+           /*
+                    
+                自动转换
+                - 自动转换是以强制类型转换为基础的
+                - 遇到以下三种情况时,会发生自动转换
+
+                第一种情况:不同类型的值发生运算时：
+                例子：
+                        '4' - '2' = 2; //减号两边的字符串都转换为数值类型,在进行减法操作
+                第二种情况:对非布尔类型求布尔值
+                例子:
+                        if('abc'){      //'abc'字符串会自动转换为布尔值true
+                            console.log('true');
+                        }    
+                第三种情况:对非数值类型的值使用一元运算符运算，即'+'和'-'
+                例子:
+                        - [123];  //-123
+                        + '456';  //456
+                        - [asd];  //NaN
+                        + 'asd';  //NaN
+                        + {};  //NaN
+
+                3.1 自动转换为布尔值
+                - 在Js中遇到预期为布尔值的地方(如if语句)则会将值自动转换为布尔值
+                系统会自动调用Boolean()函数
+                因此 除了以下五个值会转换为false,其他都是转换为true
+                1. 0
+                2. null
+                3. undefined
+                4. ''
+                5. NaN
+                - 手动转换为布尔值的方法:直接在表达式前面加两个!! 如:!!(1>2);  //false
+
+                3.2 自动转换为字符串
+                - Js中遇到预期为字符串的地方(加法运算),则会将值自动转换为字符串形式
+                系统会自动调用String()函数
+                - 一般发生在加法运算中,如果一个运算子为字符串,另一个为非字符串,则后者转换为字符串
+                如：
+                '1' + null;     //'1null'
+                '2' + undefined; //'2undefined'
+                '2' + fasle; //'2false'
+                '2' + {};  //'2[Object Object]'
+                '2' + [123]; //'2123'
+
+                3.2 自动转换为数值
+                - js遇到预期值为数值的地方(除加法外的其他运算),都会把非数值的值转换为数值
+                系统内部都会自动调用Number()函数
+                如：
+                '5' - '2' // 3
+                '5' * '2' // 10
+                true - 1  // 0
+                false - 1 // -1
+                '1' - 1   // 0
+                '5' * []    // 0
+                false / '5' // 0
+                'abc' - 1   // NaN
+                null + 1 // 1
+                undefined + 1 // NaN
+                - 注意:null转换为数值为0.而undefined转换为数值为NaN
+                - 一元运算符(+,-)也会把运算子转换为数值
+                如：
+                +'abc';  //NaN //等同于Number('abc');
+                - [1]; //-1 //等同于Number(-[1]);
+           */                    
+                        
+        }
+    </script>
+</head>
+
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自动转</title>
+    <style>
+        img{
+            width: 500px;
+            height: auto;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var srcArr = ["1.jpg","2.jpg","3.jpg","4.jpg"];
+            var index = 0;
+            var img = document.getElementsByTagName("img")[0];
+            setInterval(function(){
+                index++;
+                if(index == srcArr.length){
+                    index = 0;
+                }
+                img.src=srcArr[index];
+               
+            },1000)
+        }
+    </script>
+</head>
+<body>
+    <img src="1.jpg" alt="">
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload=function(){
+            // function add(a,b){   //求和的函数
+            //     return a+b;
+            // }
+            // alert(add(9,3));
+
+            //***************闭包*******************************
+        //     function user(name,sex,age){
+        //         return{
+        //             getName:function(){
+        //                 return name;
+        //             },
+        //             setName:function(newName){
+        //                 name = newName;
+        //             },
+        //             getSex:function(){
+        //                 return sex;
+        //             },
+        //             setSex:function(newSex){
+        //                 sex = newSex;
+                        
+        //             },
+        //             getAge:function(){
+        //                 return age;
+        //             },
+        //             setAge:function(newAge){
+        //                 age = newAge;
+        //             },
+        //         }
+        //     }
+        //     var long = user('long','男',18);
+        //     long.setAge(19);
+        //     long.setSex('女');
+
+        //     console.log(long.getName());
+        //     console.log(long.getSex());
+        //     console.log(long.getAge());
+            
+        // var height = parseFloat(prompt('请输入身高(m):'));
+        // var weight = parseFloat(prompt('请输入体重(kg):'));
+        
+
+        // var bmi = weight/(height*height);
+
+        // if (bmi<18.5){
+        // console.log('过于轻');
+        // } else if (bmi>18.5 && bmi<25){
+        // console.log('正常');
+        // }else if (bmi>25 && bmi<28){
+        // console.log('过重');
+        // }else if (bmi>28 && bmi<32){
+        // console.log('肥胖');
+        // }else{
+        // console.log('过于肥胖');
+        // }
+
+        
+    // *********************************使用闭包
+
+        // function user(name){
+        //     var sex,age;
+        //     return {
+        //         getName:function(){
+        //             return name;  
+        //         },
+        //         setName:function(newName){
+        //             return name = newName;  
+        //         },
+        //         getSex:function(){
+        //             return sex;  
+        //         },
+        //         getAge:function(){
+        //             return age;  
+        //         },
+        //         setAge:function(newAge){
+        //             age = newAge;  
+        //         },
+        //     }
+        // }
+
+        // var long = user('longer');
+        // alert(long.getName());
+        // alert(long.setName('cici'));
+        // alert(long.getName());
+
+
+            // *********************************使用原型
+
+        // function User(name,age,sex){
+        //     this.name = name;
+        //     this.age = age;
+        //     this.sex = sex;
+        // }
+        // User.prototype.getName=function(){
+        //    return this.name;
+        // }
+        // User.prototype.setName=function(newName){
+        //     return this.name = newName;
+        // }
+
+        // var long = new User('longer',15,'男');
+        // var long2 = new User('coco',16,'女');
+        // console.log(long2.getName());
+        
+
+        /*闭包----------------------------------*/
+        var iBaseNum = 10;
+
+        function addNum(iNum1, iNum2) {
+            // return{   
+            // doAdd:function(){
+            //     return iNum1 + iNum2 + iBaseNum;
+            //     },
+            // }
+            function doAdd(){
+                return iNum1 + iNum2 + iBaseNum;
+            }
+            return doAdd();
+        }
+        alert(addNum(1,6));
+        
+}
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

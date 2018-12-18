@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload=function(){
+            /*
+                JSON
+                1. js中的对象只js自己认识，别的语言都不认识
+                2. JSON就是一个特殊格式的字符串,这个字符串可以被任何语言识别
+                并且可以转换为任意语言中的对象，所以JSON主要用于不同语言之间的
+                数据交互
+                3. javascript  object NOtation (js对象表示法)
+                4. json和js的格式一样，只不过json字符串中的对象属性名必须加引号
+                其他的和js语法一致
+                JSON的分类：
+                1. JSON对象：'{"name":"孙悟空","sex":"男","age":"18"}';
+                2. JSON数组: '[1,2,3,4,"hello",true]';
+                JSON允许的值：
+                1. 字符串
+                2. 数组
+                3. 对象(不包括函数)
+                4. null
+                5. 布尔值
+                6. number
+                
+                
+
+            */
+            // var obj = {name:'孙悟空'};
+            // alert(obj);
+
+
+            /*
+                将JSON转换为js中的对象
+                在JS中，为我们提供了一个工具类，就叫JSON
+                这个对象可以把js对象转换为JSON，也可以把JSON转换为js对象
+            */
+            
+            /*
+
+            JSON------>js对象
+            JSON.prase()
+            - 可以将JSON字符串转换为JS对象
+            - 需要一个JSON字符串作为参数,会将该字符串转换为JS对象并返回
+            */
+            // var json = '{"name":"孙悟空","sex":"男","age":"18"}';
+            // var json2 = '[1,2,3,4,"hello",true]';
+            // console.log( JSON.parse(json));    //成功将其转换为了JS对象
+            // console.log(typeof JSON.parse(json2)[0]); 
+            var jsonStr = '[1,2,3,4,"hello",true]';
+            console.log(JSON.parse(jsonStr)[2]);
+
+            /*
+            js对象----->为JSON
+            JSON.stringify()
+            - 可以将js对象转换为JSON字符串
+            - 需要一个js对象作为参数会返回一个JSON字符串
+            */
+        //    var o = JSON.stringify(JSON.parse(json));
+        //    console.log(o);    //string类型 ，说明已经转换成功了
+        var str = {name:'孙悟空',sex:'男',age:18};
+        console.log(typeof JSON.stringify(str));
+
+           /*
+           注意：JSON对象在IE7及以下不可使用,因为没有被定义,会报错
+           */
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

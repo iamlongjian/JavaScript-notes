@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload=function(){
+        var str = 'Today is nice day!';
+        // console.log(str.length);   //查看字符串的长度
+        // console.log(str[0]);   //T
+        // console.log(str.charCodeAt(0));  //T的unicode编码是84  //84
+        var str2  = 'andyou?';
+        var  str3 = (str.concat(str2));  //连接字符串
+        // alert(str3.indexOf('o',5));   //23  //在str3中,从索引为5的位置开始查找'o'字符
+    // alert(str3.slice(1,5)); //slice 裁剪字符串,包前不包后
+    // alert(str3.slice(1,-5)); //slice 也可以传负数,表示从索引为1的截取到倒数第五个
+    alert(typeof str3.split());
+            
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

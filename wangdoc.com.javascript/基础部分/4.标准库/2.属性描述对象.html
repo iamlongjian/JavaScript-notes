@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload=function(){
+
+            /*
+                属性描述对象:
+                Js提供了一个内部数据结构，用来描述对象得属性,控制它得行为,比如某个属性是否可写,
+                可遍历等等...这个内部数据结构称为'属性描述对象'，每个属性都有自己对应的属性描述
+                对象,保存该属性的一些元信息
+                例如:
+                    {
+                        value:123,   //该属性的属性值 //默认为undefined
+                        writable: false,    //是一个布尔值,表示属性值是否可改变(是否可写),默认为true
+                        enumerable: true,   //布尔值,表示属性是否可遍历到,默认为ture
+                        configurable: false, //布尔值,表示属性是否可配置
+                        get: undefined,  //是一个函数 //表示该属性的取值函数(getter)
+                        set: undefined  //是一个函数 //表示该属性的存值函数(setter)
+                    }
+
+                (2)Object.getOwnPropertyDescriptor()：获取某个属性的属性描述对象,参数一为目标对象,参数二
+                为字符串，对应目标对象的的某个属性名:
+                例如:
+                    var obj = {name:'longer'};
+                    console.log(Object.getOwnPropertyDesciptor(obj,'name'));
+                    输出以下结果:
+                    {
+                        configurable: true
+                        enumerable: true
+                        value: "longer"
+                        writable: true
+                        __proto__: Object
+                    }
+                - 该方法只能用于自身属性,如果`Object.getOwnPropertyDesciptor(obj.'toString')` 则返回undefined,因为
+                toString属性是继承属性。
+
+                (3)Object.getOwnPropertyNames(),返回一个数组,遍历某个对象的所有属性名,不管该属性是否可以遍历
+                例子：
+                    Object.getOwnPropertyNames(obj); //[.......]
+
+                (4)Object.defineProperty(),Object.defineProperties()
+                - Object.defineProperty()方法允许通过属性描述对象,定义或修改一个属性,然后返回修改后的对象
+                - Object.defineProperty()方法接受三个参数,依次如下:
+                1. object: 属性所在的对象
+                2. propertyName: 字符串，表示属性名
+                3. attributesObject: 属性描述对象
+                例子：
+                    定义obj.name：
+                    var obj = Object.defineProperty({},'name',{
+                        value:'longer',  //值为123
+                        writable: false,    //不可写
+                        enumerable: true,   //可遍历
+                        configurable: false //不可配置
+                    });
+                    obj.name;  //'longer'
+
+                    obj.name = 'cici';
+                    obj.name; //'longer'  //因为设置了改属性为不可写
+
+                4.2 Object.defineProperties()方法,如果一次定义或修改多个属性,可以用此方法
+                例如：
+                    定义obj.name,obj.sex,obj.age三个属性
+                    var obj = Object.defineProperties({},{
+                        naem:{value:'longer'},
+                        sex:{value:'男'},
+                        age:{value:18}
+                    });
+                    obj.name;  //'longer'
+                    obj.sex; //'男'
+                    obj.age;  //18
+
+                (5)Object.prototype.propertyIsEnumerable():获取某个元素是否可以被遍历
+                例如:
+                    var obj = {name:123};
+                    obj.propertyIsEnumerable('name');  //true
+
+                (6)元属性：属性描述对象的各个属性称为'元属性'
+                1. value    //值
+                2. writable //可写性
+                3. enumerable   //可枚举性
+                4. configurable //可配置性
+
+                (9)控制对象状态:
+                有时候需要冻结对象的读写状态,防止对象被改变,JS提供了三种冻结方法:最弱的一种:Object.preventExtensions,
+                其次是:Object.seal(密封),最强是:Object.freeze(冻结)
+                9.1 Object.preventExtensions()
+                可以使得一个对象无法再添加新属性：
+                    var obj  = {};
+                    Object.preventExtensions(obj);
+                    obj.p = 123;
+                    obj.p; //undefined //因为使得obj不能添加新属性了,所以返回undefined
+                - 检查一个对象是否使用了Object.perventExtensions()
+                    var obj = {};
+                    Object.isExtensible(obj);//true  //当前表示可添加新属性
+                    Object.prevnetExtensions(obj);  //给对象设置不可添加属性
+                    Object.isExtensible(obj);//false  //当前表示不可添加新属性
+                9.2 Object.seal();
+                方法使得一个对象既无法删除旧属性,也无法添加新属性
+                    var obj = {p:'hello'};
+                    Object.seal(obj);
+                    delete obj.p;
+                    obj.p; //'hello'  //发现并没有删除
+                    obj.name = '123';
+                    obj.name; //undefined  //发现并没有添加name属性
+                - 检查一个对象是否使用了Object.seal(),需要使用Object.isSealed()
+                    var obj = {};
+                    Object.seal(obj);
+                    Object.isSealed(obj); //true
+                9.3 Object.freeze()
+                方法使得一个对象无法删除旧属性,无法添加新属性,无法修改value的值,使得这个对象变成了常量
+                    var obj = {name:'longer'};
+                    Object.freeze(obj);  //设置Object.freeze()
+                    Object.isFrozen(obj); //true //表示使用了Object.freeze()方法                   
+            */
+           
+            var obj = {name:123};
+            console.log(Object.getOwnPropertyDescriptor(obj,'name'));   //查看一个对象的某个属性的属性描述对象
+            Object.defineProperty(obj,'name',{      //定义或修改一个对象中的某个属性的属性描述对象
+                value:'longer'
+            })
+            Object.preventExtensions(obj); //不可新增新属性
+            Object.seal(obj);  //不可删除旧属性,不可新增新属性
+            Object.freeze(obj); //不可删除旧属性,不可新增新属性,不可修改Value的值,相当于一个常量
+            delete obj.name;  //无效 //因为使用了Object.freeze()方法
+            obj.sex = '男'; //无效
+            console.log(obj.sex);   //undefined
+          
+          
+            
+
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

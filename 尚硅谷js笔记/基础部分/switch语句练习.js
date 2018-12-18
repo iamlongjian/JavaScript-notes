@@ -1,37 +1,37 @@
-// var x = +prompt('请输入今天周几(1-7)');
-// if( x<1 || x>7 || isNaN(x) ){
-//     console.log("请你输入正确的值");
-// }else{
-//     switch(x){
-//         case 1:
-//         console.log('壹');
-//         break;
-//         case 2:
-//         console.log('贰');
-//         break;
-//         case 3:
-//         console.log('叁');
-//         break;
-//         case 4:
-//         console.log('肆');
-//         break;
-//         case 5:
-//         console.log('五');
-//         break;
-//         case 6:
-//         console.log('陆');
-//         break;
-//         default :
-//         console.log('漆');
-//         break;
-//     }
-// }
+var x = +prompt('请输入今天周几(1-7)');
+if( x<1 || x>7 || isNaN(x) ){
+    console.log("请你输入正确的值");
+}else{
+    switch(x){
+        case 1:
+        console.log('壹');
+        break;
+        case 2:
+        console.log('贰');
+        break;
+        case 3:
+        console.log('叁');
+        break;
+        case 4:
+        console.log('肆');
+        break;
+        case 5:
+        console.log('五');
+        break;
+        case 6:
+        console.log('陆');
+        break;
+        default :
+        console.log('漆');
+        break;
+    }
+}
 
 // var x = +prompt('请输入您的成绩');           
 // if(x>100 || x<0 || isNaN(x)){
 //     console.log('请输入正确的值');
 // }else{
-//     switch(parseInt(x/10)){
+//     switch(parseInt(x/10)){    //parseInt():取出有效整数
 //         case 10:
 //         case 9:
 //         case 8:

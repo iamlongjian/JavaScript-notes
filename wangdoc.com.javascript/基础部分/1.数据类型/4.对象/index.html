@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload=function(){
+            /*
+                12.17对象：
+                      - 对象是JS中核心的概念,也是最重要的数据类型.
+                    例一：
+                        var obj = {foo:'abc',boo:123};
+                    上面的变量obj指向的就是一个对象,对象中包含两个键值对,第一个的键名为foo,键值为'abc',键名和键值之间
+                    使用':'分割,第二个键值对的键名为boo,键值为123,键值对之间使用','分割。
+
+                    1.2 键名：所有对象的键名都是字符串
+                        - 不符合规范的键名需要加上引号
+                    例二:
+                    var obj={
+                        'h x':123,         //不符合规范需要加上双引号
+                        '1+2':'abc'         //不符合规范需要加上双引号
+                    }
+                        - 每一个键名又称为属性,属性值可以是任何数据类型,属性值如果是一个函数,通常把这个属性称为方法,它可以
+                        像函数一样被调用
+                    例三:
+                    var obj = {
+                        p:function(x){
+                            return x;
+                        }
+                    }
+                    obj.p(1);   //1  //调用对象内部的函数,也叫调用方法
+
+                    1.3 如果对象的属性值还是一个对象,那么就形成了链式引用
+                    例四：
+                    var obj = {},obj2 = {name:'hapi'};
+                    obj.foo = obj2;
+                    obj.foo.name; //'hapi'  //obj的foo属性指向obj2(一个对象),所以在obj的foo属性中就有了name属性,这就
+                    形成了链式引用
+
+                    1.4 对象的引用
+                    如果不同名的变量指向了同一个对象,那么它们都是这个对象的引用,也就是说指向的是同一个内存地址,修改其中
+                    一个变量,会印象到其他所有的变量
+                    例子：
+                        var obj={};
+                        var obj2 = obj;
+                        obj.a = 456;
+                        alert(obj2.a);  //456  //因为obj和obj2的内存地址是一样的,所以他们会有所关联.
+                    如果两个变量都指向的是一个原始类型的值的话,那么变量这时都是值得拷贝
+                    例子：
+                        var x =1,y=x;
+                        x =2;
+                        y;  //1 //只是对原始值的拷贝,这表示x和y并不指向同一个内存地址
+
+                
+                2. 对象属性的读取
+                    - 两种方式1.使用点(.)运算符2.使用方括号([])运算符
+                    请注意 如果使用方括号读取属性,键名必须放在引号里,否则会被当成变量处理：
+                    例子:
+                        var foo ='bar';
+                        var obj = {
+                            foo : 123,
+                            bar : 'hello'
+                        }
+                        obj.foo;    //123  //使用点运算符
+                        obj[foo];   //'hello'   //使用方括号但是不符合规范:没有把属性名放在引号里，那么foo就是一个变量,指向'bar'.
+                        obj['foo']; //123   //使用方括号运算符
+
+                    如果键名为数值则不可以使用点运算符,会被当成小数点,只能使用方括号运算符：
+                    例子 ：
+                        var obj = {
+                            123:'hello'
+                        }
+                        obj.123;  //报错
+                        obj[123];  //'hello'   //加不加引号都可以,因为数值会自动转换为字符串
+                        
+                3. 属性的赋值
+                    - 使用点运算符和方括号运算符不仅仅可以用来取值,也可以用来赋值
+                    例子:
+                        var obj={};
+                        obj.p = 123;    //为对象obj的p属性赋值为123
+                        obj['p'] = 123; //为对象obj的p属性赋值为123
+
+                    - 允许属性的后绑定：也就是说你可以在任何时刻新增属性
+                    例子:
+                        var obj = {p:1};
+                            ||
+                        var obj = {};
+                        obj.p = 1;
+                        obj['p'] = 1;
+
+                4. 属性的遍历
+                - 可以使用Object.keys()
+                例子:
+                        var obj = {o:123,p:456};
+                        Object.keys(obj);  //['o','p']
+
+                5. 属性的删除
+                - 可以使用 delete obj.属性名
+                例子:
+                        var obj = {o:123};
+                        Object.keys(obj);  //['o'];
+                        delete obj.o;
+                        Object.keys(obj);  //[]
+
+                - 如果删除一个不存在的属性,也会返回true,因此我们不能依靠delete来判断一个属性是否存在
+                - 只有一种情况下delete属性会返回false,就是这个属性存在,但是configurable属性为false的时候(不可修改)
+
+                6. 检查属性是否存在
+                - 可以使用 in (如果存在则返回true,不存在则返回false)
+                - in的左边是一个属性名(字符串形式),in的右边是一个对象
+                例子：
+                        var obj = {p:123};
+                        alert('p' in obj); //true
+                        
+                - hasOwnProperty()方法:检查一个属性是否为对象自身的属性
+                - 如果是自身属性则返回true,如果是继承属性则返回false
+                例子:
+                        var obj = {};
+                        alert(obj.hasOwnProperty('toStirng'));  //false //表示toString属性非自身属性
+                - for...in
+                - 遍历对象的属性
+                for(var i in obj){
+                    console.log(i);  //输出所有的属性
+                    console.log(obj[i]); //输出所有的键值
+                }
+
+                一般结合hasOwnProperty()方法,输出自身的属性,继承的属性一般是不会想要遍历的
+                for(var i in obj){
+                    if(obj.hasOwnProperty(i)){
+                        console.log(i); //输出自身的属性
+                    }
+                }
+
+                
+            */
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            /*
+            对象
+            1. 对象就是一组键值对(key-value),格式:key:value,key:value,key...
+            2. key的引号可加可不加,如果key不符合规范则必须加上引号
+            3. Object.keys(obj)  可以查看对象中的属性名称
+            4. delete obj.name 删除对象obj中的name属性
+            5. 属性是否存在 in关键字:  'name' in obj
+            6. 遍历属性for in语句: for(var i in obj)
+            */
+           /*
+            对象属性的读取
+            obj.p :
+            obj['p']
+            
+           */
+           
+            // var bar = '123';
+            // var obj = {
+            // foo: 1,
+            // bar: 2
+            // };
+            
+            // alert(obj.foo);  // 1
+            // alert(obj['bar']); 2    //使用[]的方式 需要在属性名称上加上引号
+            // alert(bar);  // 123
+            // alert(obj[bar]) 相当于 alert(obj['123'])  //undefined
+
+            // var obj = {name:132,age:12};
+            // alert(Object.keys(obj));       //查看对象中的属性 object.keys(objName)
+
+            //in 查询对象中是否包含某个属性
+            // alert('name' in obj);  //true
+
+            //for in 遍历对象中的属性
+            // for(var i in obj){
+            //     alert(i);   //name,age
+            // };
+            /*
+                对象属性的读取:
+                1. 使用.运算符 `obj.name`
+                2. 使用[]运算符`obj['name']`   方括号内的属性必须加引号,否则会当成变量处理
+            */
+           //查看对象中的属性 Object.keys
+        //    let obj = {p:1,a:2,c:3};
+        //    console.log(Object.keys(obj));  
+        //    //查看对象某个属性是否存在 in
+        //    console.log('p' in obj);
+        //    //遍历对象中的属性  for in 
+        //    for(var i in obj){
+        //        console.log(i);   //p,a,c
+        //    }  
+           //删除属性 //删除成功则返回true 如果该属性存在但是不得删除 则会返回false
+        //    delete obj.p;    //删除了名为p的属性
+        //    for(var i in obj){
+        //        console.log(i);   //a,c
+        //    }  
+
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

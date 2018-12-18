@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>类的操作</title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+        }
+        .b1{
+            width: 100px;
+            height: 100px;
+            background-color: rebeccapurple;
+            position: absolute;
+        }
+        .b2{
+            width: 300px;
+            height: 300px;
+            background-color: rgb(131, 131, 131);
+            position: absolute;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var btn = document.getElementById('btn');
+            var box= document.getElementById('box');
+            btn.onclick=function(){
+
+                //修改box的样式,使用style的方法不好,执行的性能比较差,而且当我们想要改变
+                //多个样式时,写起来比较麻烦
+                // box.style.width = 200 + 'px';
+                // box.style.height = 200 + 'px';
+                // box.style.backgroundColor = "yellow";
+
+
+                /*
+                我希望可以一行代码修改多个样式
+                直接修改class名即可,这样可以一次修改多个样式
+                */
+                /*className = b2的元素不应该出现在body中,直接把b2的样式写在style里即可*/
+                //    box.className='b2';
+                /*不想要完全取代b1,需要b1的样式和b2的样式一起生效*/
+                //使用‘+=’，b2前面需要有一个空格
+                //    box.className +=' b2';
+                // addClass(box,'b2');
+                toggleClass(box,"b2");
+                
+            }
+
+
+            //定义一个函数 专门用来添加class
+            /*
+                参数1:需要给谁添加
+                参数2：添加的className是什么
+            */
+            function addClass(obj,cn){
+                //判断：如果obj中没有cn,那么就加上，有的话就不加
+                if(!hasClass(obj,cn)){
+                    obj.className += ' '+cn;
+                }
+            }
+             //定义一个函数 判断元素中是否包含指定的class属性值,不能让他点一次加一次
+             //如果包含，则该函数返回true，否则返回false
+             function hasClass(obj,cn){
+                 //判断obj中是否含有class为cn的 
+                 //需要使用正则表达式
+                 var reg = new RegExp("\\b"+cn+"\\b");
+                 return reg.test(obj.className);
+             }
+
+             //删除一个元素中的指定class
+             //把需要删除的className替换成空字符串
+             function removeClass(obj,cn){
+                var reg = new RegExp("\\b"+cn+"\\b");
+                obj.className = obj.className.replace(reg,'');
+             }
+             //创建一个toggle函数
+             /*
+                如果元素中含有这个class,则删除
+                如果元素中不含有,则添加
+             */
+            function toggleClass(obj,cn){
+                if(hasClass(obj,cn)){
+                    removeClass(obj,cn);
+                }else{
+                    addClass(obj,cn);
+                }
+            }
+        }
+        
+    </script>
+</head>
+<body>
+    <button id="btn">点击按钮修改样式</button>
+    <br>
+    <br>
+    <div class="b1" id="box"></div>
+</body>
+</html>

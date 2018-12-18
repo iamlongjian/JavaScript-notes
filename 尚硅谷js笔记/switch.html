@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload=function(){
+            var x = +prompt('输入今天周几');
+            if(x>7 || x<1 || isNaN(x)){
+                alert('数字不合法');
+                return;
+            }
+            switch(x){
+                case 1:
+                alert('今天周一');
+                break;
+                case 2:
+                alert('今天周二');
+                break;
+                case 3:
+                alert('今天周三');
+                break;
+                case 4:
+                alert('今天周四');
+                break;
+                case 5:
+                alert('今天周五');
+                break;
+                case 6:
+                alert('今天周六');
+                break;
+                default:
+                alert('今天周日');
+                break;
+            }
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

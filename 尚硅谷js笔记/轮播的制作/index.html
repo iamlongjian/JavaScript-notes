@@ -37,7 +37,7 @@
              /*开启绝对定位*/
              position: absolute;
              /*每向左移动520px就会显示到下一张图片*/
-             left: -520px;
+             /* left: -520px; */
         }
         /*设置li*/
         #imgList li{
@@ -82,6 +82,7 @@
             background-color: black;
         }
     </style>
+    <script src="../BOM/定时器的应用/tool.js"></script>
     <script>
         window.onload=function(){
             // 获取imgList
@@ -90,6 +91,7 @@
             var Allimg = document.getElementsByTagName('img');
              // 设置一个活动的imgList宽度
             imgList.style.width = 520 * Allimg.length + "px";
+            
             
 
             /*为nav的left设置
@@ -104,6 +106,64 @@
             /*设置一个初始索引*/
             var index = 0;
             allA[index].style.backgroundColor="black";
+
+            //1.点击超链接切换到指定图片
+            for(var i =0;i<allA.length;i++){
+                //用户点击时,停止自动播放动画
+                clearInterval(timer);
+
+                //3.给allA[i]新增一个属性用来保存索引
+                allA[i].num = i;
+
+                allA[i].onclick = function(){
+                    //2.需要获取到索引，并将其设置为index
+                    //向谁负值谁就写前面
+                    index = this.num;
+                    //4.切换图片
+                    /*
+                    第一张 0 0
+                    第二张 1 -520
+                    第三张 2 -1040
+                    */
+                    
+                    setA();
+                    //点击a标签,使用move函数来切换图
+                    move(imgList,'left',-520*index,20,function(){
+                        autochange();
+                        });
+                    }
+                    
+                    
+                    
+                }
+                autochange();
+
+                //创建一个方法来设置选中的a的背景
+                function setA(){
+                    if(index >= Allimg.length -1 ){
+                        index = 0;
+                        imgList.style.left=0;
+                    }
+                    //遍历所有的a,并且将他们的背景设置为空字符串,相当于把内联样式的background去除了
+                    for(var i =0;i<allA.length;i++){
+                        allA[i].style.backgroundColor='';
+                        
+                    }
+                    allA[index].style.backgroundColor = 'black';
+                }
+
+                //创建一个方法来自动轮播
+                var timer;
+                function autochange(){
+                    timer = setInterval(function(){
+                        index++;
+                        index %= Allimg.length;
+                        move(imgList,'left',-520*index,20,function(){
+                            //修改导航按钮
+                            setA();
+                        });
+                    },2000)
+                }
         }
     
     </script>
@@ -125,10 +185,12 @@
             <li>
                 <img src="4.jpg" alt="">
             </li>
+            <li>
+                    <img src="1.jpg" alt="">
+            </li>
             
         </ul>
         <div id="nav">
-            <a href="javascript:;"></a>
             <a href="javascript:;"></a>
             <a href="javascript:;"></a>
             <a href="javascript:;"></a>

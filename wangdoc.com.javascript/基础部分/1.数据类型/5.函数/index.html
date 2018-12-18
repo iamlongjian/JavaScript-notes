@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload=function(){
+            // 12.17
+            /*
+                //函数：函数的三种声明方法
+                1. function关键字
+                例子： function fun(形参1,形参2...){
+                    函数体;
+                }
+                - 使用function关键字 后面跟上函数名,函数名后面是一对圆括号用于传递形参,函数体放在大括号内部
+                2. 函数表达式
+                例子: var fun = function(){
+
+                };
+                - 使用函数表达式声明函数,给变量fun赋值一个匿名函数,调用方法:fun();
+                3. 构造函数
+                function Add(){
+
+                }
+                var add = new Add();  //创建一个构造函数add()
+
+                //函数的重复声明:如果重复声明同一个函数,后面的声明则会覆盖前面的声明.
+                例子：
+                    function f(){
+                        console.log(1);
+                    }
+                    f();    //2
+                    functino f(){
+                        console.log(2);
+                    }
+                    f(2);    //2
+                - 上面的例子中,重复声明了两次f函数,由于函数名提升,第一次声明的f函数是无效的
+
+                //圆括号运算符,return语句和递归
+                    - 圆括号运算符:函数调用时要用到圆括号运算符,圆括号内可以传递参数。
+                    - return 语句,表示返回,js遇到return语句就会直接返回return后面表达式的值,后面即使还有
+                    语句也不会得到执行,也就是说return后面所带的表达式的值就是函数的返回值,return在函数中
+                    不是必须的
+                    例子：
+                    function add(x,y){
+                        return x+y;
+                    }
+                    add(1,2);  //3 //因为函数内有return,所以x+y的值就是函数的返回值.
+
+                //函数名的变量提升：
+                    - 在js种,函数名跟变量名一样都会提升到代码头部,所以下面的代码不会报错：
+                    例子：
+                        fun();  //由于函数名提升,可以在声明函数之前调用函数
+                        function fun(){
+                            函数体;
+                        }
+                        但是如果采用函数表达式声明的函数,函数名则不会提升
+
+            
+                //函数的属性和方法
+                    - 2.1 name属性 
+                    函数的name属性会返回函数名
+                        function add(){};
+                        add.name;  //'add'
+                    如果是通过函数表达式定义的函数,则会返回变量的名称
+                        var add = function(){};
+                        add.name; //'add'
+                    如果通过函数表达式创建的函数是一个具名函数,则返回的是具名函数的名称
+                        var add = function cc(){};
+                        add.name; //'cc'
+                    name属性的作用就是返回当前函数的函数名：
+                        var myfun = function firstFun(){};
+                        function disName(x){
+                            console.log(x.name);
+                        }
+                        disName(myfun);  //'firstFun'
+                    - 2.2 length属性
+                    可以获得函数所定义的形参个数:funName.length;
+                    例子:
+                        function add(x,y){};
+                        add.length;  //2
+                    - 2.3 toString()方法
+                    可以返回函数内容(字符串形式)
+                    例子:
+                        function add(x,y){
+                            return x+y;
+                        }
+                        add.toString();  //返回整个函数 //function add(x,y){return x+y;}
+
+                //函数的作用域:scope
+                        - 作用域指的是变量存在的范围
+                        1. 函数外部声明的变量为全局变量,任何位置都可读取
+                        例子:
+                            var i =123;
+                            function(){
+                                consloe.log(i);  //123
+                            }
+                        2. 函数内部声明的变量为局部变量,只在函数内部生效,外部无法读取
+                        例子：
+                            function(){
+                                var i = 123;
+                            }
+                            consloe.log(i);  //i is not defined //因为i为局部变量,外部无法读取
+                
+                函数内部的变量提升:
+                            - 无论变量在什么位置,变量声明都会被提升到函数头部
+                            function add(){
+                                if(true){
+                                    var x = 123;
+                                }
+                            }
+                                ||上下两个函数等同
+
+                            function add(){
+                                var x;
+                                if(true){
+                                    x=123;
+                                }
+                            }
+
+                            
+                //参数：函数运行的时候有时候需要提供外部数据,不同的外部数据得到不同的结果,这种外部数据就是函数的参数
+                例子：
+                            function add(x,y){     //x,y就是形参
+                                return x + y;
+                            }
+                            add(1,3);    //1,3是实参
+                1. 参数的省略：JS的参数不是必须的.
+                            function f(a,b){
+                                return a;
+                            }
+                            f(1,2,3);  //1
+                            f(1);  //1
+                            f();  //undefined
+                            f.length;   //2
+                2. 传值传递和传址传递
+                            - 基本数据类型是传值
+                            - 引用数据类型是传址
+
+
+                //管理实参的机制：arguments
+                    - arguments属性只能在函数内部使用
+                    例子：
+                            function add(x,y){
+                                console.log(add.arguments.length);
+                            }        
+                            add(1,3,4);   //3 //虽然有三个实参,但是只有前两个生效,因为形参只定义了两个
+
+                // 闭包(closure):是Js中的一个难点,也是特色,很多 高级应用都要依靠闭包实现
+                    - 首先要理解作用域：局部作用域和全局作用域.
+                    - 由于作用域的关系,我们无法在外部拿到函数内部的变量,需要在函数内部再定义一个函数.
+                    例子:
+                            function h1(){
+                                var n = 999;
+                                function h2(){
+                                    console.log(n);   //999
+                                }
+                            }
+                    - 上面代码种,h2函数在h1函数的内部,所以h1所有的变量对h2是可见的,但是h2的变量对h1是不可见的.
+                       这就是JS特有的'链式作用域',子对象会一级级的向上寻找父元素的变量,所以父元素的变量对子元素都是
+                       可见的,反之则不成立.
+                    - 所以只要把h2函数返回,我们就可以在h1的外部获取到h1的内部变量n的值,此时h2就是闭包
+                    例子:
+                            function h1(){
+                                var n =99;
+                                function h2(){
+                                    console.log(n);
+                                }
+                                return f2;
+                            }
+                            h1();  //99
+                    - 闭包的最大特点:它可以记住诞生的环境
+                    - 闭包的最大用处有两个: 1. 读取函数内部的变量
+                                           2. 让这些变量始终保持在内存中,即闭包可以使得它诞生环境一直存在
+
+
+                //立即执行函数 IIFE
+                - 错误写法:function(){}();
+                - 正确写法:(function(){})();
+                - 通常情况下只对匿名函数使用'立即执行函数',目的是为了
+                                                        1. 不必为匿名函数命名,避免污染全局作用域
+                                                        2. 利用函数有局部作用域这一特点,可以封装一些外部无法读取的私有变量
+                            
+            */
+
+
+                    function f1(){
+                        var n = 99;
+                        function f2(){
+                            console.log(n);
+                        }
+                        return f2();
+                    }
+                    var i = f1;
+                    i();
+                            
+                    
+
+                    add(1,21);
+                    //22 //函数的返回值就是x+y的和
+                    //由于函数名提升，可以在函数之前调用函数
+                    function add(x,y){return x+y;}
+                    add.name;  //add
+
+                    var arr = function add(x,y){
+                        alert(arr.name);
+                    }
+                    // arr();  //add
+                    var arr = function add(x,y){
+                        alert(arr.length);
+                    }
+                    //arr();  //2 //返回形参的个数
+                    var arr = function add(x,y){
+                        alert(arr.arguments.length);
+                    }
+                    //arr();  //0  //返回实参的个数//arguments
+
+                    var arr = function add(x,y){
+                        alert(arr.toString());
+                    }
+                    // arr();  //返回一整个函数体
+                    /*
+                        function add(x,y){
+                            alert(arr.toString());
+                        }
+                    */
+           
+            
+
+
+
+
+
+            /*
+                函数:
+                1. var f = function(){}
+                2. function fun(){}
+                3. 作用域：函数内定义的变量外部访问不到,全局变量可以在函数内访问到
+            */
+
+            /*
+                参数：
+                1. 函数的参数可以省略
+                2. 多余的参数将被省略，
+                3. 如果只想传入第二个参数： fun(undedined,2);    第一个参数需要设置为undefined
+                4. 如果传的是基本数据类型，则不会影响到函数内的值，如果是引用数据类型则会影响.
+                5. arguments 可以用来查看参数长度或者使用索引查看具体参数
+                6. callee 返回它所对应的原函数
+            */
+
+
+
+
+
+           /*
+            函数的三个声明方法:
+            --1. function命令声明代码区块,就是一个函数 后面紧跟函数名,函数名后面()内传递函数的参数,函数体放在大括号内
+            例子:    function funName(){
+
+                }
+            上面的代码定义了一个funName函数,以后使用funName()这种形式,就可以调用相应的代码
+            --2. 函数表达式:采用变量赋值的写法创建函数
+            var fun = function(){
+
+            };
+            这种写法相当于给fun赋值了一个匿名函数,这个匿名函数又称函数表达式,因为赋值语句的右边只能存在表达式
+            这个方法需要在赋值语句的右边后面加上';'
+            --3. function构造函数 函数名首字母大写,调用时要使用new关键字
+            --4. 函数的重复声明
+            - 如果一个函数被多次声明,则后面的声明会覆盖前面的声明
+            function f(){
+                console.log(1);
+            }
+            f();   //2
+            function f(){        
+                consloe.log(2);
+            }
+            f();   //2       //这一次调用会覆盖前一次的调用结果
+            --5. 调用函数时要使用圆括号运算符,圆括号可以加入函数的参数(实参)
+            当Js引擎遇到return 会直接返回后面哪个表达式的值,后面即使还有其他语句也不会得到执行
+            也就是说 return 后面所带的表达式的值就是函数的返回值,return不是必须的,那么该函数返回的就是undefined
+            function f(x,y){
+                return x+y;
+            }
+            f(1,2);  //3
+            --6. 函数可以调用自身,这种方式称为递归
+           */
+ 
+           //第一等公民   //函数就是一种值
+        //    function add(x,y){
+        //     return x+y;
+        //    }
+        //    var result = add;
+
+        //    function o(op){
+        //        return op;
+        //    }
+        //    var rr = o(result)(1,2);   //3
+        //    alert(rr);
+
+            //函数名的变量提升
+            // f();   //报错:f is not a function  //f只是被声明并没有被赋值
+            // var f = function (){};
+
+            // f(); //不会报错   //由于函数名提升
+            // function f(){};
+
+            //因此 用这两种方式定义函数,总会采用赋值语句的定义
+
+
+            /*
+                函数的属性和方法:
+                1. name属性:返回函数的名称
+                2. length属性:返回函数形参的个数
+                3. tostring()方法:返回函数的源码
+                4. 作用域:指的是变量存在的范围:全局作用域和函数作用域(局部作用域)
+                    -对于var命令来说,只有在函数内部声明的变量算局部变量,其他区块中声明均为全局变量  
+            */
+           //2.length
+        //    function add(){}
+        //    alert(add.length);  //0 //返回形参的个数
+
+        //3.tostring()
+        // function add(x,y){
+        //     return x+y;
+        // }
+        // alert(add.toString());     //tostring  返回函数的源码,注释也可以返回
+
+        //4.作用域
+        // function add(){
+        //     var x = 6;
+        // }
+        // console.log(x);   //x is not defined  //函数内部定义的变量,外部不能获取
+
+        //定义在函数内部的变量,会在本身作用域中覆盖全局同名变量
+            // var x = 1;
+            // function add(){
+            //     var x = 2;
+            //     return x ;
+            // }
+            // alert(add());   //2   //局部变量覆盖了局部作用域,所以return的X值为2
+            // alert(x);   //1  //全局作用域
+
+        //var在函数外声明的变量均为全局变量
+        // if(true){
+        //     x = 3; 
+        // }
+        // alert(x);   //3
+
+
+        /*
+            函数内部的变量提升
+            1. 不管在函数哪个位置用var声明了变量,都会被提升到函数的头部
+            2. 函数执行时所在的作用域时定义时的作用域,不是调用的作用域
+               - 假设函数a调用函数b,函数b是不会引用a函数体中的变量的
+            3. 函数体内声明的函数,作用域绑定在函数内部(闭包)
+        */
+        // function f(){
+        //    if(true){
+        //        var tmp = x+10;
+        //    }
+        // }
+        // //等同于下面代码
+        // function f(){
+        //     var tmp;   //函数内部的变量提升
+        //     if(true){
+        //         tmp = x+10;
+        //     }
+        // }
+
+            //2.
+            // var x = 1;
+            // function cx(){
+            //     console.log(x);
+            // }
+            // function p (){
+            //     var x = 3;
+            //     cx();
+            // }
+            // p();   //1   //cx函数在定义时就获取到了全局变量X,尽管在p函数中执行,但不会去p函数体中取值
+
+            //3.
+            // function f(){
+            //     var x =1;
+            //     function cx(){
+            //         console.log(x);   
+            //     }
+            //     return cx();
+            // }
+            // var x = 2;
+            // f();  //则会在控制台输出1  
+
+
+            /*  参数：
+                函数运行时,有时候提供外部数据,不同的外部数据有着不同的返回结果,这种外部数据就叫做参数
+                1. length可以获得定义的形参个数
+                2. 运行时无论提供多少个参数或者不提供参数都不会报错,省略的数值的值会变为undefined
+                -  靠前的参数不能使用,省略(需要显示的传入undefined)
+                add(undefined,2);
+                3. 如果参数是普通数据类型则时传递值，如果是引用数据类型则是传递内存地址
+                4. 如果参数重名,假设有两个a形参,取值的时候以后面的a参数为准
+            */
+        //1. 必须要在调用函数时输入参数,否则得不到想要的结果
+        // function xx(x){
+        //     console.log( x*x);
+        // }
+        // xx(3);  //9
+
+        //4. 重名参数
+        // function add(a,a){
+        //     console.log(a);  //默认输出第二个a的值
+        // }
+        // add(1);  //undefined
+           
+        // function add(a,a){
+        //     console.log(arguments[0]);  //输出的是第一个参数的值 
+        // }
+        // add(1);     //1
+        
+        /*
+            arguments对象：需要一种机制来读取函数内部所有实参,这就是arguments的由来
+            1. 这个对象只有在函数提内部才可以使用
+            2. 读取的是函数的实参,形参可以使用fun.length来读取
+        */
+    //    var add = function(x,y,z){
+    //        console.log(add.arguments);   //2，说名有两个实参
+    //    }
+    //    add(1,2);
+
+        /*
+            闭包(closure)
+            1. 了解作用域
+            - 函数作用域内部可以获取到外部的变量,但是外部无法获取定义在函数内部的变量
+            2. 如果在函数外部想要获取函数内部的变量,需要在函数内部再定义一个函数
+        */
+    //    function add(){
+    //        var x = 99;
+    //        function xx(){
+    //            console.log(x);
+    //        }
+    //        return xx(); //需要返回xx函数的结果
+    //    }
+    //    add();
+
+        
+        
+
+            
+           
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Object对象</title>
+    <script>
+        window.onload=function(){
+            /*
+                介绍Object对象的各种原生方法
+                js中的所有其他对象都继承与Object对象,即那些对象都是Object的实例
+                Object对象的原生方法分为两类:Object本身的方法 && Object实例的方法
+                
+                (1)本身的方法
+                - 就是直接定义在Object对象的方法
+                例如:   
+                    Object.print = function (o){ console.log(o) };
+                (2)实例方法
+                - 就是定义在Object.prototype上的方法,可以被Object的实例直接使用
+                例如：
+                    Object.prototype.getName = function(name){
+                        console.log(name);
+                    }
+                    var user = new Object();
+                    user.getName('longer');      //'longer'
+                - 凡是定义在Object.prototype上的方法,都将被Object的所有实例对象共享
+            */
+
+            /*
+                    Object作为函数的用法：
+                    例如：
+                        var obj = new Object();
+                                ||
+                        var obj = new Object(null);
+                        var obj = new Object(undefined);
+                        obj instanceof Object;  //true  //instanceof用于判断一个对象是否为指定构造函数的实例
+                        obj; //返回一个空对象
+
+                    - 如果Object方法的参数是一个对象,它总是返回该对象,即不用转换
+                    例如：
+                        var arr = [];
+                        var obj = Object(arr);  //返回原数组
+                        obj === arr;    // true
+
+                        var obj1 = {};
+                        var obj = Object(obj1);  //返回原对象
+                        obj === obj1;   // true
+
+                        var fun = function(){};
+                        var obj = Object(fun);  //返回原函数
+                        obj === fun;    // true
+                    - 因此我们可以写出一个判断变量是否为对象的函数
+                        function isObject(value){
+                           return value === Object(value);
+                        }
+                        isObject(123);  //false
+                        isObject({}); //true
+            */
+           /*
+                        Object构造函数
+                        Object不仅可以当作工具函数使用,还可以当作构造函数使用,即前面使用new命令。
+                        Object构造函数的首要用途,使用它来生成新的对象,var obj = {}; 与 var obj = new Object();是等价的
+                        - 它的用法几乎和Object工具用法一样,使用时可以接受一个参数,如果是对象则返回原对象,如果是原始类型,则
+                        返回该值对应的包装类
+                        例如：
+                            var o1 = {name:123};
+                            var o2 = new Object(o1);
+                            o2 === o1; //true
+
+                            var o = new Object(123);
+                            o instanceof Number; //true
+           */
+
+           /*
+                        Object的静态方法：所谓静态方法,指的是Object对象自身的方法
+                        1. Obejct.keys()和Object.getOwnPropertyNames()
+                        - Object.keys()和Object.getOwnPropertyNames()都是用来遍历对象的属性
+                        1.1 Object.keys()的参数是一个对象,返回一个数组,该数组的成员都是对象自身的属性(不是继承的)
+                        例如：
+                            var obj = {
+                                p:123,
+                                p2:456
+                            };
+                            Object.keys(obj);  //[p,p2]
+                        1.2 Object.getOwnPropertyNames()也是用来遍历对象的属性,他可以返回不可枚举的属性。
+                        - 一般情况下总是使用Object.keys()来遍历,如果想获取属性的长度：Object.keys().length;
+
+           */
+
+
+                            // 检查一个值的类型：
+                            // var obj = [];
+                            // alert(Object.prototype.toString.call(obj));   //array
+
+
+
+            /*
+                            Object的实例方法：
+                            除了静态方法还有不少定义在Object.prototype上,它们称为实例方法,所有的Object实例对象都继承了
+                            这些方法
+                            Object的实例方法,主要有下面六种：
+                            1. Object.prototype.valueOf()；返回当前对象的值
+                            2. Object.prototype.toString(): 返回当前对象对应的字符串形式
+                            3. Object.prototype.toLocaleString()：返回当前对象对应的本地字符串形式
+                            4. Object.prototype.hasOwnProperty(): 判断某个属性是否为当前对象自身的属性,还是继承自原型
+                            对象的属性
+                            5. Object.prototye.isPrototypeOf(): 判断当前对象是否为l另一个对象的原型
+                            6. Object.prototype.propertyIsEnumerable(): 判断某个属性是否可枚举
+
+                            (1):Object.prototype.valueOf()方法:返回当前对象的值,默认情况下返回对象本身
+                            例如:
+                                var obj = {};
+                                obj.valueOf() === obj;  //true
+                            - 在js加法运算的适合，会自动调用valueOf()方法
+                            例如:
+                                var obj = {};
+                                obj + 1;  //'[Object Object]1'   //先调用了valueOf()再调用toString()
+
+                            (2):Object.prototype.toString()方法:返回当前对象字符串形式的值
+                            例如:
+                                var obj = {};
+                                obj.toString();  //'[Object Object]'
+                            我们也可以自定义toString()
+                                var obj = {};
+                                obj.toString = function(){
+                                    return 'hello';
+                                };
+                                obj + '' + 'world';  //'hello world'
+                            - 上面代码自定义了对象的toString()方法,所以在做加法的时候会调用此方法,
+                            返回字符串'hello',再与字符串'world'拼接
+                            - 数组,字符串,函数,Date对象都部署了自定义的toString()方法,则在这些类型上
+                            调用toString()方法的时候不会返回'[Object Object]';
+
+                            //toString()的应用:判断数据类型
+                            例子：
+                                var obj = {};
+                                obj.toString;  //'[Object Object]'
+                            但是最好使用:Object.prototype.toString.call(value)
+                            例子：  
+                                    Object.prototype.toString.call(2) // "[object Number]"
+                                    Object.prototype.toString.call('') // "[object String]"
+                                    Object.prototype.toString.call(true) // "[object Boolean]"
+                                    Object.prototype.toString.call(undefined) // "[object Undefined]"
+                                    Object.prototype.toString.call(null) // "[object Null]"
+                                    Object.prototype.toString.call(Math) // "[object Math]"
+                                    Object.prototype.toString.call({}) // "[object Object]"
+                                    Object.prototype.toString.call([]) // "[object Array]"
+                            - 也就是说Object.prototype.toString.call(value)可以判断出一个值到底是什么数据类型
+                            利用这个特性可以写出一个比typeof更准确地判断类型的函数
+                                    var type = function(o){
+                                        var s = Object.prototype.toString.call(o);
+                                        return s.match(/\[object(.*?)\]/)[1].toLowerCase();
+                                    }
+                                    type({});  //object
+                                    type([]);  //array
+                                    type('');   //string
+
+                            (3)Object.prototype.toLocaleString():该方法返回的结果和Object.prototype.toString()一样,
+                            也是返回一个值的字符串形式
+                                    var obj = {};
+                                    obj.toString();     //'[Object Object]'
+                                    obj.toLocaleString();  //'[Object Object]'
+                            - 这个方法的主要作用是留出一个接口，让各种不同的对象实现自己版本的toLocaleString，
+                            用来返回针对某些地域的特定的值。
+                                    var obj = {};
+                                    obj.toString = function(){
+                                        return 'Bai';
+                                    };
+                                    obj.toLocaleString = function(){
+                                        return '白求恩';
+                                    };
+                                    obj.toString();  //'Bai'
+                                    obj.toLocaleString();  //'白求恩'
+                            上面代码中,toString()返回了对象一般字符串形式，toLocaleString()返回了对象本地字符串形式
+                            - 两者的区别(toString()和toLocaleString())：
+                            toString(1234); '1234'
+                            toLocaleString(1234); '1,234'
+                            还有Date对象也自定义了toLocaleString()方法
+                            Array也定义了toLocaleString();
+
+                        (4)Object.hasOwnProperty():接受一个字符串作为参数,返回一个布尔值,表示一个对象自身是否具有该属性
+                                    var obj  = {p:2};
+                                    obj.hasOwnProperty('p');  //true
+                                    obj.hasOwnProperty('toString') //fasle  //该属性为对象的继承属性
+
+
+
+            */
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

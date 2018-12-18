@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Array</title>
+    <script>
+        window.onload=function(){
+            /*
+                Array对象：
+                1. 构造函数：Arrar是JS的原生对象,同时也是一个构造函数,可以使用它生成新的数组
+                    var arr = new Array(2);
+                    arr.length;  //2
+                    arr;  //空*2
+                - 上面代码中,构造函数Array的参数为2,表示生成一个两个成员的数组,每个位置都是空值
+                1.2. 字面量：（直接使用字面量创建一个数组比较好）
+                    var arr = [1,2,3];
+                    arr.length;  //3
+                    arr;  //1,2,3
+                
+                2. 静态方法
+                2.1 Array.isArray()
+                - Array.isArray()方法返回一个布尔值,表示参数是否为数组,该方法可以弥补typeof的不足,其实使用
+                Object.prototype.toString.call()可以更清楚的看到每个参数的类型。
+
+                3. 实例方法
+
+                3.1 valueOf(),toString()
+                valueOf()方法是一个所有对象都拥有的方法,表示对该对象求值,数组的valueOf()方法返回数组本身
+                    var arr = [1,2];
+                    arr.valueOf();  //[1,2]
+                toString()方法则返回数组的字符串形式
+                    arr.toString();  //'1,2'
+                    
+                3.2 pop(),push()
+                push()方法：用于在数组的末端添加一个或多个元素,并返回新数组的长度。注意:该方法会影响原数组
+                    var arr = [1,2,3];
+                    arr.push('4');  //4 //表示新数组的长度
+                    arr.push(true); //5  //表示新数组的长度
+                    arr.push('hello'); //6  //表示新数组的长度
+                    arr;  //[1,2,3,'4',true,'hello']   //新数组的所有成员
+                pop()方法:用于删除数组的最后一个或多个元素,并返回删除的元素。注意:该方法返回的是被删除的元素
+                    var arr = [1,true,3];
+                    arr.pop();  //3
+                    arr.pop();  //true
+                    arr; //[1]
+                - push()和pop()结合使用,就形成了 后进先出 的栈结构(stack)
+                    var arr= [];
+                    arr.push(1,2);
+                    arr.push(3);
+                    arr.pop();
+                    arr;  //[1,2]  //虽然3是最晚进入数组的,但是是最早离开数组的
+                    
+                3.3 shift()和unshift()
+                shift()方法：用于删除数组的第一个元素,并返回元素。注意:该方法会影响原数组
+                    var arr = [1,2,3];
+                    arr.shift(); //1 //返回被删除的元素
+                    arr.shift();  //2   //返回被删除的元素
+                    arr; //[3]
+                - push()和shift()结合使用,形成了先进先出的队列结构
+                    var arr = [1,2,3];
+                    arr.push(4);  //4 //返回数组的长度
+                    arr.shift();  //1  //最先进入数组的被删除,先进先出的队列结构
+                    arr; //[2,3,4];
+                unshift()方法：用于在数组的开头添加一个或多个元素。注意：该方法会影响原数组
+                    var arr = [2,3];
+                    arr.unshift(1);//3 //返回新数组的长度
+                    arr.unshift(-1,0);  //5 //返回新数组的长度
+                    arr;  //[-1,0,1,2,3]
+                unshift和push的参数都可以为多个
+
+                3.4 join()
+                join()方法：以指定参数为分隔符,将所有数组成员连接为一个字符串,如果不提供参数,默认使用逗号分隔
+                    var arr = [1,2.3];
+                    arr.join(); //'1,2,3' //默认使用逗号分割
+                    arr.join('-');  //'1-2-3'  //指定使用‘-’分隔
+                - 如果数组是undefined或null,则会转换成空字符串
+                    var arr = [undefined,null];
+                    arr.join('#');
+                    arr;  //'#'
+                3.5 concat()
+                concat()方法:concat方法用于多个数组的合并,他将新数组的成员,添加到原数组成员的后面,然后返回
+                一个新数组,原数组不变
+                例如:
+                    var arr = [1,2],arr2 = [3,4];
+                    arr3 = arr.concat(arr2);    //将arr2添加到arr的后面,并返回新数组
+                    arr3;  //[1,2,3,4]  //新数组
+                    arr;//[1,2]  //原数组不变   
+                    arr2; //[3,4]   //原数组不变
+                - 除了数组作为参数,concat()也接受其他类型的值作为参数,添加到目标数组的尾部：
+                例如：
+                    var arr = [1,2,3];
+                    arr2 = arr.concat(1,'hello',true);
+                    arr2; //[1,2,3,1,'hello',true]
+                    arr2.length;  //5 //长度为5的数组
+
+                3.6 reverse()
+                reverse()方法：用于颠倒数组的排序,注意：该方法将改变原数组
+                例如:
+                    var arr = [1,2,3];
+                    arr.reverse();   //[3,2,1]
+
+                3.7 slice()
+                slice()方法,用于截取数组的一部分,原数组不变,返回一个新数组
+                例如:
+                    var arr = [a,b,c];
+                    arr.slice(1); //[b,c] //如果只有一个参数,则从键名为1的元素开始,截取到最后一个元素
+                    arr.slice(1,2);  //[b] //如果有两个参数,则返回键值为1到键值为2的元素,第二个参数
+                    键名所对应的值不包括在内(包前不包后)
+                    arr.slice(0);  //[a,b,c]
+                    arr.slice(); //[a,b,c]
+                    //错误写法  arr.slice(2,1);  //[] 
+                - 如果参数是负数,则表示倒数计算的位置
+                    var arr = [1,2,3,4,5];
+                    arr.slice(-3,-1);   //[3,4]
+                    //错误写法 arr.slice(-1,-3);  //[]  
+                - slice()一个重要的应用,就是把类数组转换为真正得数组
+                方法如下：
+                    Array.prototype.slice.call(value);
+                
+                3.8 splice()
+                splice()方法：用于删除数组得一部分内容,并可以在删除的位置添加新的数组成员,返回值
+                是被删除的元素.注意,该方法会改变原数组
+                第一个参数是起始位置的键值,第二个参数是要删除的个数,如果后面还有更多的参数,则表示
+                要插入数组的新元素
+                语法：arr.splice(start,count,addElement1,addElement2,...);
+                例如:
+                    var arr = [1];
+                    arr.splice(0,1,'hello','','world');  //1 //返回被删除的元素
+                    arr; //['hello','','world']
+                - 如果起始位置是负数,则表示倒数位置开始删除
+                    var arr = [1,2,3,4];
+                    arr.splice(-3,2,'b','c'); //[2,3] //删除的元素是2，3
+                    arr; //[1,'b','c',4]
+                - 可以做数组的去重练习
+                - 如果只是在指定位置单纯的插入元素,可以把第二个参数设置为0,'arr.splice(1,0,5,6,7);  //从索引为1的
+                位置开始删除0个元素,插入5,6,7'
+                - 如果只提供第一个参数,则数组会在指定位置拆分成两个数组
+
+                3.9 sort()
+                sort()方法：对数组成员进行排序,默认是按照unicode编码顺序排序,排序后,原数组将会被改变
+                    ['c','b','d','a'].sort();    //['a','b','c','d']
+                    [3,1,2].sort();   //[1,2,3]
+                    [11,101].sort();  //[101,11] //按照unicode编码顺序
+                    [10111,1101,111].sort();  //[10111,1101,111] //按照unicode编码顺序
+                - 按照unicode编码排序,也就是说数值会被转换为字符串,在按照编码顺序比较,所以101排在11的后面
+                - 也可以自定义sort()排序规则,可以传入一个函数作为参数
+                例一:
+                    function so(a,b){
+                        return a - b;
+                    }
+                    [1101,10111,111].sort(so);  //[111,1101,10111] //
+                例二:var arr = [
+                    {name:'张三',age:25},
+                    {name:'王五',age:19},
+                    {name:'李松',age:40}
+                ];
+                arr.sort(function(o1,o2){
+                    return o1.age - o2.age;
+                })
+
+                3.10 map()
+                map()方法：将数组的所有成员依次传入参数函数,然后把每一次的执行结果组成一个新数组返回
+                该方法的函数调用时,map方法向它传入三个参数：1. 当前元素
+                                                         2. 当前元素的索引
+                                                         3.数组本身
+                如：
+                    var numbers = [1,2,3];
+                    numbers.map(function(n){
+                        return n+1;
+                    }); //[2,3,4]
+                    numbers; //[1,2,3]  //该方法不会改变原数组
+                如：
+                    [1,2,3].map(function(ele,index,arr){
+                        return ele*index;
+                    }); //[0,2,6] //[1*0 2*1 3*2]
+                - 上面代码中,map的回调函数有三个参数,ele表示当前成员,index表示当前成员的索引,arr表示原数组[1,2,3]
+                
+                - map还可以接受第二个参数,用来绑定回调函数内部的this变量
+                如：
+                    var arr = ['a','b','c','d'];
+                    [1,2].map(function(e){
+                        return this[e];
+                    },arr);  //[b,c]  //???
+                - 上面代码通过map方法的第二个参数，将回调函数内部的this对象，指向arr数组。
+
+                
+
+
+
+
+            */
+            var arr = [1,2,3,4];
+            arr.splice(-3,2,'b','c'); //[2,3] //删除的元素是2，3
+            arr; //[1,b,c,4]
+
+            // 数组的去重练习：
+            var arr = [0,1,2,2,8,6,4,9,4,4,6,10,11,0,10];
+            for(var i=0;i<arr.length;i++){
+                for(var j = i+1;j<arr.length;j++){
+                    if(arr[i] == arr[j]){
+                        arr.splice(i,1);
+                    }
+                }
+            }
+            arr;  //已经去重
+
+            var arr = [1];
+            arr.splice(0,1,'hello','','world');  //[1]
+            arr; //['hello','','world']  //arr.length为3
+
+           var obj = [];
+           Object.prototype.toString.call(obj);   //精准返回值得类型
+
+           var str = '123';
+           str.slice(0,1); //fa-stack-1x
+           
+
+            var arr = [1,2,3,4,5];
+            arr.slice(-3,-1);   //[4,5]
+
+           var a = [1,2];
+           var a2 = a.concat(3,'hello','trey');
+           a2;  //[1,2,3,'hello','trey']
+
+
+            var arr = [1,2],arr2 = [3,4];
+                    arr3 = arr.concat(arr2);    //将arr2添加到arr的后面,并返回新数组
+                    arr3;  //[1,2,3,4]  //新数组
+                    arr;//[1,2]  //原数组不变   
+                    arr2; //[3,4]   //原数组不变
+
+            var arr = [1,2,3];
+                    arr.push(4);  //4 //返回数组的长度
+                    arr.shift();  //1  //最先进入数组的被删除,先进先出的队列结构
+                    arr; //[2,3,4];
+            var list = [1, 5, 3, 4];
+            //遍历
+            for(var i = 0 ; i<list.length;i++){
+                //console.log(list[i]);
+            }
+            //清空一个数组
+            list.length = 0;
+            list;  //[]
+
+            
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

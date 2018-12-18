@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .b1{
+            width: 100px;
+            height: 100px;
+            background-color: aquamarine;
+            position: absolute;
+        }
+        .b2{
+            width: 300px;
+            height: 300px;
+            background-color: rgb(4, 48, 241);
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var btn = document.getElementById('btn');
+            var box = document.getElementById('box');
+            btn.onclick=function(){
+                //增加class名称
+                // addClassName(box,'b2');
+                //判断是否有，有就不加了,没有才加
+                // alert(hasClassName(box,'b2'));    
+                //完善addClassName //这样就不会无止尽的添加className了
+                // addClassName(box,'b2');
+                //删除removeClassName
+                // removeClassName(box,'b1');
+                //toggleClassName,有就删，没有就加
+                toggleClassName(box,'b1');
+
+            }
+
+            //定义一个函数来 增加 class名
+            function addClassName(obj,cn){
+                if(!hasClassName(obj,cn)){
+                    obj.className += " "+ cn;
+                }
+            }
+
+            //定义一个判断函数,判断元素是否含有指定className
+            function hasClassName(obj,cn){
+                //使用正则表达式
+                var reg = new RegExp("\\b"+cn+"\\b");
+                //返回正则表达式的判断结果
+                return reg.test(obj.className);
+            }
+
+            //定义一个函数 ，删除元素中的指定className
+            function removeClassName(obj,cn){
+                //删除,只需要把对应的className换成空字符串即可
+                var reg = new RegExp("\\b"+cn+"\\b");
+                box.className = box.className.replace(cn,'');
+            }
+
+            // 定义一个函数,可以使得元素，如果没有该className就加上，有就删除
+            function toggleClassName(obj,cn){
+                if(hasClassName(obj,cn)){
+                    removeClassName(obj,cn);
+                }else{
+                    addClassName(obj,cn);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="btn">点击我</button>
+    <br>
+    <br>
+    <div id="box" class="b1"></div>
+</body>
+</html>

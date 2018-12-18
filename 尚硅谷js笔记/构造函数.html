@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload=function(){
+            function Person(name,age,sex){    //Person为新创建的构造函数
+                this.name = name;
+                this.age = age;
+                this.sex = sex;
+                //console.log(arguments.length);     //输出实参的长度
+                //console.log(arguments.callee);    //输出函数正在指向函数的对象
+            }
+            Person.prototype.getName = function(){      //把共用的方法存在原型中，所有该类的事例都可以访问到该方法
+                //alert(this.name);
+            }
+            var l  = new Person('longer',18,'男');  //调用构造函数的时候 前面要加new
+            var o  = new Person('cici',18,'男');
+            l.getName();   //longer
+            o.getName();   //cici
+            console.log(l);
+
+            
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

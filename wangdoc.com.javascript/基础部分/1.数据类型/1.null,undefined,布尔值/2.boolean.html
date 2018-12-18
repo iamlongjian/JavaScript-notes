@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload=function(){
+            /*
+                布尔值:true(真),false(假);
+                下面的运算符将会返回布尔值:
+                1. !取反运算符
+                2. 相等运算符： ==(相等运算符) !=(相等运算符取反) ===(严格相等运算符)  !==(严格相等运算符取反)
+                -   == 和 != 比较若类型不同，先偿试转换类型，再作值比较，最后返回值比较结果 。
+                    而 
+                    === 和 !== 只有在相同类型下,才会比较其值。类型不同直接返回false
+                3. 比较运算符:  >=(大于等于)   <=(小于等于) >(大于) <(小于)
+                值为false的六种情况:
+                1. false
+                2. null
+                3. undefined
+                4. ''
+                5. 0
+                6. NaN
+
+                布尔值往往用于程序流的控制：
+                例一：
+                if(''){
+                    console.log('true');
+                }   //没有任何输出
+                例二：
+                if({}){
+                    console.log('true');
+                }   //true  //如果是一个对象,则转换为布尔值为true
+                例三：
+                if([]){
+                    console.log('true');
+                }  //true  //如果是一个数组,则转换为布尔值也为true
+            */
+
+            if(''){
+                console.log('123');  //不输出
+            }
+            if({}){
+                console.log(123);  //输出123 //因为空对象不在false的六种情况里  所以转换为true
+            }
+            if([]){
+                console.log(456); //输出456 //因为空数组也不在false的六种情况里 所以转换为true
+            }
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
