@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Date对象</title>
+    <script>
+        window.onload=function(){
+            /*
+                Date对象:
+                1. 普通函数的用法
+                - Date对象可以作为普通函数直接调用,返回一个代表当前事件的字符串
+                如:
+                    Date();  // Thu Dec 20 2018 12:13:40 GMT+0800 (中国标准时间)
+
+                2. 构造函数的用法
+                - Date还可以当作构造函数使用.对它使用new命令,会返回一个Date对象的实例.如果
+                不加参数,事例代表的就是当前的时间
+                如:
+                    var today = new Date(); // Thu Dec 20 2018 12:16:31 GMT+0800 (中国标准时间)
+                指定参数:
+                    //年,月,日,时,分,秒
+                    var today = new Date(2012,9,12,15,12,10);  //Fri Oct 12 2012 15:12:10 GMT+0800 (中国标准时间)
+
+                3. 静态方法
+                3.1 Date.now():方法用于返回当前时间距离时间零点(1970.1.1 UTC)的毫秒数,相当与时间戳乘以100
+                如:
+                    Date.now();  //1545283618788
+                
+                3.2 Date.parse():方法用于解析日期字符串,返回改时间距离时间零点的毫秒数
+                如:
+                    Date.parse('2011-10-10'); //1318204800000
+
+                3.3 Date.UTC():方法接受年月日等变量作为参数,返回该时间距离时间零点的毫秒数
+                如:
+                    Date.UTC(2010,1,2,15,3,20); //1265123000000 //返回2010年1月2日15点3分20秒距离时间零点的毫秒数
+
+                4. 实例方法
+                - Date的实例方法,有几十个,除了valueOf()和toString()可以分为以下三类
+                - to类:从Date返回一个字符串,表示指定时间
+                - get类:获取Date对象的日期和时间
+                - set类:设置对象的日期和时间
+
+                4.1 valueOf()
+                - 用于返回实例对象距离时间零点对应的毫秒数,等同于getTime()方法
+                如:
+                    var day = new Date().valueOf();
+                                ||
+                    var day = new Date().getTime();
+
+                4.2 to类方法
+                (1)Date.prototype.toString()方法用于返回一个完整的日期字符串(该方法为默认调用方法)
+                如:
+                    var day = new Date(); 
+                    day.toString(); //Thu Dec 20 2018 13:41:06 GMT+0800 (中国标准时间)
+                    day;    //Thu Dec 20 2018 13:41:06 GMT+0800 (中国标准时间)
+                (2)Date.prototype.toUTCString()返回对应时间的UTC时间,也就是比北京市时间晚8小时
+                如:
+                    var day = new Date(2010,2,10);
+                    day.toUTCString();  //Tue, 09 Mar 2010 16:00:00 GMT
+
+                (3)Date.prototype.toDateString()用于返回日期字符串(不含小时,分,秒)
+                如:
+                    var day = new Date(2010,2,10);
+                    day.toDateString();  //Wed Mar 10 2010
+
+                (4)Date.prototype.toTimeString()用于返回时间的字符串(不含年月日)
+                如:
+                    var day = new Date(2010,2,10,15,16,17);
+                    day.toTimeString();  //15:16:17 GMT+0800 (中国标准时间)
+
+                (5)本地时间:
+                (5.1)Date.prototype.toLocalString():完整的本地时间
+                如:
+                    var today = new Date().toLocaleString(); //2018/12/20 下午1:51:06
+                (5.2)Date.prototype.toLocalDateString():本地日期(不含小时,分,秒)
+                如:
+                    var today = new Date().toLocalDateString(); //2018/12/20
+                (5.3)Date.prototype.toLocalTimeString():本地时间(不含年月日)
+                如:
+                    var today = new Date().toLocalTimeString(); //下午1:50:47
+
+
+
+                4.3 get类方法:Date对象提供了一系列get*方法,用于获取实例对象某个方面的值
+
+                · getTime();   返回实例距离时间戳的毫秒数
+                · getDate();  返回实例对象对应的是每个月的几号(从1开始)
+                · getDay();  返回周几,周日为0,周一为1,以此类推(从0开始)
+                · getFullYear();  返回四位数的年份
+                · getMonth();  返回月份,0表示一月,11表示十二月(从0开始)
+                · getHours(); 返回小时(0-23)
+                · getMinutes();  返回分钟(0-59)
+                · getSeconds();  返回秒(0-59)
+                · getMilliseconds();  返回秒(0-59)
+
+                - 所有这些get*方法返回的都是整数，不同方法返回值的范围不一样。
+                分钟和秒：0 到 59
+                小时：0 到 23
+                星期：0（星期天）到 6（星期六）
+                日期：1 到 31
+                月份：0（一月）到 11（十二月）
+                如:
+                    var today = new Date(2013,5,12,23,15,35);
+                    today.getDate(); //12  //表示十二号
+                    today.getDay(); //0 //表示周日
+                    today.getFullYear();  //2013 //返回四位数年份
+                    today.getMonth(); //5 //五月份
+                    today.getHours(); //23  //23时
+                    today.getMinutes(); //15    //15分 
+                    today.getSeconds(); //35    //35秒
+                    today.getMilliseconds(); //0    //0毫秒
+                    today.getTime(); //1370790935000    //距离时间戳的毫秒数
+
+                - 例子:计算本年度还剩多少天
+                    var today = new Date();
+                    var msTime = new Date(today.getFullYear(),11,31,23,59,59);
+                    var day = 24 * 60 * 60 * 1000;
+                    var hava = (msTime.getTime()-today.getTime()) / day;
+                    console.log(hava)
+                - 计算今日度还有几个小时  //方法一定要记得加括号
+                    var time = new Date();
+                    var lastTime = new Date(time.getFullYear(),time.getMonth(),time.getDate(),23,59,59);
+                    var day = 1000*60*60;
+                    alert((lastTime.getTime() - time.getTime()) / day);
+
+                -上面这些get*方法返回的都是当前时区的时间，Date对象还提供了这些方法对应的 UTC 版本，用来返回 UTC 时间。
+                getUTCDate()
+                getUTCFullYear()
+                getUTCMonth()
+                getUTCDay()
+                getUTCHours()
+                getUTCMinutes()
+                getUTCSeconds()
+                getUTCMilliseconds()
+
+                4.4 set类方法:Date提供了一系列的set*方法,用来设置实例对象的各个方面
+
+                ·setDate(date); //返回设置后距离时间戳的毫秒数 //参数为1-31
+                ·setFullYear(year[, month, date]); //设置年份 //参数为四位数
+                ·setHours[, month, date]); //设置小时 //参数为0-23
+                ·setMilliseconds[, month, date]); //设置毫秒 //0-999
+                ·setMinutes(min [, sec, ms]);//设置分钟 //（0-59）
+                ·setMonth(month [, date]);设置月份（0-11）。
+                ·setSeconds(sec [, ms]);设置秒（0-59）。
+                ·setTime(milliseconds);设置毫秒时间戳。
+
+            - 可以和get方法结合使用,设置获取到的时间
+            如:
+                var day = new Date(); 
+                day.toLocaleString();   //2018/12/20 下午2:41:59
+                day.setDate(2);
+                day.toLocaleString();  //2018/12/2 下午2:41:59
+
+            - 应用实例
+                var time = new Date();
+                //将时间设置为两年后
+                time.setFullYear(time.getFullYear()-1);
+                //将时间设置为六小时后
+                time.setHours(time.getHours()+6);
+                //将时间设置为一百天后
+                time.setDate(time.getDate()+100);
+
+
+            */
+
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

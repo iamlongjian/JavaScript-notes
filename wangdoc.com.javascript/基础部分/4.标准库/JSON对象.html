@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JSON对象</title>
+    <script>
+        window.onload=function(){
+            /*
+                JSON对象：JSON是一种用于数据交换的文本格式
+                - 每个JSON对象就是一个值，可能是一个数组或者对象，也可能是一个原始类型的值,总之
+                只能是一个值,不能是两个或更多
+                - JSON对值得类型和格式得规定
+                1. 符合类型的值只能是数组或对象,不能是函数,正则表达式对象和日期对象
+                2. 原始类型的值只有四种：字符串,布尔值,数值(十进制)和null,（不能使用NaN, Infinity, -Infinity和undefined）
+                3. 字符串必须用双引号表示,不能使用单引号
+                4. 对象的键名必须放在双引号里面,不管符合规范与否("name":"longer")
+                5. 数组或对象最后一个成员后面不能加逗号','
+
+                以下是合法的JSON:
+                如：
+                    ["one","two","three"]
+                    {"one":1,"two":2,"three":3}
+                    {"name":["张三","李四"]}
+                    [{"name":"张三"},{"name":"李四"}]
+                以下是不合法的JSON：
+                如:
+                    {name:"longer",age:18}  //键名必须用双引号
+                    [32, 64, 128, 0xFFF]  //数值只能使用十进制
+                    { "name": "张三",
+                    "birthday": new Date('Fri, 26 Aug 2011 07:13:10 GMT'),
+                    "getName": function () {
+                        return this.name;
+                    }
+                    }  //属性值不能有函数和日期对象或者正则表达式
+
+                2. JSON对象
+                - JSON对象是JS的原生对象,用来处理JSON格式数据,它有两个静态方法
+                1. JSON.stringify()
+                2. JSON.parse()
+                
+                3 JSON.stringify()
+                3.1 基本用法
+                - JSON.stringify()用于将一个值转换为JSON字符串,该字符串符合JSON格式,并且可以被JSON.parse()还原
+                如:
+                    JSON.stringify('hello');  //"'hello'" //注意:如果是原始类型则会加上双引号,为了parse方法更好的还原
+                    JSON.stringify(123); //"123"
+                    JSON.stringify(true); //"true"
+                    JSON.stringify([]); //"[]"
+                    JSON.stringify({}); //"{}"
+
+                    JSON.stringify([1,flase,"false"]);  //'[1,false,"false"]'
+                    JSON.stringify({name:"张三"});  //'{"name":"张三"}'
+
+                - 如果 对象 的属性是undefined、函数或 XML 对象，该属性会被JSON.stringify过滤。
+                如:
+                   var obj = {name:undefined,age:function(){}};
+                   JSON.stringify(obj);  //"{}"  //JSON中不能含有函数,undefined和正则
+                   JSON.stringify(/ab/i);  //"{}"  //正则将会被转换为空对象
+                - 如果是数组的成员为undefined，函数,将会转换为null
+                如:
+                    var arr = [undefined,function(){}];
+                    JSON.stringify(arr);  //"[null,null]"
+
+                3.2 JSON.stringify()可以接受第二个参数
+
+                -只能在对象中使用,指定转换为字符串的属性
+                - 数组
+                如：
+                    JSON.stringiofy({name:123,age:18},["name"]);  //"{"name":"123"}"  //指定了值转换name属性
+                - 注意:该方法在数组中不适用
+                - 第二个参数也可以是一个函数:用来更改JSON.stringify()的返回值
+                如:
+                    function f(key, value) {
+                    if (typeof value === "number") {
+                        value = 2 * value;
+                    }
+                    return value;
+                    }
+
+                    JSON.stringify({ a: 1, b: 2 }, f)
+                    // '{"a": 2,"b": 4}'
+
+                3.3 第三个参数：用于增加JSON字符串的可读性
+                如：
+                    JSON.stringify({
+                        name:"longer",
+                        sex:"男",
+                        age:18
+                    },null,"-");  //{                           //第二个参数为空,第三个参数为"-"，增加了可读性
+                                    -"name": "longer",
+                                    -"sex": "男",
+                                    -"age": 18
+                                    }
+
+                3.4 toJSON
+                - 如果参数对象有自定义的toJSON方法，那么JSON.stringify会使用这个方法的返回值作为参数，而忽略原对象的其他属性。
+
+                
+                4. JSON.parse()方法
+                - JSON.parse方法用于将JSON字符串转换为对应的值
+                如：
+                    JSON.parse("{}");  //{}
+                    JSON.parse("123");  //123
+                    JSON.parse("[]");  //[]
+
+                    var o = JSON.parse('{"name":"longer","sex":"男"}');   //JSON对象中的属性必须用双引号
+                    console.log(o);  //{name: "longer", sex: "男"}
+
+                - 如果JSON.parse()的参数传入的不是JSON字符串将会报错
+                4.1 第二个参数
+                - JSON.parse方法可以接受一个处理函数，作为第二个参数，用法与JSON.stringify方法类似。
+
+            */
+
+            // console.log(JSON.parse("{}"),  //{}
+            //         JSON.parse("123"),  //123
+            //         JSON.parse("[]")//[]
+            //         )
+               
+
+
+
+
+                                    
+            //第二个参数
+        //     var obj = {
+        //         "name":"longer",
+        //         "age":18,
+        //         "sex":"男"
+        //     };
+        //     var arr = ["name","sex"];
+        //     // console.log(JSON.stringify(obj,arr));  //{"name":"longer","sex":"男"}
+        //     //第三个参数:增加可读性
+        //     // console.log(JSON.stringify(obj,arr,'|-'));  //{|-"name": "longer",|-"sex": "男"}
+
+        //    console.log( JSON.stringify({
+        //                 name:"longer",
+        //                 sex:"男",
+        //                 age:18
+        //             },null,"-"));
+        }
+    </script>
+</head> 
+<body>
+    
+</body>
+</html>

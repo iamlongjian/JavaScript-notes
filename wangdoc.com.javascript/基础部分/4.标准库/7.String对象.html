@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>String对象</title>
+    <script>
+        window.onload=function(){
+            var str = 'hhllo,world!' 
+            // console.log(String.fromCharCode(98,64,98,66,87)); //b@bBW //输入unicode返回对应的字符串
+
+            // console.log(str.length);  //12 //字符串的长度
+
+            // console.log(str.charAt(2));  //l  //返回指定位置对应的字符 //等同于str[2];
+
+            // console.log(str.charCodeAt(2)); //108 //返回指定位置字符的unicode编码
+
+            // console.log(str.concat('iam new Str')); //hhllo,world!iam new Str //不影响原字符串
+            // console.log(str); //hhllo,world!
+
+            // console.log(str.slice(0,2)); //hh //从0开始截取到2,包前不包后
+
+            // console.log(str.substr(2,5)); //llo,w //从2开始截取5个字符
+
+            // console.log(str.substring(2,-1)); //hh //如果第一个参数比第二个参数大,则调换位置,如果有参数为负数,则转换为0
+
+            // console.log(str.search('l')); //2 //返回该字符第一次出现的位置
+
+            // console.log(str.indexOf('l')); //2 //返回第一次出现的位置,从前往后查找
+            // console.log(str.indexOf('l',5)); //9 //返回第一次出现的位置,从5开始往后查找
+
+
+            // console.log(str.lastIndexOf('l')); //9 //返回第一次出现的位置,从后往前查找
+            // console.log(str.lastIndexOf('l',5)); //3 //返回第一次出现的位置,从5开始往前查找
+
+            // console.log(str.match(/l/g).input); //["l","l","l"] //返回字符串中符合条件的元素组成数组
+
+            // console.log(str.replace(/l/g,'O')); //hhOOo,worOd! //该方法不影响原数组
+            // console.log(str); //hhllo,world! 
+
+
+            //12.21复习
+            var str = '123456';
+            // str.length   //6
+            //str.concat(true,'你好') //123456true你好
+            // str.trim(); //去除空格
+            //str.slice(0,3);//123
+            //str.slice(0,-2);//1234
+            // str.substring(-1,-2); //'' //转换为0
+            // str.substring(3,2); //3 //调换位置
+            //str.substr(3,2) //45
+            //str.substr(-3,2)  //45
+
+            var str = '121314156';
+            str.split('1'); // ["", "2", "3", "4", "56"]
+            str.search('1') //0
+            str.replace(/1/g,'0'); //020304056 //全局模式,所有的1替换成0
+            str.indexOf('1',3); //4
+            str.indexOf('1'); //0
+            str.lastIndexOf('1'); //6
+            str.lastIndexOf('1',3); //2
+
+            var str = 'abcd';
+            str.toUpperCase(); //ABCD  //转换为大写
+            str //abcd //不影响原数组
+            var str = 'XYZ';
+            str.toLowerCase()  //xyz //转换为小写
+            str  //XYZ //不影响原数组
+        
+            
+            
+            /* 12.19
+                String()对象：String作为JS原生提供的三个包装类之一,作是用来返回一个字符串对象的。
+                如：
+                    var s1 = 'abc';
+                    var s2 = new String('abc');
+
+                    typeof s1;  //string
+                    typeof s2;  //object
+
+                    s2.valueOf();  //'abc' //valueOf()是对象才有的方法
+                除了用作构造函数,还可以当作工具函数来使用,将任意类型的值转换为字符串
+                如：
+                    String(true);  //'true'
+                    - 快捷方法:将原值和空字符串相加,因为做加法运算的时候,只要有一个运算子为字符串,那么另一个
+                    运算子也将转化为字符串,进行字符串的拼接
+                    true + '';    //'true'
+
+                1. 静态方法
+                1.1 String.fromCharCode()
+                String定义的静态方法(即定义在对象本身,而不是定义在对象实例的方法),主要是String.fromCharCode(),
+                该方法的参数是一个或多个数值,代表unicode码点,返回值是这些码点组成的字符串
+                如：
+                    String.fromCharCode(); //''
+                    String.fromCharCode(97); //'a'
+                    String.fromCharCode(104,101,108,108,111); //'hello'
+
+                2. 实例属性
+                2.1 String.prototype.length
+                - 用于返回该字符串的长度
+                如:
+                    '2134'.length;  //4
+
+                3. 实例方法
+                3.1 String.prototye.charAt()
+                - charAt()方法用于返回指定位置的字符
+                如：
+                    var s = 'abc';
+                    s.charAt(1);  //'b'
+                    s.charAt(s.length - 1 );  //'c'
+                    - 完全可以使用数组下标代替
+                    s[1];  //'b'
+
+                3.2 String.prototye.charCodeAt()
+                - String.prototype.charCodeAt()用于返回指定位置的字符所对应的unicode码点
+                如：
+                    var s = 'abc';
+                    s.charCodeAt(1);  //'98' //参数是1,索引为1的字符是'b',所对应的unicode码点为98
+                    s.charCodeAt(); //'97' //如果没有任何参数,则返回第一个的码点
+                    s.charCodeAt(-1);//NaN  //如果参数无效,则返回NaN
+                
+                3.3 String.peototype.concat()
+                - String.protptype.concat()方法用于连接字符串,并返回一个新的字符串,不改变原字符串
+                    var s = 'abc';
+                    s.concat('def');  //'abcdef'
+                    s;  //'abc'  //不改变原字符串
+                    s.concat(true,false,null);  //'abctruefalsenull' //如果参数不是字符串,会转换为字符串再进行连接
+
+                3.4 String.prototype.slice()
+                - String.prototype.slice()用于提取字符串中的一段字符(包前不包后),并返回,不影响原字符串
+                如:
+                    var s = 'JavaScript';
+                    s.slice(0,4);   //'Java'  //从索引为0开始,提取到4结束
+                    s.slice(0);  //'JavaScript'  //如果不指定第二个参数,则从开始位置一直提取到最后
+                    s.slice(-2,-1);  //'p'  //如果参数是负数,则从后往前计算
+                    s.slice(2,1); //''  //如果参数不符合规范,则返回空字符串
+                
+                3.5 String.prototype.subString()
+                - String.prototype.subString()方法用与提取字符串中的一段字符(包前不包后),并返回,不影响原字符串
+                和String.peototype.slice()方法差不读
+                举例说明: 
+                    var s = 'abcdefg';
+                    s.subString(1,3);  //'bc'  //从索引为1截取到索引为3的字符
+                    s.subString(3,1);  //'bc' //如果参数一大于参数二,则会把两个参数的位置调换
+                    s.subString(1);  //'bcdefg' //如果只有一个参数,则从指定位置截取到字符串的最后
+                    s.subString(-3);  //'abcdefg' //如果参数为负数,则转换为0
+                    s.subString(1,-3);  //'a' //实际上的参数为:0,1   //如果参数为负数,则转换为0,因为1大于0,所以位置调换
+                - 不建议使用
+
+                3.6 String.prototype.substr()
+                - String.prototype.substr()方法用于提取字符串中的一段字符并返回,不改变原字符串,和slice(),subString()
+                作用相同
+                - 第一个参数是开始截取的位置,第二个参数是截取的长度
+                举例说明:
+                    var s = 'abcdef';
+                    s.substr(1,3);  //'bcd'  //从0开始截取,长度为3
+                    s.substr(1);  //'bcdef' //如果省略第二个参数,则一直截取到字符串末尾
+                    s.substr(-3,3); //'def' //如果第一个参数为负数,表示从倒数开始计算
+                    s.substr(1,-1); //''  //如果第二个参数为负数,则会转换为0,表示提取0个字符,则返回空字符串
+
+                3.7 String.prototype.indexOf(),String.protptype.lastIndexOf()
+                - indexOf()方法用于确定一个字符串在另一个字符串中第一次出现的位置,返回结果是匹配开始的位置,如果
+                返回-1,则表示不匹配
+                如：
+                    var s = 'javascript';
+                    s.indexOf('scirpt');  //4 //表示匹配开始的位置为4
+                    s.indexOf('hello');  //-1 //表示没有匹配结果
+                    s.indexOf('a',1);  //1 //indexOf()还可以接受第二个参数,表示从该位置向后匹配(包括该位置)
+                    s.indexOf('a',2);  //3 //indexOf()还可以接受第二个参数,表示从该位置向后匹配
+
+                - lastIndexOf()的用法跟indexOf()一致,主要区别是lastIndexOf()是从尾部开始往前匹配,indexOf()
+                则是从头开始匹配;
+                    var s = 'hello world';
+                    s.lastIndexOf('o');  //7  //从后往前匹配,第一次出现的位置为7
+                    s.lastIndexOf('o',6);  //4 //从索引为6的位置开始往前匹配,第一次出现的位置为4
+
+                3.8 String.prototye.trim()
+                - String.protptype.trim()用于去除字符串两端的空格返回一个新字符串,不影响原字符串
+                例如:
+                    var s = ' hello world ';
+                    s.trim();  //'hello world'
+                    var s1 = '\n\vhello \t';
+                    s1.trim(); //'hello'  //不仅仅是去除空格,制表符\t、\v,换行符\n,和回车符\r都可以去除
+
+                3.9 String.prototype.toLowerCase(),String.protptype.toUpperCase()
+                - 用于转换一个字符串的大小写,返回新数组
+                如:
+                    'helloworld'.toUpperCase(); //'HELLOWORLD';
+                    'HELLOWORLD'.toLowerCase(); //'helloworld';
+
+                3.10 String.prototype.match()
+                - String.protptype.match()表示检测一个字符串是否匹配参数的内容,如果匹配则输出所有匹配的内容到一个
+                数组中。
+                如： 
+                    var str = 'cat,bat,fat';
+                    str.match(/at/g); //['at','at','at'];  //使用正则表达式,查找字符串中的'at',并且输出成一个数组
+                - 使用match()后返回的数组有两个属性,index表示匹配开始的位置,input表示元字符串
+                如:
+                    var str = 'bat,fat,cat,var';
+                    str.match(/t/); //['t']
+                    str.match(/t/).index;  //2 //表示开始匹配的位置
+                    str.match(/t/).input  //'bat,fat,cat,var'  //input属性表示输出原字符串
+
+                3.11 String.protptype.search(),String.prototype.replace()
+                - search()的方法基本等同于match();但是返回值为匹配的第一个位置,如果不匹配则返回-1
+                如：
+                    var str = 'hello';
+                    str.search('e'); // 1 //返回匹配的第一个位置
+                    var str = 'Ohello';
+                    alert(str.search(/o/i));  //0 //使用正则表达式作为参数,返回o第一次出现的位置(忽略大小写)
+                - replace()用于替换匹配的子字符串(正则表达式),一般情况下只替换第一个匹配,除非使用带有g修饰符的正则表达式,
+                表示全局模式
+                如:
+                    var str = 'aaab';
+                    str.replace('a','s');  //'saab' //只替换了第一个匹配的字符
+                    str.replace(/a/g,'s');  //'sssb'  //使用了正则表达式g修饰符,表示全局查找
+
+                3.12 String.prototype.split()
+                - String.prototype.split()方法:用于将一个字符串分割为数组,分割成一个由子字符串组成的数组
+                例如：
+                    var str = 'a|b|c';
+                    str.split('|');  //["a", "b", "c"];       
+                    str.split(''); //["a", "|", "b", "|", "c"] //如果分割规则为空字符串，则返回数组的成员是原字符串的每一个字符。
+                    str.split(','); //["a|b|c"]  //如果参数不存在字符串中,或者省略参数,则返回数组的唯一成员就是原字符串。
+                    str.split('|',2);  //[a,b] //第二个参数表示指定返回的数组length
+                    str.split(/[A-z]/g);  //["","|","|",""]  //使用正则表达式作为参数,返回一个长度为4的数组
+            */
+            
+            // var s = 'hello world!';
+            //  console.log(s[0]);
+            // console.log(s.charCodeAt(1));  //101 //表示e的unicode为101
+            // console.log(s.toLowerCase());  //hello world! //
+            // console.log(s.toUpperCase());  //HELLO WORLD! //
+            // console.log(s.slice(1,2)); //e
+            // console.log(s.substring(3,2)); //l //两个参数会互换位置
+            // console.log(s.substr(3,2)); //lo //从索引为3开始,提取两个字符
+            // console.log(s.match(/l/g)); //['l','l','l'] //提取数组中符合的元素组成一个数组
+            // console.log(s.search('l')); //2 //寻找符合的元素并返回第一次出现的位置
+            // console.log(s.replace(/l/g,'h')); //hehho worhd! //全局替换l成'h'
+            // console.log(s.indexOf('o',5)); //7 //从5开始往后查找,返回第一次出现的位置
+            // console.log(s.lastIndexOf('o',5)); //4 //从5开始往前查找,返回第一次出现的位置
+            // console.log(s.split(' '));// ["hello", "world!"] //将字符串拆分为数组
+            // console.log(s.concat(true,123,'abc')); //'hello world!true123abc' //会将不是字符串形式的值转换为字符串再拼接
+
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

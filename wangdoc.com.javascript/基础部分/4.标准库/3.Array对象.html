@@ -7,6 +7,101 @@
     <title>Array</title>
     <script>
         window.onload=function(){
+            // var arr = ['a','b','c','d','e','b'];
+            // console.log(arr.length);//6  //获取数组的长度
+
+            // console.log(arr.filter(function(ele,index,arr){
+            //     return ele === 'b';
+            // }));  //['b','b']   //返回符合规则的成员组成数组
+
+            // console.log(arr.map(function(ele,index,arr){
+            //     return ele + ele;
+            // }));    //['aa','bb','cc','dd','ee','bb'];  //数组中的每个元素都执行一次回调函数内的代码
+
+            // console.log(Array.isArray(arr));  //true //判断一个值是否为一个数组
+
+            // console.log(Object.prototype.toString.call(arr));  //[object Array] //判断一个值是否为一个数组
+
+            // console.log(arr.push('f'));  //7 //返回新数组的长度 //影响原数组
+                        // (|两者结合使用,形成后进先出的栈结构|)
+            // console.log(arr.pop());  //b //返回被删除的元素 //影响原数组
+
+            // console.log(arr.shift());  //a //返回被删除的元素 //影响原数组
+
+            // console.log(arr.unshift(0,1));  //8 //返回数组的长度 //影响原数组
+            // console.log(arr); //[0, 1, "a", "b", "c", "d", "e", "b"]
+
+            // console.log(arr.join('#')); //把数组拆分为字符串,按参数来拆. //不影响原数组
+
+            // console.log(arr.reverse()); //["b", "e", "d", "c", "b", "a"] //颠倒数组的顺序
+    
+            // console.log(arr.concat([1,23,4])); //["a", "b", "c", "d", "e", "b", 1, 23, 4] //连接两个数组或者任意类型
+
+            // console.log(arr.slice(0,2)); //["a", "b"] //提取从0开始到2的成员 //如果为负数则从后往前
+
+            // console.log(arr.splice(1,2)); //["b","c"] //从1开始提取两个成员 //如果为负数则从后往前
+            // console.log(arr.splice(-2,2)); //["e","b"] //从倒数第二个往后提取两位
+
+            // console.log(arr.indexOf('v')); //-1 //表示不存在该成员
+            // console.log(arr.indexOf('a')); //0 //'a'首次出现的位置为0
+            // console.log(arr.indexOf('a',3)); //-1 //如果从位置为3开始往后查找,则不存在'a'
+
+            // console.log(arr.lastIndexOf('b')); //5 //从后往前查找,'b'首次出现的位置为5
+            // console.log(arr.lastIndexOf('a',3)); //-0 //从后往前查找,'a'首次出现的位置为0
+
+            // console.log(arr.some(function(ele,index,arr){
+            //     return ele === 'a';
+            // })) //true  //只要数组中有一个成员满足,就返回true
+            // console.log(arr.every(function(ele,index,arr){
+            //     return ele === 'a';
+            // })) //false  //需要数组全部满足函数内的规则才返回ture
+
+            // console.log(arr.sort()); //["a", "b", "b", "c", "d", "e"] //给数组排序
+
+
+            // var arr = [1,5,6,2,3,4,101];
+            // console.log(arr.sort(function(a,b){
+            //     return a-b;
+            // })); //[1, 2, 3, 4, 5, 6, 101]  //自定义排序方法
+
+
+
+            var arr = ['a','b','c','d','e','b','a'];
+// arr.length//6
+// arr.push('123',456)  //8
+// arr.pop()//456
+// arr.shift()//a
+// arr.unshift(123,'hello')  //8 
+// arr.concat('hello',456)  // ["a", "b", "c", "d", "e", "b", "hello", 456]
+// arr.slice(0,5)// ["a", "b", "c", "d", "e"]
+// arr.slice(-2,-1)//["e"]
+//arr.splice(-2,-1) //[""] //负数转换为0
+// arr.splice(2,1) //["c"]
+
+// arr.splice(-2,1,'333333333','4444444')//["e"] //删除了[e]
+// console.log(arr) //["a", "b", "c", "d", "e", "333333333", "4444444", "a"]
+
+// arr.indexOf('a') //0
+//arr.indexOf('a',5) //6
+// arr.lastIndexOf('a') //从后往前
+//arr.lastIndexOf('a',5) //0 //从指定位置开始往前寻找
+//arr.reverse()// ["a", "b", "e", "d", "c", "b", "a"]
+//arr.join('_') //a_b_c_d_e_b_a
+//arr.map(function(ele,index,arr){return ele + 2;}) //["a2", "b2", "c2", "d2", "e2", "b2", "a2"] //每个成员执行一次该方法
+//arr.filter(function(ele,index,arr){return ele === 'a';})//["a", "a"] //输出符合条件的成员
+//arr.some(function(ele,index,arr){return ele==='a'}); //true   //一个符合就返回true
+//arr.every(function(ele,index,arr){return ele==='a'}); //false  //要求所有符合就返回true
+
+// arr.sort(function(a,b){
+//     return a-b;
+// });
+// console.log(arr);
+
+
+
+            
+
+
             /*
                 Array对象：
                 1. 构造函数：Arrar是JS的原生对象,同时也是一个构造函数,可以使用它生成新的数组
@@ -72,7 +167,8 @@
 
                 3.4 join()
                 join()方法：以指定参数为分隔符,将所有数组成员连接为一个字符串,如果不提供参数,默认使用逗号分隔
-                    var arr = [1,2.3];
+                该方法不会影响原数组
+                    var arr = [1,2,3];
                     arr.join(); //'1,2,3' //默认使用逗号分割
                     arr.join('-');  //'1-2-3'  //指定使用‘-’分隔
                 - 如果数组是undefined或null,则会转换成空字符串
@@ -185,6 +281,51 @@
                     },arr);  //[b,c]  //???
                 - 上面代码通过map方法的第二个参数，将回调函数内部的this对象，指向arr数组。
 
+                3.11 filter()
+                - filter()方法:用于过滤数组的成员,满足条件的成员组成一个新数组返回.
+                它的参数是一个函数,所有数组成员依次执行该函数，返回结果为true的成员组成一个新数组返回,该方法不会
+                改变原数组
+                - 它可以接受三个参数，当前成员,当前成员索引,数组本身
+                例一：
+                    var arr = [1,2,3,4,5];
+                    arr.filter(function(ele){
+                        return (ele>2);   //如果数组本身大于2则返回
+                    })  //[3,4,5]
+                    arr; //[1,2,3,4,5]  //原数组不变
+                例二：
+                    var arr = [1,2,3,4,5];
+                    arr.filter(function(ele,index,arr){
+                        return (ele % 2 === 0);
+                    }) //[2,4]  //输出可以被二整除的成员
+                - filter()也可以接受第二个参数,用来绑定函数内部的this变量
+            
+                3.12 some(),every()
+                - 这两个方法类似‘断言’(assert),返回一个布尔值,表示判断数组成员是否符合某种条件
+                - some()方法是如果数组内有一个符合条件则整个回调函数都返回true,如果全部不符合条件,才返回false
+                    var arr = [1,2,3,4];
+                    arr.some(function(ele,index, arr){
+                        return ele>2;  //判断数组成员是否有大于2的,如果是则返回true
+                    }) //true   //有成员大于2
+
+                - every()方法是如果数组内所有成员都符合条件才返回true,否则就返回false
+                    var arr  = [1,2,3,4,5];
+                    arr.every(function(ele,index, arr){
+                        return ele>2;  //如果所有的成员都大于2,则返回true,否则即返回false
+                    })  //false  //因为并不是所有成员都是大于2
+                - 这两个方法都可以接收第二个参数,用来绑定函数内部的this变量
+
+                3.13 indexOf(),lastIndexOf()
+                - indexOf()方法返回给定元素在数组中第一次出现的位置,如果没有出现则返回-1
+                例如:
+                    var arr = [a,b,c];
+                    arr.indexOf('a');  //0  //'a'所在位置的索引为0
+                    arr.indexOf('a',1);  //-1  //从索引为1的位置开始寻找'a','a'不存在所以返回-1
+                    arr.indexOf('y');  //-1 //'y'不存在数组中,所以返回-1
+                - lastIndexOf()方法用于返回给定元素在数组中最后出现的位置,如果没有搜索到,则返回-1
+                例如：
+                    var arr = [1,2,3,4,2];
+                    arr.lastIndexOf('2');   //4 //'2'最后出现的位置所对应的索引为4
+                    arr.lastIndexOf('5');  //-1 //'5'不存在数组中
                 
 
 

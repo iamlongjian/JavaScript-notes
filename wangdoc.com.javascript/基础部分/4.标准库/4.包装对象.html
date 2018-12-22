@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>包装对象</title>
+    <script>
+        window.onload=function(){
+            /*
+                包装对象：对象是js中最主要的数据类型,三种原始数据类型(字符串,数值,布尔值)在一定条件下,也会
+                自动转换为对象,也就是原始类型的包装对象。
+                例如：
+                    var v1 = new Number(123);
+                    var v2 = new String('a');
+                    var v3 = new Boolean(true);
+                - 上面代码中,基于原始类型的值,生成了三个对应的包装对象
+                    typeof v1;  //Object
+                    typeof v2;  //Object
+                    typeof v3;  //Object
+
+                    v1 === 123; //false
+                    v2 === 'a'; //false
+                    v3 === true; //false
+                - 包装对象的最大目的,首先:使得JS的对象涵盖所有的值,其次:使得原始类型的值可以方便的调用某些方法
+                - Number,String,Boolea如果不作为构造函数调用,常常用于类型的转换
+                如：
+                    Number('123');  //123
+                    String([123]);  //'123'
+                    Boolean('');  //false
+                总结:这三个对象如果作为构造函数来调用时(带有new),可以将原始类型转换为对象。作为普通函数调用时,可以
+                将任意类型的值,转为原始类型的值。
+
+                1.1 ValueOf()
+                - 返回包装类对象实例对应的原始类型的值
+                new Number(123).valueOf();  //123
+                new String('123').valueOf();  //'123'
+                new Boolean(true).valueOf(); //true
+                
+                1.2 toString()
+                - 返回包装类对象实例对应的原始类型的字符串形式的值
+                new Number(123).toString(); //'123'
+                new String('123').toString(); //'123'
+                new Boolean(true).toString();  //'true'
+
+                2. 原始类型与对象实例的自动转换
+                - 原始类型的值,可以自动当作包装对象调用,即调用包装对象的属性和方法。
+                这是JS引擎会自动将原始类型的值转换为包装对象实例,方便使用对象方法,但是,在使用完毕后
+                会立即销毁。
+                - 如：字符串可以使用length属性,返回字符串的长度(自动转换为了对象实例)
+                例子:
+                       '132'.length;  //3
+                            ||
+                        new String('132').length; //3  //这一步为自动转换
+                我们可以在包装对象的原型(prototype)上,新增属性
+                例如:
+                        String.prototype.double=function(){
+                            return this.valueOf() + this.valueOf();
+                        }
+                       '123'.double();  //'123123'
+                        Number.prototype.double=function(){
+                            return this.valueOf() + this.valueOf();
+                        }
+                        (123).double(); //246  //数值需要加括号,否则会连读为小数
+            */
+            var arr = [1,2,3,4];
+            // console.log(arr.concat(3,3,3,33)); //用于连接数组,非数组将会转为数组进行添加
+            // console.log(Array.isArray(arr)); //true //判断一个值是否为数组
+            // console.log(Object.prototype.toString.call(arr)); //[object Array] //判断一个值是否为数组
+            // console.log(arr.slice(1,3)); //[2,3];  //提取数组,包前不包后
+            // console.log(arr.splice(1,3)); //[2,3,4];  //提取数组,第一个参数为开始位置,第二个参数为长度
+            // console.log(arr.join('-')); //1-2-3-4  //将一个数组拆分成字符串,已参数的形式拆
+            var arr = [1,2,3,4,101];
+            // console.log(arr.sort()); // [1, 101, 2, 3, 4]  //将一个数组已unicode编码顺序排序
+            // console.log(arr.sort(function(a,b){return a - b;})); // [1, 2, 3, 4, 101]  //将一个数组自定义顺序排序
+            // console.log(arr.push('102')); //6 //在数组的末尾添加一个或多个元素，返回新数组的长度,不影响原数组
+            // console.log(arr.pop()); //101 //返回删除的元素
+            // console.log(arr.unshift('0')); //6 //再数组的开头添加一个或多个元素，返回新数组的长度
+            // console.log(arr.shift()); //1 //返回删除的元素
+            // console.log(arr.reverse()); // [101, 4, 3, 2, 1] //颠倒数组的排序
+            // console.log(arr.indexOf(2)); //1 //返回第一次出现的位置
+            // console.log(arr.indexOf(2,2)); //-1 //从2开始往后查找,不存在2了,所以返回-1
+            // console.log(arr.lastIndexOf(2,-2)); //1 //从倒数第二个开始往后查找,返回第一次出现的位置
+            var arr = [1,2,3,4,101,2];
+            // console.log(arr.lastIndexOf(2)); //5 //从最后一个元素开始往前查找‘2’字符
+            // console.log(arr.map(function(ele,index,arr){
+            //     return ele + 1;
+            // })) //[2, 3, 4, 5, 102, 3] //每个元素都回调用一次该回调函数
+            // console.log(arr.filter(function(ele,index,arr){
+            //     return ele>2;
+            // })) //[3, 4, 101] //用于过滤数组,返回true的成员
+            // console.log(arr.some(function(ele,index,arr){
+            //     return ele>2;
+            // })) //true //只要有一个成员满足该回调函数的条件，则返回true
+            // console.log(arr.every(function(ele,index,arr){
+            //     return ele>2;
+            // })) //false //需要所有成员都满足回调函数的条件才会返回true
+            
+            
+
+            
+
+
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Boolean</title>
+    <script>
+        window.onload=function(){
+            /*
+                Boolean对象：Boolean对象是Js中的三个包装对象之一,作为构造函数,它主要用于生成Boolean值
+                的包装对象实例
+                如：
+                    if(new Boolean(false)){      //使用了Boolean的构造函数,生成了一个对象实例,转换为布尔值为true
+                        consloe.log('true');
+                    }  //'true'  //转换后为true,所以有输出
+                    if(new Boolean(false).valueOf()){ //输出了对象的原始值,为false
+                        consloe.log('true');
+                    }  //无结果  //转换后为原始值false,所以没有输出
+                - 直接以函数的方式调用,则会转换为相应的布尔值
+                    Boolean('123');  //true
+                    Boolean('');  //false
+                    Boolean(0);  //false
+                - 或者直接只用双重否定运算符(!!),也是可以直接转换为相应的布尔值
+                    !!'123';  //true
+                    !!0;  //false
+                    !!'';  //false
+                - 布尔值为false的几个原始数据类型
+                    1. 0
+                    2. false
+                    3. null
+                    4. undefined
+                    5. ''
+                    6. NaN
+            */
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

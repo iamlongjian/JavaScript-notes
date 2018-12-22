@@ -7,6 +7,15 @@
     <title>Document</title>
     <script>
         window.onload=function(){
+            // var obj = {name:'123',age:19};
+            // console.log(obj);
+            // Object.freeze(obj);  //冻结对象,无法添加
+            // console.log(Object.isFrozen(obj)); //true //表示该对象已经被冻结
+            // Object.defineProperties(obj,{
+            //     name:{value:'longer',writable:true,configurable:true},
+            //     age:{value:'18',writable:true,configurable:true}
+            // })
+            // console.log(obj);
 
             /*
                 属性描述对象:
@@ -118,17 +127,17 @@
                     Object.isFrozen(obj); //true //表示使用了Object.freeze()方法                   
             */
            
-            var obj = {name:123};
-            console.log(Object.getOwnPropertyDescriptor(obj,'name'));   //查看一个对象的某个属性的属性描述对象
-            Object.defineProperty(obj,'name',{      //定义或修改一个对象中的某个属性的属性描述对象
-                value:'longer'
-            })
-            Object.preventExtensions(obj); //不可新增新属性
-            Object.seal(obj);  //不可删除旧属性,不可新增新属性
-            Object.freeze(obj); //不可删除旧属性,不可新增新属性,不可修改Value的值,相当于一个常量
-            delete obj.name;  //无效 //因为使用了Object.freeze()方法
-            obj.sex = '男'; //无效
-            console.log(obj.sex);   //undefined
+            // var obj = {name:123};
+            // console.log(Object.getOwnPropertyDescriptor(obj,'name'));   //查看一个对象的某个属性的属性描述对象
+            // Object.defineProperty(obj,'name',{      //定义或修改一个对象中的某个属性的属性描述对象
+            //     value:'longer'
+            // })
+            // Object.preventExtensions(obj); //不可新增新属性
+            // Object.seal(obj);  //不可删除旧属性,不可新增新属性
+            // Object.freeze(obj); //不可删除旧属性,不可新增新属性,不可修改Value的值,相当于一个常量
+            // delete obj.name;  //无效 //因为使用了Object.freeze()方法
+            // obj.sex = '男'; //无效
+            // console.log(obj.sex);   //undefined
           
           
             

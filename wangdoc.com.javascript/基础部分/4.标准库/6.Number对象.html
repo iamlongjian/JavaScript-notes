@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Number</title>
+    <script>
+        window.onload=function(){
+            /*
+                Number()对象:Number对象是数值对应的包装对象,可以作为构造函数使用,也可以作为
+                工具函数使用
+                作为构造函数使用时,用于生成值为数值的对象
+                    var n = new Number(123);
+                    typeof n;  //Object
+                - 上面代码中,使用Number构造函数,返回一个值为1的对象
+                作为工具函数使用时,用于将任何数据类型转换为数值
+                    Number('123');  //123
+                    +'123';  //123 //更快捷的方法,直接在前面加一个正(+)操作符
+                
+                1. Number()的静态属性：
+                        Number.POSITIVE_INFINITY：正的无限，指向Infinity。
+                        Number.NEGATIVE_INFINITY：负的无限，指向-Infinity。
+                        Number.NaN：表示非数值，指向NaN。
+                        Number.MIN_VALUE：表示最小的正数（即最接近0的正数，在64位浮点数体系中为5e-324），相应的，最接近0的负数为-Number.MIN_VALUE。
+                        Number.MAX_SAFE_INTEGER：表示能够精确表示的最大整数，即9007199254740991。
+                        Number.MIN_SAFE_INTEGER：表示能够精确表示的最小整数，即-9007199254740991。
+                2. 实例方法
+                - Number()对象有四个实例方法,都跟将数值转换成指定格式有关
+                2.1 Number.prototype.toString()
+                - 该实例方法用于将一个数值转换为字符串形式
+                例如:
+                    (10).toString();  //'10'
+                    也可以在toString方法里指定参数,参数为想要转换的进制
+                    (10).toString(2);   //'1010'  //把数值10转换为2进制并用字符串输出
+                    (10).toString(8);  //'12'   //把数值10转换为8进制并用字符串输出
+                    (10).toString(16);  //'a'   //把数值10转换为16进制并用字符串输出
+                如果需要将其他进制的数,转成十进制,请使用parseInt()方法
+
+                2.2 Number.Prototye.toFixed()
+                - toFixed()方法用于将一个数转换为指定位数的小数,然后返回这个小数所对应的字符串
+                如:
+                    (10).toFixed(2);  //'10.00'     //把数值10转换为两位小数,并输出对应的字符串
+                    (10.005).toFixed(2);  //'10.01' //把数值10.005转换为两位小数,并输出对应的字符串
+
+                2.3 Number.prototype.toExponential()
+                - toExponential()方法：用于将一个数值转换为科学记数法,并返回它的字符串形式
+                如：
+                    (10).toExponential();  //"1e+1"
+
+                2.4 Number.prototype.toPrecision() 
+                - Number.prtotype.toPrecision()用于将一个数值转为指定位数的数字
+                如：
+                    (12.34).toPrecision(1) // "1e+1"
+                    (12.34).toPrecision(2) // "12"
+                    (12.34).toPrecision(3) // "12.3"
+                    (12.34).toPrecision(4) // "12.34"
+                    (12.34).toPrecision(5) // "12.340"
+                
+                3. 可以在Number.prototype上自定义属性,被Number的实例继承
+                如:
+                    Number.prototype.add = function(x){
+                        return this + x;
+                    }
+                    (8).add(1);  //9
+             */
+                    console.log((123).toFixed(2));  //123.00    //转成两位小数
+                    console.log((123).toExponential(2));  //1.23e+2 //转为科学记数法
+                    console.log((123).toPrecision(1)); //1e+2 //一位数
+                    console.log((123).toPrecision(2)); //1.2e+2//两位数
+                    console.log((123).toPrecision(4)); //123.0//四位数
+
+             
+
+
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>员工管理页面</title>
+    <style>
+        *{
+            margin: 20px auto;
+            padding: 0;
+            text-align: center;
+            
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            //封装代码
+            function Dle(){
+                var tr = this.parentElement.parentElement;  //this的指向为绑定此函数的变量
+                var info = tr.children[0].innerHTML;
+                var sure = confirm("您确定删除"+info+"的信息嘛？此操作不可逆");
+                if(sure){
+                    tr.parentElement.removeChild(tr);
+                }
+            }
+
+            var allA = document.getElementsByTagName('a');
+            for(var i =0;i<allA.length;i++){
+                allA[i].onclick=Dle;
+            }
+            var index = document.getElementById('index');
+            var tbody = index.children[0];
+            var submit = document.getElementById('submit');
+            var reset = document.getElementById('reset');
+            var name = document.getElementById('name');
+            var email = document.getElementById('email');
+            var salary = document.getElementById('salary');
+            var tr = tbody.getElementsByTagName('tr');
+            submit.onclick=function(){
+                //重点！！！
+                for(var j = 0;j<tr.length;j++){
+                    if(tr[j].children[0].innerHTML === name.value){
+                        var quote = confirm(name.value+'已存在,是否继续添加?');
+                        if(quote){
+                            break;
+                        }else{
+                            return;
+                        }
+                    }
+                }
+                
+                var newTr = document.createElement('tr');
+                newTr.innerHTML = "<td>"+name.value+"</td>"+
+                                    "<td>"+email.value+"</td>"+
+                                    "<td>"+salary.value+"</td>"+
+                                    "<td><a href=\"javascript:;\">删除</a></td>";
+                //重新给新创建的a标签添加单击事件
+                var newA =  newTr.getElementsByTagName('a')[0];
+                newA.onclick=Dle;
+                tbody.appendChild(newTr);
+                name.value = '';
+                email.value = '';
+                salary.value = '';
+
+            }
+            reset.onclick=function(){
+                name.value = '';
+                email.value = '';
+                salary.value = '';
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>员工管理系统</h1>
+    <table border id="index">
+        <tbody>
+            <tr>
+                <td>&nbsp;&nbsp;姓名&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;邮箱&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;工资&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;删除信息&nbsp;&nbsp;</td>
+            </tr>
+            <tr>
+                <td>小蔡</td>
+                <td>123465789@fox.com</td>
+                <td>5000</td>
+                <td><a href="javascript:;">删除</a></td>
+            </tr>
+            <tr>
+                <td>小张</td>
+                <td>987654321@google.com</td>
+                <td>4000</td>
+                <td><a href="javascript:;">删除</a></td>
+            </tr>
+            <tr>
+                <td>小韦</td>
+                <td>775786481@qq.com</td>
+                <td>3500</td>
+                <td><a href="javascript:;">删除</a></td>
+            </tr>
+            <tr>
+                <td>小龙</td>
+                <td>790164074@qq.com</td>
+                <td>3000</td>
+                <td><a href="javascript:;">删除</a></td>
+            </tr>
+        </tbody>
+    </table>
+   
+    <br><br> <hr><br>
+    <h2>添加新员工</h2>
+    <table border>
+        <tbody>
+            <tr>
+                <td>&nbsp;&nbsp;姓名&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;邮箱&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;工资&nbsp;&nbsp;</td>
+            </tr>
+            <tr>
+                <td><input type="text" id="name"></td>
+                <td><input type="text" id="email"></td>
+                <td><input type="text" id="salary"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button id="submit" type="button"style="padding: 3px 6px;">确认</button>
+    <button id="reset" type="button" style="padding: 3px 6px;">重置</button>
+</body>
+</html>

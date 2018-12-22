@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>对象的继承</title>
+    <script>
+        window.onload=function(){
+            /*
+                对象的继承
+
+            */
+
+            //原型对象
+            // function Cat(name){
+            //     this.name = name,
+            //     this.sayHi = function(){
+            //         return 123;
+            //     }
+            // }
+            // Cat.prototype.color = 'white';
+            // var cat1 = new Cat('cici');
+            // var cat2 = new Cat('pipi');
+            // alert(cat1.sayHi === cat2.sayHi);  // fasle
+
+            // function New(){
+            //     this.name = name
+            // }
+            // console.log(typeof New.prototype); //object
+            // console.log(New.prototype); //{constructor: ƒ}
+                                        //constructor: ƒ New()
+                                        //__proto__: Object
+
+            // constructor的name属性
+            // function Foo(){};
+            // var f = new Foo();
+            // console.log(f.constructor.name); //'Foo'
+
+
+
+            //构造函数的继承
+            function F(name){
+                this.name = name;
+            }
+            F.prototype.sex = '男';
+            F.prototype.sayHi = function(){
+                console.log('hi');
+            };
+            function F2(name){
+                F.call(this);
+            }
+            F2.prototype = Object.create(F.prototype);
+            F2.prototype.constructor = F;
+            var g = new F2('cici');
+            var c = new F('coco');
+            console.log(g.name);
+
+
+                
+            //构造函数方法的继承
+            function Foo(){};
+            Foo.prototype.sayHi=function(){
+                console.log('hi');
+            };
+            function F2(){};
+            F2.prototype.sayHi =function(){
+                Foo.prototype.sayHi.call(this);
+            }
+            var g = new F2();
+            g.sayHi();
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

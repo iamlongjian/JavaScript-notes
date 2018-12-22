@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RegExp 对象</title>
+    <script>
+        window.onload=function(){
+            /*
+                RegExp 对象:提供正则表达式功能
+                - 正则表达式是一种表达文本模式的方法,常常用来按照'给定模式'匹配文本.比如正则表达式给出一个Email地址的
+                模式,然后用它来确定一个字符串是否为数组.
+                - 新建正则表达式有两种方法,一种是使用字面量形式:
+                如:
+                    var reg = /xyz/;
+                另一种是是使用RegExp构造函数:
+                如:
+                    var reg = RegExp('xyz');
+                - 以上两种方式,前者的效率较高,而且前者比较便利和直观
+                - 正则表达式还可以接受第二个参数,表示修饰符(i,g,m)
+                如:
+                    var reg = /xyz/i;  //表示不区分大小写匹配xyz
+
+
+                1. 实例属性
+                - 正则表达式的实例属性分为两类.
+                1.1 修饰符相关属性,返回一个布尔值,表示对应的修饰符是否设置
+                (1) RegExp.prototype.ignoreCase; //返回一个布尔值,表示是否设置了i修饰符
+                (2) RegExp.prototype.global; //返回一个布尔值,表示是否设置了g修饰符
+                (3) RegExp.prototype.multiline; //返回一个布尔值,表示是否设置了m修饰符
+                - 以上三个属性都是只读的
+                如:
+                    var reg = /xyz/igm;
+                    reg.ignoreCase; //true //表示设置了i修饰符
+                    reg.global; //true  //表示设置了g修饰符
+                    reg.multiline; //true   //表示设置了m修饰符
+                1.2 与修饰符无关的属性
+                (1) RegExp.protptype.lastIndex;  //返回一个整数,表示下一次开始搜索的位置
+                (2) RegExp.protptype.source;  //返回正则表达式的字符串,该属性只读
+                如:
+                    var reg = /xyz/igm;
+                    reg.lastIndex; //0  //返回下一次开始搜索的位置
+                    reg.source; //'xyz'  //返回正则表达式的字符串
+                
+
+                
+                2. 实例方法
+                2.1 RegExp.prototype.tese()
+                - 正则实例对象的tese方法返回一个布尔值,表示当前模式是否能匹配参数字符串
+                如:
+                    /xyz/.test('xyz an abc'); //true //表示能匹配
+                - 如果正则表达式带有g修饰符,则每一次test方法都从上一次结束的位置开始向后匹配
+                如:
+                    var r = /x/g;
+                    var s = '_x_x';
+
+                    r.lastIndex; //0
+                    r.test(s); //true
+
+                    r.lastIndex; //2
+                    r.test(s); //true
+
+                    r.lastIndex; //4
+                    r.test(s); //false
+                - 所以当正则表达式带有g修饰符时,我们可以利用正则的lastIndex属性来指定开始搜索则位置
+                如:
+                    var r = /x/g;
+                    var s = '_x_x';
+
+                    r.lastIndex = 4;
+                    r.test(s);  //fasle
+
+                    r.lastIndex; //0  //每次返回false之后,lastIndex属性就会重置为0
+                    r.test(s);  //true
+
+                2.2 RegExp.prototype.exec()
+                - 用来返回匹配的结果,如果发现匹配就返回一个数组,成员就是匹配的字符串,否则返回null
+                    var r = /x/g;
+                    var s = '_x_x';
+                    
+                    r.exec(s), //['x'] //index:1
+                    r.exec(s),//['x'] //index:3
+                    r.exec(s), //null
+
+                3.字符串的实例方法:字符串的实例方法中,有四个和正则表达式有关
+                (1) String.prototype.match():返回一个数组,成员是所有普配的子字符串
+                (2) String.prototype.search():按照给定的正则表达式搜索,返回一个整数,表示匹配开始的位置
+                (3) String.prototype.replace():按照给定的正则表达式搜索,返回替换后的字符串
+                (4) String.prototype.split():按照给定的正则表达式进行字符串分割,返回一个数组,成员为分割后的字符
+
+                3.1 String.prototype.match()
+                - 字符串的实例对象的match方法对字符串进行正则匹配,返回匹配结果组成数组
+                如:
+                    var s = 'abbc';
+                    s.macth(/b/g);  //['b','b'];  //在全局模式下,match方法会一次性返回所有匹配成功的结果
+                    s.exec(/b/g);  //['b'];
+
+                3.2 String.prototype.search()
+                - 字符串实例对象的search()方法对字符串进行正则匹配,返回开始匹配的位置,如果没有任何匹配则返回-1
+                如:
+                    'xxuy'.search(/x/);   //0
+                    'xxuy'.search(/w/);   //-1  //没有匹配
+
+                3.3 String.prototype.replace(
+                - 字符串实例对象的replace()方法对字符串进行正则匹配并且替换,并返回替换后的结果
+                如:
+                    'abbc'.replace(/b/,'c');  //'acbc'  //如果不加全局修饰符,则值替换第一个
+                    'abbc'.replace(/b/g,'c');  //'accc'  //全局模式匹配b并替换成c
+
+                3.4 String.prototype.split()
+                - 字符串中实例对象的split()方法按照正则规则分割字符串,返回由分割后各部分组成的数组
+                - 该方法接受两个参数,第一个为正则表达式(分隔规则),第二个为返回数组的最大成员数
+                如:
+                    // 非正则分隔
+                    'a,  b,c, d'.split(',');    // [ 'a', '  b', 'c', ' d' ]
+                    
+                    // 正则分隔，去除多余的空格
+                    'a,  b,c, d'.split(/,* /);       // [ 'a', 'b', 'c', 'd' ]
+                    
+                    // 指定返回数组的最大成员
+                    'a,  b,c, d'.split(/, * /, 2);  //[ 'a', 'b' ]                    
+                如:
+                    // 例一
+                    'aaa*a*'.split(/a* /);   // [ '', '*', '*' ]
+                    
+                    // 例二
+                    'aaa**a*'.split(/a* /);  // ["", "*", "*", "*"]
+                    
+                - 上面代码的分割规则是0次或多次的a，由于正则默认是贪婪匹配，所以例一的第一个分隔符是aaa，
+                第二个分割符是a，将字符串分成三个部分，包含开始处的空字符串。例二的第一个分隔符是aaa，
+                第二个分隔符是0个a（即空字符），第三个分隔符是a，所以将字符串分成四个部分。
+                
+            
+                4. 匹配规则:正则表达式匹配的规则很复杂,下面一一介绍这些规则
+                4.1 字面量字符和元字符
+                (1)字面量字符表示只表示它字面的含义:如(/a/匹配a,/b/匹配b)
+                如:
+                    /dog/.test('old dog');  //true //此时的/dog/就是字面量字符
+                (2) 元字符
+                - 元字符有一些特殊的含义
+                1. (.字符)匹配所有字符,除回车(\r),换行(\n),行分隔符(\u2028),段分隔符(\u2029)
+                如:
+                    /c.t/.test('c任意一个字符t');  //true
+
+                2. (位置字符)主要有两个: ^(开头) 和 &(结尾)
+                如:
+                    /^test/.test('test 123');  //true //表示test必须出现在开头
+                    /^test/.test('123 test');  //false
+
+                    /test$/.test('123 test');  //true  //表示test必须出现在结尾
+                    /test$/.test('test 123');  //false 
+                
+                3. (|)在正则表达式中表示'或(or)'的关系,即/11|22/表示匹配113或223;
+                如:
+                    /11|22/.test('113'); //true
+
+                    //多个联合使用
+                    /11|22|33/.test('113'); //true
+
+                    //选择符会包括前后的多个字符,比如ab|cd指的是匹配ab或者cd,而不是匹配
+                    b或者c.如果想修改这个行为,可以使用圆括号.
+                    /a( |\t)b/.test('a\tb'); //true //表示a和b之间可以有一个制表符或者空格
+
+                4.2 转义字符
+                - 正则表达式中那些有特殊含义的元字符,如果要匹配他们本身就需要在他们前面加上'\',
+                比如要匹配 + ,就要写成 \+ ;
+                如:
+                    /1+1/.test('1+1'); //false //没有转义
+                    /1\+1/.test('1+1'); //true 
+                - 正则表达式中，需要反斜杠转义的，一共有12个字符：^ .  [ $ ( ) | * + ? { 和 \
+
+                4.3 特殊字符
+                - 正则表达式对一些不能打印的特殊字符,提供了表达方法
+                \cX 表示Ctrl-[X]，其中的X是A-Z之中任一个英文字母，用来匹配控制字符。
+                [\b] 匹配退格键(U+0008)，不要与\b混淆。
+                \n 匹配换行键。
+                \r 匹配回车键。
+                \t 匹配制表符 tab（U+0009）。
+                \v 匹配垂直制表符（U+000B）。
+                \f 匹配换页符（U+000C）。
+                \0 匹配null字符（U+0000）。
+                \xhh 匹配一个以两位十六进制数（\x00-\xFF）表示的字符。
+                \uhhhh 匹配一个以四位十六进制数（\u0000-\uFFFF）表示的 Unicode 字符。
+                
+
+                5. 字符类
+                - 字符类表示有一些列字符可供选择,只要匹配其中一个就可以了,所有可供选择的类都放在
+                方括号内,比如[xyz]表示x,y,z之中任意一个匹配
+                如:
+                    /[abc]/.test('hello'); //false
+                    /[abc]/.test('apple'); //true
+                
+                (1) 脱字符 ^
+                - 如果方括号内的第一个字符是脱字符(^)则表示除了字符类中的字符,其他字符都可以匹配
+                如[^xyz],表示除了x,y,z其他字符都可以匹配
+                如:
+                    /[^abc]/.test('bbc'); //false //因为字符串中不包含abc以外的字符,所以返回false
+                    /[^abc]/.test('iphone'); //true
+                
+                (2) 连字符 -
+                - 在字符类中,连字符(-)表示字符的连续范围,比如[abc]可以写成[a-c],[0123456789]可以写成[0-9],
+                [A-Z]表示26个大写字母,[A-z]表示26个大小写字母
+                如:
+                    /[a-z]/.test('s');  //true
+                    /a-z/.test('s');  //false //因为连字符没有出现在字符类中,所以不具备连字符功能
+
+                6. 预定义模式
+                - 指的是某些常见模式的简写方式
+                · \d 匹配0-9之间的数字,相当于[0-9]
+                · \D 匹配所有0-9以外的字符,相当于[^0-9]
+                · \w 匹配任意的字母,数字,下划线,相当于[A-Za-z0-9_]
+                · \W 匹配除字母,数字,下划线以外的字符,相当于[^A-Za-z0-9_]
+                · \s 匹配空格(包括换行符,制表符...),相当于[\t\r\n\v\f]
+                · \S 匹配非空格的字符,相当于[^\t\r\n\v\f]
+                · \b 匹配词边界
+                · \B 匹配非词边界,即在词的内部
+
+                - \s的例子:匹配空格
+                - \S\s 指代一切字符
+                    /\s\w* /.exec('hello world') // [" world"] //匹配空格后面的所有字符
+                - \b的例子:单词边界
+                    /\bhello/.test('hello world');  //true
+                    /\bhello/.test('hello-world');  //true
+                    /\bhello/.test('helloworld');  //false  //因为hello已经不是一个单独的单词了
+                - \B的例子:非单词边界
+                    /\Bhello/.test('hello world'); //false
+                    /\Bhello/.test('helloworld'); //false
+                    /\Bhello/.test('aaahelloworld'); //true   //hello不是一个独立的单词则返回true
+                - \d的例子:0-9之间的数字
+                    /\d/.test('123');//true  //只要存在0-9之间的数字就会返回true
+                    /\d/.test('aaa');//false
+                - \D的例子:非0-9之间的数字
+                    /\D/.test('aaa');//true //只要不存在0-9之间的数字就会返回true
+                    /\D/.test('123');//false  
+                - \w:匹配所有数字,字母,下划线
+                    /\w/.test('123asd_'); //true    
+                    /\w/.test('$%%^'); //false  //不包括数字字母下划线则返回false
+                - \W:匹配除了数字,字母,下划线以外的字符
+                    /\w/.test('123asd_'); //  false  
+                    /\w/.test('$%%^'); // true //不包括数字字母下划线则返回true
+
+                7. 重复类
+                - 模式的精确匹配次数,使用大括号{}表示.{n}表示恰好重复n次,{n,}表示至少重复n次
+                {n,m}表示重复不少于n次,不多于m次
+                如:
+                    /lo{2,}k/.test('lok'); //fasle //正则要求o至少重复两次,所以返回false
+                    /lo{2}k/.test('look'); //true //正则要求o重复两次,look存在两次,所以返回true
+                    /lo{2,}k/.test('looook'); //true //正则要求o至少重复两次,looook存在四次,所以返回true
+                    /lo{2,3}k/.test('looook'); //false //正则要求o重复2-3次,looook存在四次,所以返回false
+
+                8. 量词符
+                - 量词符用来设定某个模式出现的次数
+                · '?'问号表示某个模式出现0次或1次,等同于{0,1}
+                · '*'星号表示某个模式出现0次或多次,等同于{0,}
+                · '+'加号表示某个模式出现1次或多次,等同于{1,}
+
+                例子:
+                    ?表示0次或1次==={0,1}
+                    /t?est/.test('test'); //true
+                    /t?est/.test('est'); //true
+                    /t?est/.test('ttest'); //false
+
+                    *表示0次或多次==={0,}
+                    /t*est/.test('test'); //true
+                    /t*est/.test('tttest'); //true
+                    /t*est/.test('est'); //true
+
+                    +表示1次或多次==={1,}
+                    /t+est/.test('test');  //true
+                    /t+est/.test('ttttest');  //true
+                    /t+est/.test('est');  //false
+
+                9. 贪婪模式(默认)
+                - 如需改成非贪婪模式,直接在模式结尾添加?即可
+                如:
+                    'abb'.match(/ab*b/) // ["abb"]
+                    'abb'.match(/ab*?b/) // ["ab"]
+
+                    'abb'.match(/ab?b/) // ["abb"]
+                    'abb'.match(/ab??b/) // ["ab"]
+
+                10. 修饰符
+                - 修饰符（modifier）表示模式的附加规则，放在正则模式的最尾部。修饰符可以单个使用，也可以多个一起使用。
+                如:
+                    单个修饰符
+                    /abc/i.test('ABC');
+                    多个修饰符
+                    /abc/ig.test('ABC');
+                (1) g修饰符
+                - 默认情况下,第一次匹配成功后,正则对象就停下向下匹配了,g修饰符代表全局匹配模式,正则对象将匹配全部
+                如何条件的结果,主要用与搜索和替换
+                如:
+                    /a/g.test(aab); //true
+                    /a/g.test(aab); //true
+                    /a/g.test(aab); //false
+                - 上面代码中，正则模式含有g修饰符，每次都是从上一次匹配成功处，开始向后匹配。因为字符串abba只有两个b，
+                所以前两次匹配结果为true，第三次匹配结果为false。
+                (2) i修饰符
+                - 默认情况下,正则对象区分大小写,加上i修饰符表示忽略大小写
+                如:
+                    /a/.test('Abc'); //false
+                    /a/i.test('Abc'); //true  //i修饰符表示忽略大小写
+                (3) m修饰符
+                - 表示多行修饰符,会修改 ^ 和 $的行为,默认情况下(即不加m修饰符)^ 和 $匹配字符串的开始处
+                和结尾处,加上m修饰符后,^ 和 $还会匹配行首和行尾,即^和$会识别换行符（\n）
+                如:
+                    /^a/.test('b\na'); //false  //默认情况下 ^ 代表的是开始处
+                    /^a/m.test('b\na'); //true  //加上m后,还能匹配行首和行尾
+
+                    /b$/m.test('ab\n'); //true  //加上m后,还能匹配行首和行尾
+                
+
+                11. 组匹配
+                - 正则表达式的括号表示分组匹配,括号中的模式可以用来匹配分组的内容
+                如:
+                    /fed+/.test('fedd'); //true //没有括号表示匹配一次或多次的d
+                    /(fed)+/.test('fedfed'); //true  //有括号表示一次或多次的fed
+                
+                11.2 非捕获组
+                - (?:x)称为非捕获组,表示不返回该组匹配的内容,即匹配的结果不计入这个括号
+                11.3 先行断言
+                - x(?=y)称为先行断言（Positive look-ahead），x只有在y前面才匹配，y不会被计入返回结果。
+                比如，要匹配后面跟着百分号的数字，可以写成/\d+(?=%)/。
+                11.4 先行否定断言
+                - x(?!y)称为先行否定断言（Negative look-ahead），x只有不在y前面才匹配，y不会被计入返回结果。
+                比如，要匹配后面跟的不是百分号的数字，就要写成/\d+(?!%)/。
+
+                
+            */
+            
+            var r = /a/ig;
+            //实例属性
+            r.multiline; //fasle  //是否使用了m修饰符   //修改 ^ 和 $行为的修饰符
+            r.ignoreCase; //true    //是否使用了i修饰符 //忽略大小写模式
+            r.global; //true    //是否使用了g修饰符 //全局模式
+            r.lastIndex; //0    //返回下一次开始匹配的位置
+            r.source; //abc //返回原正则
+            //实例方法
+            r.test('abc'); //true //返回当前模式是否能匹配参数字符串
+            // r.lastIndex = 4;
+            r.test('abcddd'); //false //修改了下一次匹配的位置,4之后不存在abc了,所以返回false
+            r.test('acb'); //false //返回当前模式是否能匹配参数字符串
+            r.test('acb'); //false //返回当前模式是否能匹配参数字符串
+
+            //加了全局修饰符可以连续使用exec,下一次搜索的位置从上一次匹配成功结束的位置开始。
+            r.exec('abc_abc_abc'); //["a"] index:0
+            r.exec('abc_abc_abc'); //["a"] index:4
+            r.exec('abc_abc_abc'); //["a"] index:8
+                    //(组匹配模式)
+            var r = /(abc)_/ig;
+            r.exec('abc_abc_abc'); //["abc_","abc"]  //包含两个结果
+
+            //字符串对象方法
+            var strReg = /ab/g;
+            //match()
+            'abcdab'.match(strReg);  //["ab","ab"] //使用字符串实例对象方法match()会一次返回所有匹配结果
+           strReg.exec('abcdab');  //["ab"] index:0 //使用正则实例对象方法exec()返回第一次匹配成功的结果
+           //search()
+           'abcdab'.search(strReg); // 0 //第一次出现的位置为0
+           //replace()
+           'abcdab'.replace(strReg,'替换'); //"替换cd替换"  //因为是全局模式,所以全部替换
+           //split()
+           'abcdab'.split(strReg,2); //["", "cd"] //拆分为数组,指定返回一个长度为2的数组
+
+           //[^]表示一切字符
+           /o.x/.test('hello\nxixi');  //false //因为.不包括换行符
+           /o[^]x/.test('hello\nxixi');  //true //因为[^]代表所有字符
+
+
+           //使用正则判断我输入的手机号是否合法
+           //13128913910
+        //    var phoneNumber = +prompt('请输入您的手机号');
+        //    var Reg = /^1[3-9]\d{9}$/i;
+        //    var see = Reg.test(phoneNumber);
+        //    if(!see){
+        //        alert('请重新输入')
+        //    }
+
+
+
+
+
+
+            // var s = 'abbc';
+            // var e = /b/g;
+            // console.log('a*a*a*a*'.split(/\*/));
+
+            // var r = /x/g;
+            // var s = '_x_x';
+            // console.log(
+            //     r.exec(s), //['x'] //index:1
+            //     r.exec(s),//['x'] //index:3
+            //     r.exec(s), //null
+
+            //     r.lastIndex, //0
+            //     r.test(s), //true
+
+            //     r.lastIndex, //2
+            //     r.test(s), //true
+
+            //     r.lastIndex, //4
+            //     r.test(s) //false
+            // )
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

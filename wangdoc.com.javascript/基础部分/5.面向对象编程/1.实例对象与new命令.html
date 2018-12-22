@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>实例对象与new命令</title>
+    <script>
+        window.onload=function(){
+            /*
+            ---JavaScript 语言具有很强的面向对象编程能力，本章介绍 JavaScript 面向对象编程的基础知识。
+                实例对象与new命令：
+            
+            1. 什么是对象
+            (1). 对象是单个实物的抽象。
+            - 一本书,一辆车一个人都可以是对象一个数据库、一张网页、一个与远程服务器的连接也可以是对象。
+            当实物被抽象成对象，实物之间的关系就变成了对象之间的关系，从而就可以模拟现实情况，针对对象进行编程。
+            (2). 对象是一个容器，封装了属性（property）和方法（method）
+            - 属性是对象的状态，方法是对象的行为（完成某种任务）。比如，我们可以把动物抽象为animal对象，
+            使用“属性”记录具体是那一种动物，使用“方法”表示动物的某种行为（奔跑、捕猎、休息等等）
+
+            2. 构造函数
+            - 面向对象编程的第一步，就是要生成对象。前面说过，对象是单个实物的抽象。
+            通常需要一个模板，表示某一类实物的共同特征，然后对象根据这个模板生成。
+            - 构造函数就是一个普通的函数，但是有自己的特征和用法。
+            如：
+                var Vehicle = function(){
+                    this.price = 100;
+                };
+            - 上面代码中,Vehicle就是构造函数,为了与普通函数区别,构造函数的名称的第一个字母通常大写
+
+            2.1 构造函数的特点一般有两个
+            - 函数体内部使用了this关键字,代表了所要生成的对象实例
+            - 生成对象的时候必须使用new关键字
+
+            3. new命令
+            3.1 new命令的基本用法
+            - new命令的作用就是执行构造函数,返回一个实例对象
+            如：
+                var Vehicle = function(){
+                    this.price = 100;
+                };
+                var v = new Vehicle();
+                v.price;  //100
+            - 上面代码中,通过new命令让构造函数Vehicle生成了一个实例对象,保存在变量v中。
+            这个新生成的实例对象,从构造函数Vehicle中得到了price属性。new命令执行时,构造函数
+            内部的this,就代表了新生成的实例对象v
+
+            3.2 如果忘了使用new命令怎么办
+            - 为了保证构造函数和new命令一起使用,一个解决办法是,构造函数内部使用严格模式,即构造
+            函数的第一行加上'use strict',这样的话,一旦忘了使用new命令,直接调用构造函数会报错。
+            如：
+                var Vehicle = function(){
+                    'use strict';
+                    this price = 100;
+                }
+                Vehicle(); // TypeError: Cannot set property '_foo' of undefined //报错
+
+            3.3 new命令的原理
+            - 使用new时,它后面的函数一次执行以下步骤
+            1. 创建一个空对象,作为j将要返回的对象实例
+            2. 将这个空对象的原型,指向构造函数的prototype属性
+            3. 将这个空对象赋值给函数内部的this关键字
+            4. 开始执行构造函数内的代码
+            - 也就是说，构造函数内部，this指的是一个新生成的空对象，所有针对this的操作，都会发生在这个空对象上。
+            构造函数之所以叫“构造函数”，就是说这个函数的目的，就是操作一个空对象（即this对象），将其“构造”为需要的样子。
+
+            3.4 new.target
+            - 函数内部可以使用new.target属性。如果当前函数是new命令调用，new.target指向当前函数，否则为undefined。
+            如：
+                var Vil = function(){
+                    console.log(new.target === Vil)
+                };
+                Vil(); //false  //普通函数调用返回undefined
+                new Vil(); //true //如果使用new命令调用,则指向当前函数  
+
+
+            4. Object.create() 创建实例对象
+            - 构造函数作为模板,可以生成实例对象。但是,有时候拿不到构造函数,只有一个现有的对象，我们希望以
+            这个现有的对象作为模板,生成新的实例对象,这时候就可以使用Object.create()方法
+            如：
+                var obj = {
+                name:'张三',
+                age:18,
+                sayHello:function(){
+                    console.log('hello');
+                    }
+                }
+                var obj2 = Object.create(obj);
+                obj2.name;  //'张三'
+                obj2.sayHello();  //'hello'
+            - 上面代码中,对象obj是obj2的模板,后者继承了前者的属性和方法
+            */
+
+
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

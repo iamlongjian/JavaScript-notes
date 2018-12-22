@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>this关键字</title>
+    <script>
+        window.onload=function(){
+            // var obj = {
+            //     p:3,
+            //     b:{
+            //         f:function(){
+            //             console.log(this.p);
+            //         }
+            //     }
+            // };
+            
+            // obj.b.f();  //undefined
+
+            // var obj = {
+            //     b:{
+            //         f:function(){
+            //             console.log(this.p);
+            //         },
+            //         p:12
+            //     }
+            // };
+            // var hello = obj.b.f;
+            // hello(); //undefined
+            // //解决方法如下:把f方法所在的对象赋值给变量hello即可,这样就不会改变this的指向了
+            // var hello = obj.b;
+            // hello.f();  //12
+
+            // var obj = {
+            //     f1:function(){
+            //         console.log(this);
+            //         var that = this;
+            //         var f2 = function(){
+            //             console.log(that);
+            //         }();
+            //     }
+            // }
+            // obj.f1();  //obj
+
+            // var f = function(log,log2){
+            //     console.log(this.name+log+log2);
+            // };
+            // var obj = {
+            //     name:'longer'
+            // };
+            // //使用属性赋值改变this指向
+            // // obj.f = f;
+            // // obj.f(); //'longer'
+
+            // //使用call方法改变this指向，绑定了指向也可以绑定参数
+            // f.call(obj,' cici',' hapi');  //'longer12'
+
+
+            // var obj = {
+            //     count:0,
+            //     f:function(){
+            //         this.count++;
+            //     }
+            // };
+
+            // var obj2 = obj.f;
+            // obj2();
+            // console.log(obj.count); //0 //表示没改变
+
+            // //使用bind后
+            // var obj3 = obj.f.bind(obj);
+            // obj3();
+            // console.log(obj.count);  //1 //已经自增
+
+            // function Add(name){
+            //     this.name = name;
+            // };
+            // Add.prototype.say=function(){
+            //     console.log(this.name);
+            // }
+            // var n = new Add('nb');
+            // var p = new Add('ppppp');
+            // p.say();
+
+            var obj = {
+                f1:function(){
+                    console.log(this);  //object
+                    var f2 = function(){
+                        console.log(this);  //window
+                    }();
+                }
+            }
+            obj.f1();
+            //因为第二层的this指向window
+            // 修改后
+            var obj = {
+                f1:function(){
+                    console.log(this);  //object
+                    var that = this;
+                    var f2 = function(){
+                        console.log(that);  //object
+                    }();
+                }
+            }
+            obj.f1();
+
+            
+
+
+            //定义一个变量指向表层this
+
+            // var o = {
+            //     f1:function(){
+            //         console.log(this);
+            //         var that = this;
+            //         var f2 = function(){
+            //             console.log(that);
+            //         }();
+            //     }
+            // }
+            // o.f1();  
+
+
+            ////call
+
+            // var n = 123;
+            // var obj = {n:456};
+            // var f = function(){
+            //     console.log(this.n);
+            // };
+            // f.call();  //123
+            // f.call(null); //123 
+            // f.call(undefined); //123
+            // f.call(window); //123
+            // f.call(obj); //456
+
+            //call
+
+            // var obj = {};
+            // console.log(obj.hasOwnProperty('toString'));  //false
+            // obj.hasOwnProperty = function (){
+            //     return true;
+            // }
+            // console.log(obj.hasOwnProperty('toString'));  //true
+            // console.log(Object.prototype.hasOwnProperty.call(obj,'toStirng')); //false
+
+
+            //apply()和Math.max()结合,找出数组中最大的值
+            // var a = [1,10,65,18,20,150];
+            // console.log(Math.max.apply(null,a));  //150
+
+            //bind
+            // var obj = {
+            //     count:0,
+            //     inc:function(){
+            //         this.count++;
+            //     }
+            // };
+            // var func = obj.inc.bind(obj);
+            // func();
+            // console.log(obj.count); //1
+
+            // var co = {
+            //     count:0,
+            //     inc:function(){
+            //         this.count++;
+            //     }
+            // };
+            // var obj = {
+            //     count:100
+            // };
+            // var func = co.inc.bind(obj);
+            // func();
+            // console.log(obj.count); //101
+            // console.log(co.count); //0
+
+
+            // var add = function(x,y){
+            //     return x*this.m + y*this.n;
+            // };
+            // var obj =  {
+            //     m:5,
+            //     n:6
+            // };
+            // var arr = add.bind(obj,5);
+            // ;
+            // console.log(arr(6))//61  //此时arr函数的第一个参数已经绑定为5,调用时只需要提供第二个参数即可运行
+
+
+            // var add = function(x,y){
+            //     return x + y;
+            // };
+            // var arr = add.bind(null,5);
+            // console.log(arr(9));  //14 //如果bind第一个参数为null或者undefined,this则指向window,调用时只需指定y的值即可
+
+
+            //call
+            // function add(){
+            //     console.log(this.name);
+            // }
+            // var obj = {
+            //     name:'longer',
+            //     age:15
+            // };
+            // add.call(obj);  //'longer'  //call指定了this的指向
+
+
+            //function add(log1,log2,lo3){
+            //     console.log(this.name+log1+log2+lo3);
+            // }
+            // var obj = {
+            //     name:'longer',
+            //     age:15
+            // };
+            // add.call(obj,1,2,3);  //'longer123'  //call在指定上下文对象后的参数会一个一个传入函数中
+
+
+
+
+
+
+            //apply第二个参数,第三个...
+            // function add(log1,log2,lo3){
+            //     console.log(this.name+log1+log2+lo3);
+            // }
+            // var obj = {
+            //     name:'longer',
+            //     age:15
+            // };
+            // var arr = [1,2,3];
+            // add.call(obj,arr);  //'longer123'  //apply()在指定上下文对象后的参数可以传一个数组
+
+
+            // function User (name, age) {
+            // /*
+            //     JavaScript 会在底层创建一个新对象 `this`，它会代理不在 User 原型链上的属性。
+            //     如果一个函数用 new 关键字调用，this 就会指向解释器创建的新对象。
+            // */
+            // this.name = name
+            // this.age = age
+            // }
+
+            // const me = new User('Tyler', 27);
+            // console.log(me.name);
+            // console.log(me.age);
+
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

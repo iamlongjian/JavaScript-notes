@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Object 对象的相关方法</title>
+    <script>
+
+            // function F(){};
+            // var f= new F();
+            // Object.getPrototypeOf(f) === F.prototype;  //true
+
+            // var n = 1;
+            // var obj = {
+            //     n:2
+            // };
+            // function f(){
+            //     console.log(this.n);
+            // }
+            // f.call();
+            // f.call(null);
+            // f.call(undefined);
+            // f.call(obj);
+
+
+            //create()方法动态继承了实例对象
+            var A = {
+                name:'longer'
+            };
+            var B = Object.create(A);
+            A.name = 'cici';
+            console.log(B.name); //cici
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

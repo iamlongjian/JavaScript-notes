@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>闭包</title>
+    
+</head>
+<body>
+    <button id="btn1">点我1</button>
+    <button id="btn2">点我2</button>
+    <button id="btn3">点我3</button>
+    <button id="btn4">点我4</button>
+</body>
+<script>
+    var btn = document.getElementsByTagName('button');
+    for(var i = 0;i<btn.length;i++){
+        btn[i].addEventListener('click',function(){
+            console.log('你点了第'+i+'个按钮');
+        })
+    } //addEventListener是一个闭包,而匿名函数是一个回调函数,i是在闭包中的变量。
+      //在addEventListener的回调执行时，循环已经结束，此时的变量i被赋值为node.length，node.length为总节点数。所以结果就是'你点了第4个按钮'
+
+    /*
+        解决方法:将其返回值改成函数，既然i变量的值会被释放，那我们就引入i，让每次循环的值都保存在内存中，就可以了：
+    */
+    var btn = document.getElementsByTagName('button');
+    for(var i = 0;i<btn.length;i++){
+        (function(i){
+            btn[i].addEventListener('click',function(){
+            console.log('你点了第'+(i+1)+'个按钮');
+        })
+        })(i)
+    }
+
+</script>
+</html>

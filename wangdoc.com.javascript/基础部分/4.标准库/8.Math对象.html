@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Math对象</title>
+    <script>
+        window.onload=function(){
+
+            function ran(min,max){
+                return parseInt(Math.random()*(max-min)+min);
+            }
+            ran(2,99);  //返回一个2-99之间的整数
+
+            //做一个计算圆面积的函数
+            // var r = +prompt('请输入圆形的半径,得出它的面积');
+            // alert(Math.PI*Math.pow(r,2));
+
+
+            /*
+                Math对象
+                1. 静态属性
+                - Math对象的静态属性,提供一下一些数字常量
+                ·Math.E：常数e。 // 2.718281828459045
+                ·Math.LN2：2 的自然对数。// 0.6931471805599453
+                ·Math.LN10：10 的自然对数。 // 2.302585092994046
+                ·Math.LOG2E：以 2 为底的e的对数。// 1.4426950408889634
+                ·Math.LOG10E：以 10 为底的e的对数。// 0.4342944819032518
+                ·Math.PI：常数π。// 3.141592653589793
+                ·Math.SQRT1_2：0.5 的平方根。// 0.7071067811865476
+                ·Math.SQRT2：2 的平方根。// 1.4142135623730951
+
+                2.静态方法
+                2.1 Math.abs():方法返回参数值的绝对值
+                如:
+                    Math.abs(-1); //1 //返回-1的绝对值
+                    Math.abs(1); //1 //返回1的绝对值(返回本身)
+                
+                2.2 Math.max(),Math.min():返回参数中的最大值或最小值
+                如:
+                    Math.max(1,3,101,2); //101 //返回参数中的最大值
+                    Math.min(1,3,101,2); //1 //返回参数中的最小值
+
+                2.3 Math.ceil(),Math.floor():向上(大)取整和向下(小)取整
+                如:
+                    Math.ceil(3.2); //4 //向上(大)取整
+                    Math.ceil(-3.2); //3
+                    Math.floor(3.2); //3 //向下(小)取整
+                    Math.floor(-3.2); //-4
+                
+                2.4 Math.round():方法用于四舍五入
+                如:
+                    Math.round(5.1); //5    //5.1四舍五入为5
+                    Math.round(5.5); //6    //5.5四舍五入为6
+                注意对负值的处理:（主要是对0.5的处理）
+                    Math.round(-1.1) // -1
+                    Math.round(-1.5) // -1
+                    Math.round(-1.6) // -2
+
+                2.5 Math.pow():方法用于返回第一个参数为底数,第二个参数为幂的指数值
+                如:
+                    Math.pow(2,3); //8 //等同于2**3(2*2*2);
+                    Math.pow(2,2); //4 //等同于2**2(2*2);
+                小练习:输入半径,求出圆面积
+                    var r  = +prompt('请输入圆的半径');
+                    alert(Math.PI*Math.pow(r,2));
+
+                2.6 Math.sqrt():方法用于返回参数的平方根,如果参数是一个负值,则返回NaN
+                如:
+                    Math.sqrt(4);  //2 //4的平方根为2
+                    Math.sqrt(-1); //NaN
+
+                2.7 Math.random():方法用于返回0-1的随机数,可能等于0但是一定小于1
+                如:
+                    Math.random(); //0.16541 //随机数
+
+                自定义一个能生成随机整数的函数:
+                - 生成指定随机数:Math.random()*(max-min)+min;
+                    function rand(min,max){
+                        return parseInt(Math.random()*(max-min)+min);
+                    }
+
+                2.8三角函数方法
+                - Math对象还提供一系列三角函数方法。
+
+                Math.sin()：返回参数的正弦（参数为弧度值）
+                Math.cos()：返回参数的余弦（参数为弧度值）
+                Math.tan()：返回参数的正切（参数为弧度值）
+                Math.asin()：返回参数的反正弦（返回值为弧度值）
+                Math.acos()：返回参数的反余弦（返回值为弧度值）
+                Math.atan()：返回参数的反正切（返回值为弧度值）
+
+            */
+
+
+            // Math.abs Math.ceil Math.floor Math.round Math.random     Math.min Math.max   Math.pow        Math.sqrt
+            // 绝对值         向上取整    向下取整    四舍五入    0-1随机数   参数最小值  参数最大值  两个参数,次幂       开方
+
+            //返回随机数的函数
+            // function ran(min,max){
+            //         return parseInt(Math.random()*(max-min)+min);
+            // }
+
+            var date = new Date();
+            // date.toDateString(); //获取当前时间 不含时分秒
+            //date.toTimeString(); //10:52:52 GMT+0800 (中国标准时间)//获取当前时间 不含年月日
+            // date.toLocaleDateString(); //2018/12/21
+            // date.toLocaleTimeString(); //上午10:53:32
+            // date.toLocaleString(); //2018/12/21 上午10:53:55
+
+            // date.getDate(); //21 
+            // date.getDay(); //5 //周日0 周一 1
+
+            // var date = new Date(2012,12,5);
+            // date.getMonth(); //11 //十二月0 一月1
+
+            // date.setFullYear(date.getFullYear()+2);
+            // console.log(date.getFullYear());
+
+            //计算今年还有多少天
+            // var now = new Date();
+            // var time = new Date(now.getFullYear(),11,31,23,59,59);
+            // var day = 24*60*60*1000;
+            // alert((time.getTime()-now.getTime())/day);
+
+            //计算今天还有几个小时
+            // var now = new Date(2018,11,21,20,59,59);
+            // var time = new Date(2018,11,21,23,59,59);
+            // var Hours = 1000*60*60;
+            // alert(parseInt((time.getTime()-now.getTime())/Hours));
+
+
+
+
+
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
