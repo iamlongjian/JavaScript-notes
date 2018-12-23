@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>对象的继承</title>
     <script>
-        window.onload=function(){
             /*
                 对象的继承
 
@@ -39,37 +38,111 @@
 
 
 
-            //构造函数的继承
-            function F(name){
-                this.name = name;
-            }
-            F.prototype.sex = '男';
-            F.prototype.sayHi = function(){
-                console.log('hi');
-            };
-            function F2(name){
-                F.call(this);
-            }
-            F2.prototype = Object.create(F.prototype);
-            F2.prototype.constructor = F;
-            var g = new F2('cici');
-            var c = new F('coco');
-            console.log(g.name);
+        //     //构造函数的继承
+        //     function F(name){
+        //         this.name = name;
+        //     }
+        //     F.prototype.sex = '男';
+        //     F.prototype.sayHi = function(){
+        //         console.log('hi');
+        //     };
+        //     function F2(name){
+        //         F.call(this);
+        //     }
+        //     F2.prototype = Object.create(F.prototype);
+        //     F2.prototype.constructor = F;
+        //     var g = new F2('cici');
+        //     var c = new F('coco');
+        //     console.log(g.name);
 
 
                 
-            //构造函数方法的继承
-            function Foo(){};
-            Foo.prototype.sayHi=function(){
-                console.log('hi');
-            };
-            function F2(){};
-            F2.prototype.sayHi =function(){
-                Foo.prototype.sayHi.call(this);
-            }
-            var g = new F2();
-            g.sayHi();
-        }
+        //     //构造函数方法的继承
+        //     function Foo(){};
+        //     Foo.prototype.sayHi=function(){
+        //         console.log('hi');
+        //     };
+        //     function F2(){};
+        //     F2.prototype.sayHi =function(){
+        //         Foo.prototype.sayHi.call(this);
+        //     }
+        //     var g = new F2();
+        //     g.sayHi();
+
+        // function Ad(){
+
+        // };
+        // Ad.prototype = new Array();
+        // var x = new Ad();
+        // var y = new x.constructor();
+        // console.log(y instanceof Ad);  //利用constructor属性来创建实例对象
+
+        // function Add(){
+        // }
+        // Add.prototype.sayName = function(){
+        //         console.log('hi');
+        // }
+
+        // function A2(){
+        // }
+        // A2.prototype.sayName = function(){
+        //     Add.prototype.sayName.call(this);
+        //     alert(123);
+        // }
+
+        // var a = new A2();
+        // a.sayName();    //'hi'
+
+
+
+
+        //构造函数的继承
+        // function Add(){
+        // };
+        // Add.prototype.sayName=function(name){
+        //     this.name = name;
+        //     console.log(this.name);
+        // }
+        // function Say(){
+        //     Add.call(this);
+        // }
+        // Say.prototype = Object.create(Add.prototype);
+        // Say.prototype.constructor = Say;
+        // var long = new Say();
+        // long.sayName('longer');
+
+        //构造函数的单个方法继承
+        // function Add(){   //创建构造函数Add
+        // };
+        // Add.prototype.sayName=function(name){ //在构造函数Add原型对象上创建方法
+        //     this.name = name;
+        //     console.log(this.name)
+        // };
+        // var b = new Add();
+        // b.sayName('longer');  //longer
+
+        // function Add2(){    //创建构造函数Add2
+        // };
+        // Add2.prototype.sayName=function(name){ 
+        //     Add.prototype.sayName.call(this);   //Add2的方法继承于Add的方法
+        // };
+        // var a = new Add2();
+        // a.sayName('123');  //undefined
+
+
+
+
+        
+
+
+
+
+       
+
+        
+        
+        
+        
     </script>
 </head>
 <body>

@@ -24,13 +24,67 @@
             // f.call(obj);
 
 
-            //create()方法动态继承了实例对象
-            var A = {
-                name:'longer'
+            // //create()方法动态继承了实例对象
+            // var A = {
+            //     name:'longer'
+            // };
+            // var B = Object.create(A);
+            // A.name = 'cici';
+            // console.log(B.name); //cici
+
+
+            //Object.getPrototypeOf()   //获取实例的原型对象
+            // function Add(){};
+            // var b = new Add();
+            // console.log( Object.getPrototypeOf(b) === Add.prototype);  //true
+
+            //Object.setPrototypeOf()  //设置对象的原型
+            // var name = '123';
+            // function Add(){};
+            // Add.prototype.sayName=function(name){
+            // }
+            // var b = new Add();
+            // function Add2(){
+            // };
+            // Add2.prototype.x=1;
+            // Add2.prototype.sayName = function(name){
+            //     this.name = name;
+            //     console.log('hi '+this.name)
+            // }
+            // Object.setPrototypeOf(b,Add2.prototype);
+            // console.log(Object.getPrototypeOf(b));  //Add2.portptype
+            // console.log(b.x);  //1 //因为实例对象b继承了Add2,所以拥有了b的属性和方法
+            // b.sayName('longer'); //hi longer  //因为实例对象b继承了Add2,所以拥有了b的属性和方法
+
+
+            //Object.create()
+            var obj = {   //此时obj就是原型
+                name:'cici',
+                sex:'男',
+                sayName:function(){
+                    console.log(this.name);
+                }
             };
-            var B = Object.create(A);
-            A.name = 'cici';
-            console.log(B.name); //cici
+            //Object.getOwnPropertyNames()
+            console.log(Object.getOwnPropertyNames(obj));   //获取所有属性
+            console.log(Object.keys(obj))  //获取可遍历的属性
+            //Object.protptype.hsaOwnProperty() //参数要带双引号
+            console.log(obj.hasOwnProperty("name")); //true //表示是自身属性
+            //in
+            console.log('toString' in obj);//true //不管是继承的还是自身的,只要是对象的属性都返回ture
+            console.log('name' in obj);//true   //不管是继承的还是自身的,只要是对象的属性都返回ture
+            //for..in //输出对象所有可遍历的属性
+            for(var i in obj){
+                if(obj.hasOwnProperty(i)){
+                    console.log(i);  //name,sex,sayName
+                }
+            }
+            var obj2 = Object.create(obj);
+            obj2.sayName();  //longer  //obj2是根据obj生成的实例对象  //当修改obj.name为cici的时候,这个位置也会改变 // 该继承为动态继承
+            //object.portotype.isPrototypeOf()
+            console.log(obj.isPrototypeOf(obj2));  //true  //表示obj是obj2的原型
+
+
 
     </script>
 </head>

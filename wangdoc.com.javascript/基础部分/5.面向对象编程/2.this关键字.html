@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>this关键字</title>
     <script>
-        window.onload=function(){
             // var obj = {
             //     p:3,
             //     b:{
@@ -83,27 +82,27 @@
             // var p = new Add('ppppp');
             // p.say();
 
-            var obj = {
-                f1:function(){
-                    console.log(this);  //object
-                    var f2 = function(){
-                        console.log(this);  //window
-                    }();
-                }
-            }
-            obj.f1();
-            //因为第二层的this指向window
-            // 修改后
-            var obj = {
-                f1:function(){
-                    console.log(this);  //object
-                    var that = this;
-                    var f2 = function(){
-                        console.log(that);  //object
-                    }();
-                }
-            }
-            obj.f1();
+            // var obj = {
+            //     f1:function(){
+            //         console.log(this);  //object
+            //         var f2 = function(){
+            //             console.log(this);  //window
+            //         }();
+            //     }
+            // }
+            // obj.f1();
+            // //因为第二层的this指向window
+            // // 修改后
+            // var obj = {
+            //     f1:function(){
+            //         console.log(this);  //object
+            //         var that = this;
+            //         var f2 = function(){
+            //             console.log(that);  //object
+            //         }();
+            //     }
+            // }
+            // obj.f1();
 
             
 
@@ -244,8 +243,38 @@
             // const me = new User('Tyler', 27);
             // console.log(me.name);
             // console.log(me.age);
+            
 
-        }
+
+            // var Person = {
+            //     name:'lo',
+            //     sayName:function(){
+            //         console.log(this.name);
+            //     }
+            // };
+            // Person.sayName();
+
+
+            // var obj = {
+            //     b:{
+            //         sayName:function(){
+            //             console.log(this.p);
+            //         },
+            //         p:'hello'
+            //     }
+            // };
+            // var p = '123';
+            // // obj.b.sayName();  //hello
+            // var say = obj.b;    //如果是多层对象中的方法,可以将离方法最近的对象赋值，这样就不会改变this的指向了
+            // say.sayName();  //hello
+
+            // function Add(){};
+            // Add.prototype = new Array();
+            // Add.prototype.constructor = Add;
+            // var a = new Add();
+            // a.constructor;  //constuctor作用就是得知当前实例对象的构造函数是什么
+            
+            
     </script>
 </head>
 <body>

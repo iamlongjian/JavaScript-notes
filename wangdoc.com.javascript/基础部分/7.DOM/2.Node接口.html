@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Node接口</title>
+    
+</head>
+<body>
+<!-- 1. -->
+    <!-- <h1 id="so">This is <span>some</span> text</h1> -->
+<!-- 2. -->
+    <!-- <div id="div1">hello<span>world!</span></div> -->
+<!-- 3. -->
+    <!-- <ul id="ul1"><li>a<span>123</span></li><li>b</li><li>c</li><li>d</li><li></li></ul> -->
+<!-- 5 -->
+    <!-- <p>123</p> -->
+<!-- 6 -->
+    <!-- <p><span>1322</span></p> -->
+<!-- 7 -->
+    <!-- <div id="div1"><p>123</p></div>
+    <div id="div2"><p>333</p></div> -->
+
+    <!-- <div id="divA"></div> -->
+<!-- 8 -->
+    <ul id="ul1">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+</body>
+<script>
+// 1.
+    // var div = document.getElementById('so');
+    // div.textContent = "123";
+    // console.log(div.textContent);
+// 2.
+    // var p1 = document.getElementById('div1');
+    // console.log(p1.firstChild.nodeName)
+// 3.
+    // var children = document.querySelector('ul').childNodes;
+    // for(var i =0;i<children.length;i++){
+    //     console.log(children[i].lastChild);
+    // }
+// 4.
+    // var test = document.createElement('span');
+    // test.innerHTML = "hello";
+    // console.log(test.isConnected);  //fasle
+    // document.body.appendChild(test);  //将test添加到文档中的body
+    // console.log(test.isConnected);  //true
+
+// 5.判断当前节点是否有子节点
+    // var p = document.querySelector("p").hasChildNodes();
+    // console.log(p); //true
+
+// 6.克隆节点,cloneNode()接受一个布尔值为参数,表示是否克隆它的子节点
+    // var clone1 = document.querySelector("p").cloneNode(true);
+    // var clone = document.querySelector("p");
+    // console.log(clone,clone1);
+//7.replaceChild()替换子节点
+    // var div1_p = document.getElementById("div1").querySelector("p");
+    // var div1 = document.getElementById("div1");
+    // var div2_p = document.getElementById("div2").querySelector("p");
+    //     div1.replaceChild(div2_p,div1_p);
+//8.hasChildNodes()方法
+        // var ul = document.querySelector('ul').hasChildNodes();
+        // console.log(ul); //true //表示ul有子节点
+
+// 9.Object.prototype.insertBefore()
+        var ul = document.querySelector('ul');
+        var li3 = ul.children[4];
+        var li2 = ul.children[3];
+        var newLi = document.createElement('li');
+        newLi.innerHTML = "hello";
+        ul.insertBefore(newLi,li3);
+        ul.removeChild(li2);
+        var newLi2 = document.createElement('li');
+        newLi2.innerHTML= '替换了';
+        ul.replaceChild(newLi2,li3);
+        
+
+</script>
+</html>

@@ -92,6 +92,25 @@
             - 上面代码中,对象obj是obj2的模板,后者继承了前者的属性和方法
             */
 
+            // function Add(name,age){
+            //     this.name = name;
+            //     this.age = age;
+            // }
+            // var a = new Add('longer',18);
+           
+            // console.log(a.age,a.name);
+
+            var f = {
+                name:123,
+                age:18,
+                sayName:function(){
+                    console.log('hello');
+                }
+            };
+            var b = Object.create(f);
+            b.sayName();
+
+
 
         }
     </script>
