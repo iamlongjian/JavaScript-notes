@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件模型</title>
+</head>
+<body>
+    <button id="btn">点我试试</button>
+    <div id="info">
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+    </div>
+</body>
+<script>
+    /*事件模型*/
+//***HTML的on-属性  (只会在函数冒泡阶段触发)
+    //在HTML代码里:直接定义某些事件的监听代码(当点击div元素,触发警告框)  //这种方法行为数据耦合,不推荐
+    //<div onclick="alert('你点击了~');"></div>
+
+//元素节点的事件属性   (只会在函数冒泡阶段触发)
+    var btn  = document.getElementById("btn");
+    btn.onclick = function(){
+        123;  //点击按钮,触发此监听函数
+    }
+
+//推荐使用:addEventListener()来添加事件监听函数
+    btn.addEventListener('click',function(){console.log(123);},false);  //点击按钮,控制台输出123
+//使用此方法的好处:(1)行为与数据分离 (2)同一事件可以添加多个监听函数 (3)能够指定那个阶段触发监听函数 (4)使用范围广
+
+//***事件的传播
+//1. 捕获阶段 从window对象传到目标节点(上层传到底层)
+//2. 目标阶段 在目标节点上触发
+//3. 冒泡阶段 从目标节点传回window对象(底层传回上层)
+//这三阶段的传播模型,使得同一个事件在多个节点上触发
+
+//***事件的代理
+//由于事件会在冒泡阶段向上传播到父节点,因此可以把事件监听函数定义在父节点上,由父节点的监听函数统一处理多个子元素的事件,
+//这种方法叫做事件的代理(做法如下:)
+var info = document.getElementById("info");
+function pClick(event){
+    if(event.target.tagName == 'P'){
+        alert('您点了P元素');
+    }
+}
+info.addEventListener('click',pClick,false);
+
+
+btn.addEventListener('click',function(){
+    var p = document.createElement('p');
+    var text = document.createTextNode('hello iam new P');
+    p.appendChild(text);
+    info.prepend(p);
+},false);
+
+
+</script>
+</html>

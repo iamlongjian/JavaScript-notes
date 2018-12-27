@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Element系节点</title>
+    <style>
+
+        #div1{
+            width: 100px;
+            height: 100px;
+            background-color: aquamarine;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <p class="one two three" contenteditable="false" id="info" title="123" accesskey="h">123></p>
+    <div id = "div1" ><p></p><span></span><a href="#">1</a></div>
+    <span>000</span>
+</body>
+<script>
+
+var p = document.getElementsByClassName("one two three")[0];
+var div = document.getElementById("div1");
+// Element.click() - 相当于鼠标单击事件
+// div.onclick = fun;
+// function fun(){
+//     alert(0);
+// }
+
+//ELement.remove() - 用于将当前元素从它的父节点移除
+// div.remove() //div节点被移除了
+
+//Element.scrollIntoView() -滚动当前区域,进入浏览器的可见区域。
+
+//***事件相关方法
+    //Element.addEventListener() -添加事件的回调函数
+    //Element.removeEventListener() -移除事件监听函数
+    //Element.dispatchEvent() -触发事件
+
+    // Element.addEventListener('click',listener,false);
+    // Element.removeEventListener('click',listener,false);
+    // var event = new Event('click');
+    // element.dispatchEvent(event);
+
+///***属性相关的方法
+
+//---Element.querySelector() 接收css选择器作为参数，返回第一个匹配的子元素
+//---Element.querySelectorAll() 接收css选择器作为参数，返回所有匹配的子元素节点
+//---Element.getElementByClassName() 返回一个类数组,成员是当前元素具有参数class名的所有子元素
+//---Element.getElementByTagName() 返回一个类数组,成员是当前元素具有参数标签的所有子元素
+//---Element.closest() 方法接收一个css选择器作为参数,返回一个最接近的祖先元素
+//---Element.matches() 接收一个CSS选择器作为参数,返回一个布尔值,表示当前元素是否匹配给定的CSS选择器
+
+
+//getAttribute() 获取属性
+//getAttributeNames() 返回当前元素的所有属性名
+//setAttribute() 写入属性
+//hasAttribute() 检查某个属性名是否存在
+//hasAttributes() 当前元素是否有属性
+//removeAttribute() 删除属性
+
+//---Element.nextElementSibling（返回下一个同级元素节点） ELement.previousElementSibling（返回前一个同级元素节点）
+    div.previousElementSibling.tagName; //p  //返回前一个兄弟元素节点
+    div.nextElementSibling.tagName; //span  //返回后一个兄弟元素节点
+
+//---Element.lastElementChild（最后一个子元素节点） Element.firstElementChild（第一个子元素节点）
+    div.firstElementChild.tagName; //p  //第一个子元素节点的标签名
+    div.lastElementChild.tagName; //a //最后一个子元素节点的标签名
+
+//---Element.children (返回当前元素节点的所有子元素节点) Element.childrenCount（返回所有子元素节点的个数）
+    // var divs = div.children;
+    // for(var i=0;i<divs.length;i++){  //遍历div节点的所有子元素节点
+    //     console.log(divs[i].tagName); // p span a
+    // }
+    // div.childElementCount; //3 //表示有三个子元素节点
+
+//---Element.style
+    // div.style;  //返回当前元素节点的css样式
+
+//---Element.offsetHeight（返回该元素的CSS垂直高度(px)，包括本身和padding以及border） ELement.offsetWidth（返回该元素的CSS水平宽度(px)）
+    //相比于Element.clientHeight,Element.clientWidth属性,多了一个border的宽。
+    
+//---Element.offsetLeft（返回当前元素左上角相对于Element.offsetParent节点的水平位移） Element.offsetTop（返回当前元素左上角相对于Element.offsetParent节点的垂直位移）
+    // div.style.left = 20 +'px';  //让div节点向右偏移20px
+    // div.offsetLeft;  //20
+    // div.style.top = 50 + 'px'; //让div节点向右偏移50px
+    // div.offsetTop; //50
+
+//---Element.offsetParent（返回最靠近当前元素的,并且CSS的position属性不等于static的上层元素）
+    // <div style="position: absolute;">
+    // <p>
+    //     <span>Hello</span>
+    // </p>
+    // </div>
+    // 上面代码中:span的offsetParent属性的返回值就是div
+    //该属性主要用于确定子元素位置偏移的计算基准。Element.offsetTop和Element.offsetLeft就是Element.offparent计算的
+    //如果该元素是display:none或者position:fixed；则Element.offsetParent属性返回null
+
+//---Element.scrollLeft（返回当前元素水平滚动条滚动的数量(px)） Element.scrollTop（返回垂直滚动条向下滚动的数量(px)）
+
+//---Element.scrollHeight（返回当前元素的总高度,包括溢出内容,不可见内容）Element.scrollWidth（返回当前元素的总宽度）
+    //返回网页的总高度
+    //document.documentElement.scrollHeight
+
+//---Element.clientLeft（） Element.clientTop（）
+    div.clientLeft;  //2  //左边框宽度为2px
+    div.clientTop; //2  //上边框宽度为2px
+
+//---Element.clientHeight（可见高度，包括padding,不包括margin和border），Element.clientWidth（可见宽度）
+    //只对块级元素有效
+    // p.clientHeight; //21
+    // var span = document.querySelector('span');
+    // span.clientHeight; //00
+    //网页实际高度：document.body.clientHeight //122
+    //视口的高度(浏览器窗口的高度):document.documentElement.clientHeight //723
+
+//---Element.outerHTML
+    p.outerHTML; //返回p节点所有的HTML代码,包括标签
+
+//---Element.innerHTML（常用来设置某个节点的内容） //如果想插入纯文本或者想得到纯文本建议使用textContent属性
+    // p.innerHTML; //"123"
+    // p.innerHTML="nihao";  //直接把123替换成了'nihao'
+    p.textContent; //"123"  //如果有大于号则直接显示,不会像innerHTML一样显示实体
+    
+    
+
+//---Element.className（返回一个字符串,包含当前元素class名称）ELement.classList（返回一个类数组对象,成员为当前元素的class名称）
+    //className //返回一个字符串
+    // p.className; //"one two three"
+    //classList  //返回一个类数组对象
+    // p.classList; //['one','two'.'three']
+    //***classList还有以下六种方法
+    // add();增加一个class
+    // remove();移除一个class
+    // toggle(); 有则删,无则加
+    // contains();是否包含某个class
+    // item();返回指定位置的class
+    // toString(); 把class名转换为字符串
+        p.classList.add('666'); //增加了一个名为666的className
+        p.classList.remove('666'); //移除了这个名为666的className
+        p.classList.toggle('777');  //如果有777则删除，没有则加上
+        p.classList.contains('777'); //检查p节点的className有没有777
+        p.classList.item(2);  //返回索引为2的class名称
+        p.classList.toString(); //该方法相当于Element.className
+
+//---Element.attributes （该属性返回一个类数组对象,成员时当前元素的所有属性）
+    // var pas = p.attributes;
+    // for(var i=0;i<pas.length;i++){
+    //     console.log(pas[i].name);  //返回p节点所有的属性名称
+    // }
+
+//***元素状态相关属性
+
+    //---Element.contentEditable（可以设置此属性表示元素是否可编辑）
+    // p.setAttribute('contenteditable','true'); //设置p节点为可编辑状态
+
+    //---Element.hidden（返回一个布尔值，表示当前元素的hidden属性,用来控制元素是否可见）
+    // p.hidden = 'true'; //p节点被隐藏了
+
+//***元素特性相关属性
+    //---Element.title（返回当前元素的标题）
+    // p.title; //"123"
+
+    //---ELement.tabIndex（返回一个整数,表示当前元素在Tab遍历时的顺序）
+
+    //---Element.lang（返回当前元素语言）
+
+    //---Element.draggable （返回一个布尔值,表示当前元素是否可拖动）
+
+    //---Element.accessKey（返回当前元素的快捷按键）
+    // p.accessKey; //h
+
+    //---Element.dir（返回当前文字方向）
+
+    //---Element.tagName（返回元素的标签名）
+    // p.tagName;//P
+
+    //---Element.id（返回元素的id）
+    // p.id; //info
+
+//node系列
+
+    //nodeType---属性值
+    // document.querySelector("p").nodeType;  //1
+
+    //nodeName---属性名
+    // document.querySelector("p").nodeName; //'p'
+
+    //nodeValue ---属性值
+    // document.querySelector("p").nodeValue; //'null'
+</script>
+</html>

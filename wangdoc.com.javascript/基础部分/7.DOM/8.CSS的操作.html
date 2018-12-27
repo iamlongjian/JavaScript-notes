@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS的操作</title>
+    <style>
+        #myDiv{
+            width: 100px !important; 
+            height: 100px !important;
+            background-color:blueviolet;
+            position: absolute;
+        }
+        #myDiv::before{
+            content: "iam before";
+            color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <div id="myDiv" style="width: 200px !important;"></div>
+</body>
+<script>
+    var div =document.getElementById("myDiv");
+//直接使用节点属性操作CSS
+    // div.style.width = '200px';  //将div节点的宽度设置为200px  //采用此方法设置的是行内样式,优先级较高
+//length属性
+    div.style.length; //1 //该属性返回的是行内样式的个数
+//parentRule  //返回当前规则所属那个样式块
+    div.style.parentRule;  //null //如果不存在所属样式块,则返回null
+
+//***方法
+//获取优先级：getPropertyPriority()   如果接收一个CSS样式的属性名作为参数,返回一个字符串,表示有没有设置important属性,如果有则
+//返回important字符串,如果没有则返回空字符串。
+div.style.width;  //200px;
+div.style.getPropertyPriority('width');  // ""
+// 为HTML设置important之后
+div.style.getPropertyPriority('width');  //"important" //因为给div设置了行内属性width的优先级!important,所以返回字符串'!important'
+
+//获取属性值:getPropertyValue()
+div.style.getPropertyValue('width');  //200px
+div.style.width;  //200px
+
+//获取某个位置的CSS属性名:item()  (如果没有提供参数,则这个方法会报错,如果提供的参数超过实际的属性数,这个方法返回空字符串。)
+div.style.item(0);  //width  //返回第一个CSS属性名
+
+//移除某个属性：removeProperty()
+div.style.removeProperty('width');  //div节点的width属性被移除。
+
+//新增CSS属性：setProperty()
+//该方法接收三个参数:1.属性名 2.属性值 3.优先级（！important）
+div.style.setProperty("height","200px","important");   //设置div节点的height属性高度为200px,并且设置优先级
+
+//***window.getComputedStyle()  接收一个节点对象为参数，返回一个实例，包含了指定节点的最终样式信息.
+var divS = window.getComputedStyle(div);
+divS.width;  //100px       //最终生效的样式
+divS.height;  //200px  //最终生效的样式
+
+// //得到div的最终高度
+// var div = document.getElementById("dvi1");
+// var divS = window.getComputedStyle(div,null);
+// divS.height;  //最终高度
+
+//window.getComputedStyle()方法还可以接收第二个参数,表示伪类属性
+var Ds = window.getComputedStyle(div,":before");
+Ds.content;  //'iam before'  //返回伪类元素设置的属性值
+Ds.color;   //"rgb(0, 255, 255)"    //返回伪类元素设置的属性值
+
+
+</script>
+</html>

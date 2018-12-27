@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ParentNode 接口，ChildNode 接口</title>
+</head>
+<body>
+    <!-- <div id="div1"><span>123</span><p>1</p></div> -->
+    <div id="div1"> <p>123</p><span>000</span> </div>
+</body>
+<script>
+    /*
+        ParentNode 接口，ChildNode 接口
+    */
+    var div = document.getElementById("div1");
+    //**** ChildNode 接口***
+
+    //replaceWith()使用参数节点替换当前节点,参数节点可以是文本节点
+    // div.replaceWith('none'); //div节点被文本节点'none'替换
+
+    //replaceChild() //新节点替换子节点(新节点在前,子节点在后)
+    // var p1 = document.createElement('p');
+    // p1.textContent = "987";
+    // var p = document.querySelector('p');
+    // div.replaceChild(p1,p) //将新建的p1节点替换div的p子节点
+
+    //---before()在元素之前插入同级新节点 after()在元素之后插入同级新节点
+    // var p = document.querySelector('p');
+    // p.before('777');  //在p标签前面插入一个文本节点'777' //两者拥有同一个父节点
+    // p.after('777'); //在p标签后面插入一个文本节点'777'  //两者拥有同一个父节点
+
+    //---remove() 移除自身
+    // div.remove();  //在body中移除了div节点
+
+
+    //**** ParentNode 接口***
+    //---appendChild(在最后追加一个子节点) prepend(在最前面追加一个子节点)
+    // var p = document.createElement('p');
+    // p.textContent = "longer";
+    // div.append(p);  //在span的后面添加了一个p标签,内容为longer
+    // div.appendChild(p); //在span的后面添加了一个p标签,内容为longer
+    // div.prepend(p); //在p标签之前添加了一个p标签,内容为longer
+
+    //---childElementCount //返回子元素节点的个数(整数)
+    // console.log(div.childElementCount);  //2 //分别是p和span
+
+    //---firstChild firstElementChild lastChild lastElementChild
+    // var fir = div.firstChild;   //#text //文本节点
+    // var last = div.lastChild;   //#text //文本节点
+    // var fire = div.firstElementChild; //<p>123</p>  //p元素节点
+    // var laste = div.lastElementChild; //<span>000</span>  //span元素节点
+    // console.log(fir);
+    // console.log(last);  
+    // console.log(fire);
+    // console.log(laste);  
+
+    //---children
+    // var chi = div.children;
+    // for(var i=0;i<chi.length;i++){
+    //     console.log(chi[i].tagName) //P SPAN
+    // }
+
+    
+
+
+</script>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>申明提前,this,作用域</title>
+</head>
+<body>
+    
+</body>
+<script>
+//***闭包
+    //1.将函数作为另一个函数的返回值返回。
+    // function f1(){
+    //     var count = 1;
+    //     function f2(){
+    //         count++;
+    //         console.log(count);
+    //     }
+    //     return f2;
+    // }
+    // var fun = f1();
+    // fun();  //2  //使用了闭包,内部函数保存了变量的状态在内存中
+    // fun();  //3
+    // fun = null; //销毁闭包
+    // fun();      //此时调用时报错。
+
+//闭包的应用:定义一个模块,向外界暴露n个函数,以此调用
+(function (){
+    //私密代码
+    var name = 'longer';
+    var age = 19;
+    function sayName(){
+        console.log(name);
+    }
+    function sayAge(){
+        console.log(age);
+    }
+    return window.myMoudle = {
+        name:sayName,
+        age:sayAge
+    };
+})();
+
+myMoudle.name();  //longer  //调用到内部的变量
+myMoudle.age();   //19  //调用到内部的变量 //这就是闭包的作用
+
+
+//***this
+//在全局环境下调用 this指向window
+    // var x  = 2;
+    // function fun(){
+    //     console.log(this.x);  //输出2
+    // }
+    // fun();
+
+//在对象的方法种 this指向运行函数时所在的对象
+    // function fun(){
+    //     console.log(this.name);
+    // }
+    // var name = '全局name';
+    // var obj = {
+    //     name:'方法name',
+    //     f:fun
+    // };
+    // fun(); //全局name
+    // obj.f(); //方法name
+
+//在构造函数中 this指向构造函数的实例对象
+    // function Add(){
+    // }
+    // Add.prototype.sayName=function(name){
+    //     this.name = name;
+    //     console.log(this.name);  //this指向所有构造函数生成的实例对象
+    // }
+    // var a = new Add();
+    // a.sayName('longer');  //longer //在构造函数中定义的属性和方法都会在实例对象中体现
+    
+    // function Add2(){
+    //     Add.call(this);
+    // }
+    // Add2.prototype = Object.create(Add.prototype);
+    // Add2.prototype.constructor = Add2;
+    // var b = new Add2();
+    // b.sayName('cici');  //cici  //Add2继承了Add的所有属性和方法
+//call() apply() bind() 都是为了绑定/切换this的指向 call的参数一个一个传,apply的参数可以传数组,bind可以返回一个函数,在需要的时候调用
+// function say(e1,e2){
+//     console.log(this.name+e1+e2);
+// }
+// var name = '全局name';
+// var obj = {
+//     name:'对象中的name',
+// }
+// say(' 1',' 2');  //全局name 1 2
+// say.call(obj,' 1',' 2') //对象中的name 1 2
+// say.apply(obj,[" 1"," 2"]) //对象中的name 1 2
+// var sayName = say.bind(obj,1,2);
+// sayName();  //bind返回一个函数,可以以后调用
+
+    
+
+//使用函数声明的方法创建函数,则函数会进行函数提前
+    // fun();  //函数执行了
+    // function fun(){
+    //     console.log('函数执行了');
+    // }
+//使用函数表达式创建的函数不会函数提前
+    // fun();  //fun is not defined //报错 原因很简单, 因为 var 会声明提前,相当于在fun()前面还有一个 var fun;但是它的值是undefined,一调用自然就报错了。
+    // var fun = function(){
+    //     console.log('函数执行了');
+    // }
+//使用 var 声明的变量会变量名提前
+    // console.log(a); //undefined
+    // var a = 2;
+//不使用var声明的变量不会提前
+    // console.log(a);  // a is not defined //报错
+    // a = 2;
+    
+</script>
+</html>

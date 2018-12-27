@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EventTarget接口</title>
+</head>
+<body>
+    <button id = "btn1">点我试试看</button>
+</body>
+<script>
+    /*EventTarget接口*/
+//********addEventListener()  创建一个事件监听函数,并且可以同一个事件绑定多个监听函数
+var btn = document.getElementById("btn1");
+function fun(){
+    // alert('点我干嘛~');
+}
+// btn.addEventListener('click',fun,false);  //鼠标移入,则触发监听函数fun
+// btn.addEventListener('click',fun,{once:true});  //最后一个参数{once:true} ,表示监听函数执行一次即立即销毁
+
+// 如果要传参数,可以使用匿名函数包装监听函数
+function print(name){
+    name;
+}
+btn.addEventListener('click',function(){print('longer')},false);
+
+//监听函数内部的this,指向被绑定的那个节点
+function Thethis(){
+    alert(this.tagName);
+}
+btn.addEventListener('click',Thethis,false);  //BUTTON  //因为绑定此监听函数的是一个button元素
+
+
+//****移除事件监听函数removeEventListener()
+//注意:所移除的事件监听函数必须要与addEventListener()添加时的格式一模一样
+btn.removeEventListener('click',Thethis,true);  //移除失败
+btn.removeEventListener('click',Thethis,false);  //移除成功,上面添加的事件监听函数不生效了
+
+
+//****触发监听函数:dispatchEvent() 
+var event = new Event('click');
+btn.dispatchEvent(event);   //一进入页面立即执行监听函数
+
+
+</script>
+</html>

@@ -20,16 +20,30 @@
     /*
         定时器:
     */
-    var div = document.getElementById('someDiv');
-var op = 1;
-var timer = setInterval(function(){
+//     var div = document.getElementById('someDiv');
+// var op = 1;
+// var timer = setInterval(function(){
     
-    op -= 0.1;
-    if(op>=0){
-        div.style.opacity = op;
-    }else{
-        clearInterval(timer);
-    }
-},500);
+//     op -= 0.1;
+//     if(op>=0){
+//         div.style.opacity = op;
+//     }else{
+//         clearInterval(timer);
+//     }
+// },500);
+
+
+    var div = document.getElementById("someDiv");
+    var op = 1;
+    var timer;
+    timer = setInterval(function f(){
+        op -= 0.1;
+        if(op>=0){
+            div.style.opacity = op;
+            timer = setTimeout(f,500)   //确保两次之间执行的间隔
+        }else{
+            clearInterval(timer);
+        }
+    },500)
 </script>
 </html>

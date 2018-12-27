@@ -23,7 +23,7 @@
     <div id="div2"><p>333</p></div> -->
 
     <!-- <div id="divA"></div> -->
-<!-- 8 -->
+<!-- 8 --><!--9--><!--10-->
     <ul id="ul1">
         <li>1</li>
         <li>2</li>
@@ -33,6 +33,17 @@
     </ul>
 </body>
 <script>
+    var ul = document.getElementById("ul1");
+    // ul.hasChildNodes();  //true  //表示有子节点
+
+    var ul2 = ul.cloneNode();  //clone一个节点,
+    // document.body.appendChild(ul2); //并把clone的节点插入到body中
+
+    document.body.insertBefore(ul2,ul)  //插入到body子节点ul之前
+
+    document.body.removeChild(ul2);   //移除body中的ul2
+
+
 // 1.
     // var div = document.getElementById('so');
     // div.textContent = "123";
@@ -70,16 +81,28 @@
         // console.log(ul); //true //表示ul有子节点
 
 // 9.Object.prototype.insertBefore()
-        var ul = document.querySelector('ul');
-        var li3 = ul.children[4];
-        var li2 = ul.children[3];
-        var newLi = document.createElement('li');
-        newLi.innerHTML = "hello";
-        ul.insertBefore(newLi,li3);
-        ul.removeChild(li2);
-        var newLi2 = document.createElement('li');
-        newLi2.innerHTML= '替换了';
-        ul.replaceChild(newLi2,li3);
+        // var ul = document.querySelector('ul');
+        // var li3 = ul.children[4];
+        // var li2 = ul.children[3];
+        // var newLi = document.createElement('li');
+        // newLi.innerHTML = "hello";
+        // ul.insertBefore(newLi,li3);
+        // ul.removeChild(li2);
+        // var newLi2 = document.createElement('li');
+        // newLi2.innerHTML= '替换了';
+        // ul.replaceChild(newLi2,li3);
+
+//10.append.child() Node.prototype.hasChildNodes()
+        // var ul = document.querySelector('ul');
+        // var li = ul.childNodes[3];
+        // console.log(li);
+        // var p = document.createElement('p');
+        // p.innerHTML="hello";
+        // li.append(p);
+        // console.log(li.hasChildNodes(p));  //true
+
+
+
         
 
 </script>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>属性的操作</title>
+</head>
+<body>
+    <div id="div1" class="one"></div>
+    <div id="mydiv" data-foo="bar"></div>
+</body>
+<script>
+//属性的操作
+
+var div2 = document.getElementById("mydiv");
+//getAttribute();  //返回节点指定属性的属性值
+div2.getAttribute('class');  //null
+div2.getAttribute('id');  //mydiv
+
+//getAttributeNames(); //返回节点所有的属性
+div2.getAttributeNames();  //["id", "data-foo"]
+
+//hasAttribute() //检查一个节点是否存在某个属性
+div2.hasAttribute('class'); //false
+div2.hasAttribute('id'); //true
+
+//setAttribute() //设置节点的属性
+div2.setAttribute('name','longer');  //添加name属性,值为longer
+
+//hasAttributes()  //检查当前节点是否存在属性,存在则true。
+div2.hasAttributes(); //true
+
+//removeAttribute()  //移除节点指定的属性
+div2.removeAttribute('id');
+div2.removeAttribute('name');
+div2.removeAttribute('data-foo');
+
+//hasAttributes()
+div2.hasAttributes(); //false  //因为上一步已经把所有属性移除
+
+//dataset属性  //为了让HTML元素属性符合标准,建议使用
+var div = document.getElementById("div1");
+div.setAttribute('data-log','long');
+div.dataset.log;  //loong
+
+div.dataset.log = 'cici';
+div.dataset.log;  //cici
+
+delete div.dataset.log;  //删除此属性
+div.dataset.log;  //undefined
+
+
+
+
+
+//     var div = document.getElementsByClassName('one')[0];
+// //getAttribute()
+//     div.getAttribute('class');  //'one'
+// //getAttributeNames()
+//     div.getAttributeNames('class');
+// //setAttribute()
+//     div.setAttribute('name','tom');
+//     // （等价写法）
+//     var a = document.createAttribute("name");
+//     a.value="cici";
+//     div.setAttributeNode(a);  //第一种方法简单一些
+// //hasAttribute() 检查一个节点是否包含某个属性
+//     div.hasAttribute('name'); //true
+// //removeAttribute() 移除某个属性
+//     div.removeAttribute('name');
+//     div.removeAttribute('id');
+//     div.removeAttribute('class');
+// //hasAttributes() 检查一个节点是否有属性,如果没有任何属性则返回false
+//     div.hasAttributes(); //false
+
+// //data-*
+//     var myD = document.getElementById("mydiv");
+//     myD.dataset.foo; //'bar'
+//     myD.dataset.foo = "barz"; //修改data-foo属性
+//     delete myD.dataset.foo; //data-foo属性被删除
+
+
+</script>
+</html>

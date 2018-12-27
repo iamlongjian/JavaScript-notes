@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document节点</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <p><span>123</span></p>
+    <div class="po wo">
+        <p>hello</p>
+        <a href="#">cici</a>
+        <img src="https://s1.ax1x.com/2018/12/25/FgU5ZD.png" alt="">
+    </div>
+    <form name="form1">333</form>
+</body>
+<script>
+    /*Document节点*/
+//***方法***
+
+    //---document.createDocumentFragment() ---返回一个空的文档片段对象。
+
+    //---document.createComment()--返回一个注释节点
+
+    //---document.setAttribute() --方法设置节点的属性节点(见下面的例子)
+    // var p = document.getElementsByTagName('p')[0];
+    // var a = document.createAttribute('name');
+    // a.value = 'pE';
+    // p.setAttributeNode(a); // 或者 p.setAttribute('name','pE'); 效果是一样的
+
+
+    //---document.craeteAttribute() ---方法生成一个新的属性节点(Attr实例),并返回
+    // var div = document.getElementsByClassName("po wo")[0];
+    // var a = document.createAttribute('name');
+    // a.value= 'divv';
+    // div.setAttributeNode(a);
+
+    //---document.createTextNode() ---方法用于生成文本节点(text实例),并返回该节点。它的参数是文本节点的内容
+    // var h2 = document.createElement('h2');
+    // var text = document.createTextNode("我是标题2");
+    // h2.append(text);
+    // var form = document.getElementsByName("form1")[0];
+    // form.before(h2);
+
+    //---document.createElement()---方法用来生成元素节点,并返回该节点
+    var h1 = document.createElement('h1');
+    h1.textContent = "我是标题";
+    document.body.prepend(h1);  //把新建的h1元素节点插入body所有子元素的最前面
+
+    //---document.getElementById()---返回符合条件的元素节点
+
+    //---document.getElementsByName() ----返回符合条件的,拥有name属性的NodeList实例。
+    // document.getElementsByName("form1")[0].innerHTML;  //333
+
+    //---document.getElementsByClassName() ---- 该方法返回所有符合条件的class名字的元素(可以是多个参数)
+    // document.getElementsByClassName("po wo")[0].textContent;  //返回class名具有 po wo的元素节点,并输出内容
+
+    //---document.getElementsByTagName() ---该方法返回所有匹配的HTML标签名
+
+    //---document.querySelector() document.querySelectorAll()
+    //document.querySelector()接收一个CSS选择器为参数。如果有多个匹配,则返回第一个
+    //document.querySelectorAll()接收一个CSS选择器为参数。返回所有匹配的,组成一个NodeList实例
+
+    //---document.write() document.writeIn()
+    // document.write();//用于向文档写入内容
+    // document.writeln(); //和write()方法完全一致,除了会在尾部添加换行
+
+
+    //---document.open() document.close()
+    // document.open();//用于清楚文本内容，使得文档处于可写状态
+    // document.write(); //写入
+    // document.close(); //关闭document.open()打开的文档
+
+//document.designMode
+    //---document.designMode（控制文档是否可编辑 on或off）
+    // document.designMode = 'on';  //此时文档可以编辑了
+//cookie
+    //---document.cookie（用来操作浏览器的cookie）
+//文档状态属性
+
+    //---document.visibilityState（返回文档的可见状态）
+    //这个属性有可能返回四个值：visible（可见）hidden（页面不可见）prerender（页面渲染中，对用户来说不可见）unloaded（页面从内存里卸载了）
+
+    //---document.hidden（返回一个布尔值,表示当前文档是否可见）
+    // document.hidden; //false //表示可见
+    //如果浏览器窗口最小化,或者切换了tab页,都会使得这个属性返回true
+
+
+//文档静态信息属性（以下属性返回文档信息）
+    //---document.compatMode（返回浏览器处理文档的模式）
+
+    //---document.dir（返回一个字符串,表示文字方向）
+
+    //---document.referrer（返回一个字符串,表示当前文档的访问者来自哪里）
+    // console.log(document.referrer); //''
+
+    //---document.characterSet（返回当前文档的编码：UTF-8 ISO-8859-1等等）
+    // console.log(document.characterSet); //UTF-8
+
+    //---document.title（返回文档的title标签的值,该属性可读写）
+    // console.log(document.title);//Document节点
+    // document.title = 'new title';
+    // console.log(document.title); //new title; //修改后的title
+
+    //---document.lastModified（返回一个字符串,表示当前文档最后修改的事件）
+    // console.log(document.lastModified)  //返回最后修改的时间
+
+    //---document.location（原生对象）
+
+    //---document.domain（返回当前文档的域名）
+    // console.log(document.domain);  //如果是https://wangdoc.com/javascript/dom/document.html,则返回"wangdoc.com"
+
+    //---document.URL（返回当前文档的路径(网址)
+    // console.log(document.URL); //返回当前文档的路径(网址)
+
+//节点属性合集（以下属性返回一个HTMLCollection实例，表示文档内特定元素的集合。这些集合都是动态的）
+
+    //---document.styleSheets（返回文档中内嵌或引入的样式表集合）
+    // console.log(document.styleSheets[0]);  //返回第一个样式表
+
+    //---document.forms（返回文档中所有的表单(form)节点）
+    // console.log(document.forms); //[] //因为文档中没有表单 所以返回空数组
+
+    //---document.scripts（返回当前文档的脚本数量）
+    // console.log(document.scripts); //[script]
+
+    //---document.images（返回当前文档的图片数量）
+    // var src = document.images;   //[img] //表示有一个img标签
+    // for(var i =0;i<src.length;i++){
+    //     console.log(src[i].src);  //你将会得到所有图片的src地址 //https://s1.ax1x.com/2018/12/25/FgU5ZD.png
+    // }
+
+    //---document.links（返回文档中所有的链接）
+    // console.log(document.links);  //[a]  //表示有一个a标签
+
+//快捷方式属性
+
+    //---document.fullscreenElement（返回当前以全屏状态展示的DOM元素）
+    // if (document.fullscreenElement.nodeName == 'VIDEO') {  //如果VIDEO标签处于全屏状态,则开始播放视频
+    //   console.log('全屏播放视频');
+    // }
+
+    //---documen.activeElement（返回当前获取焦点的DOM元素）
+    // console.log(document.activeElement);  //返回body下所有内容
+
+    //---document.scrollElement（一般返回的是html）
+    // console.log(document.scrollingElement);  //返回HTML标签内所有内容
+
+    //---document.body（body标签） document.head（head标签）
+    // console.log(document.body);//返回body标签内所有内容
+    // console.log(document.head);//返回head标签内所有内容
+
+    //---document.documentElement
+    // console.log(document.documentElement);//返回HTML文档所有内容
+    
+    //---document.doctype
+    // console.log(document.doctype) //<!DOCTYPE html>
+
+    //---document.defaultView（返回当前文档所属的window对象）
+    // console.log(document.defaultView);  //window
+    
+</script>
+</html>
